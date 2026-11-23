@@ -1,0 +1,44 @@
+.contact {
+  padding-top: var(--section-space);
+  padding-bottom: clamp(4rem, 10vw, 8rem);
+}
+
+.head {
+  padding-top: 1rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+}
+
+.title {
+  max-width: 16ch;
+  font-size: clamp(2.5rem, 1rem + 6vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+/* Deuxième phrase en italique vert, comme "Commençons aujourd'hui." sur la brochure. */
+.accent {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem clamp(2rem, 8vw, 6rem);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.channel {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.value {
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}

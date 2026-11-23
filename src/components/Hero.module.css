@@ -1,0 +1,20 @@
+.hero {
+  padding-top: clamp(5rem, 16vh, 11rem);
+}
+
+.title {
+  max-width: 20ch;
+  font-size: clamp(2.375rem, 1rem + 5.2vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.lead {
+  color: var(--fg);
+}
+
+.rest {
+  color: var(--muted);
+}

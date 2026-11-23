@@ -1,0 +1,203 @@
+/* ==========================================================================
+   DA Emmanuel KIKI — tokens
+   Mode clair : blanc cassé + ardoise. Mode sombre automatique : ardoise + blanc.
+   ========================================================================== */
+
+:root {
+  --slate: #22323c;
+  --paper: #f3f2ec;
+  --forest: #2f7d55;
+  --lime: #b4e08a;
+
+  --bg: var(--paper);
+  --fg: var(--slate);
+  --muted: color-mix(in srgb, var(--slate) 62%, var(--paper));
+  --line: color-mix(in srgb, var(--slate) 18%, transparent);
+  --surface: color-mix(in srgb, var(--slate) 6%, var(--paper));
+  --accent: var(--forest);
+  --accent-shape: var(--lime);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --max: 82rem;
+  --section-space: clamp(5rem, 12vw, 10rem);
+  --radius: 4px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--slate);
+    --fg: #ffffff;
+    --muted: color-mix(in srgb, #ffffff 64%, var(--slate));
+    --line: color-mix(in srgb, #ffffff 16%, transparent);
+    --surface: color-mix(in srgb, #ffffff 6%, var(--slate));
+    --accent: var(--lime);
+    --accent-shape: var(--forest);
+    color-scheme: dark;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--slate);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Utilitaires
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Petit label en IBM Plex Mono, majuscules espacées (comme la brochure). */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Lien texte : soulignement fin qui passe au vert au survol. */
+.link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--line);
+  transition:
+    color 0.25s ease,
+    text-decoration-color 0.25s ease;
+}
+
+.link:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -3rem;
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.875rem;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* ==========================================================================
+   Apparition au scroll (voir components/Reveal.tsx et RevealScript.tsx)
+   Les éléments ne sont masqués que si le script a démarré (classe "js").
+   ========================================================================== */
+
+.js .reveal {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

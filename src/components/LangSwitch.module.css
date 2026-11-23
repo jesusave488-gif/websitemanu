@@ -1,0 +1,22 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  height: 2rem;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--fg);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.switch:hover {
+  background: var(--fg);
+  color: var(--bg);
+}

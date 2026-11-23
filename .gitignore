@@ -1,0 +1,23 @@
+# dépendances
+/node_modules
+
+# build Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# environnement
+.env*
+!.env.example
+
+# Vercel
+.vercel
+
+# système
+.DS_Store
+Thumbs.db
+npm-debug.log*
+
+# visuels de référence (brochure) — gardés en local, hors du dépôt
+/reference/

@@ -1,0 +1,45 @@
+/* Liste numérotée séparée par des filets — reprise directe de la brochure. */
+
+.list {
+  border-bottom: 1px solid var(--fg);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 1rem;
+  padding-block: clamp(1.25rem, 3vw, 2rem);
+  border-top: 1px solid var(--fg);
+}
+
+.row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  padding-top: 0.6em;
+}
+
+.title {
+  font-size: clamp(1.625rem, 1rem + 2.6vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.tags {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+
+  .number {
+    padding-top: 0.45em;
+  }
+}
