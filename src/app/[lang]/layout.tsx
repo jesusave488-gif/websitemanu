@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Omit<LayoutProps, "children">
 }
 
 export const viewport: Viewport = {
-  themeColor: "#F3F2EC",
+  themeColor: "#ffffff",
 };
 
 export default async function LangLayout({ children, params }: LayoutProps) {
@@ -74,7 +74,7 @@ export default async function LangLayout({ children, params }: LayoutProps) {
           {dict.nav.skip}
         </a>
         <main id="main">{children}</main>
-        <Footer locale={lang} nav={dict.nav} dict={dict.footer} />
+        <Footer locale={lang} nav={dict.nav} contact={dict.contact} dict={dict.footer} />
         <WhatsAppFloat label={dict.contact.floatingLabel} message={dict.contact.whatsappMessage} />
         <RevealObserver />
       </body>

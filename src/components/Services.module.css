@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .wrap {
-  --card: color-mix(in srgb, #ffffff 72%, var(--paper));
+  --card: color-mix(in srgb, var(--paper) 55%, #ffffff);
   --icon-bg: color-mix(in srgb, var(--lime) 45%, var(--card));
   --icon-fg: var(--accent);
 

@@ -5,7 +5,6 @@ import { getDictionary } from "@/i18n";
 import { getProject, getRelatedProject, projects } from "@/content/projects";
 import StudySidebar from "@/components/study/StudySidebar";
 import StudyBlocks from "@/components/study/StudyBlocks";
-import ContactCard from "@/components/ContactCard";
 import styles from "@/components/study/Study.module.css";
 
 type ProjectPageProps = {
@@ -59,7 +58,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </article>
       </div>
 
-      <ContactCard dict={dict.contact} />
     </>
   );
 }

@@ -111,12 +111,19 @@ const fr = {
   clients: {
     title: "Ils m'ont fait confiance",
   },
-  testimonials: {
-    title: "Ils en parlent",
+  recognitions: {
+    title: "Distinctions et reconnaissances",
+    intro: "Des formations certifiantes qui complètent ma pratique du design.",
+    hint: "Survolez une distinction pour voir le certificat.",
+    issuedBy: "Délivré par",
+    view: "Voir le certificat",
+    close: "Fermer",
+    placeholder: "Certificat à ajouter",
   },
   contact: {
     title: "Votre message mérite d'être vu.",
     accent: "Écrivez-moi.",
+    text: "Un site web, une identité de marque, un rapport à mettre en page ? Parlez-moi de votre projet, en français ou en anglais.",
     whatsappCta: "Écrire sur WhatsApp",
     emailCta: "Envoyer un email",
     // Message pré-rempli quand on ouvre WhatsApp depuis le site.
@@ -124,9 +131,16 @@ const fr = {
     floatingLabel: "Discuter sur WhatsApp",
   },
   footer: {
-    navLabel: "Navigation",
+    tagline: "Designer de sites web, de marques et de documents.",
+    navLabel: "Pages",
     socialLabel: "Réseaux",
-    location: "Basé à Cotonou, Bénin",
+    contactLabel: "Contact",
+    location: "Cotonou, Bénin",
+    links: {
+      experience: "Expérience",
+      services: "Services",
+      recognitions: "Distinctions",
+    },
   },
   project: {
     work: "Travaux",

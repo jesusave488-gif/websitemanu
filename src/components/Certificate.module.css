@@ -1,0 +1,122 @@
+.frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #ffffff;
+  container-type: inline-size;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* ---------- Certificat dessiné (en attendant l'image) ---------- */
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 9cqi 10cqi;
+  background:
+    radial-gradient(80% 60% at 100% 100%, rgb(180 224 138 / 0.22), transparent 70%),
+    #fbfaf6;
+  color: var(--slate);
+  text-align: center;
+}
+
+/* Double filet, comme sur un diplôme. */
+.border {
+  position: absolute;
+  inset: 3.2cqi;
+  border: 1px solid rgb(47 125 85 / 0.45);
+  outline: 1px solid rgb(47 125 85 / 0.2);
+  outline-offset: -1.4cqi;
+  border-radius: 2px;
+}
+
+.tag {
+  position: absolute;
+  top: 5.5cqi;
+  right: 6cqi;
+  padding: 0.6cqi 1.8cqi;
+  border-radius: 999px;
+  background: var(--slate);
+  color: var(--lime);
+  font-family: var(--font-mono);
+  font-size: 2.1cqi;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 2.6cqi;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+.heading {
+  max-width: 34ch;
+  margin-top: 2.6cqi;
+  font-size: 4.4cqi;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.name {
+  margin-top: 4cqi;
+  font-size: 5.4cqi;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.lines {
+  display: grid;
+  gap: 1.6cqi;
+  width: 46%;
+  margin-top: 3cqi;
+}
+
+.lines span {
+  height: 1px;
+  background: rgb(34 50 60 / 0.22);
+}
+
+.lines span:last-child {
+  width: 70%;
+  justify-self: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 62%;
+  margin-top: 6cqi;
+  font-family: var(--font-mono);
+  font-size: 2.2cqi;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(34 50 60 / 0.7);
+}
+
+/* Sceau vert, en bas à droite. */
+.seal {
+  position: absolute;
+  right: 9cqi;
+  bottom: 8cqi;
+  width: 10cqi;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow:
+    0 0 0 0.8cqi #fbfaf6,
+    0 0 0 1.1cqi rgb(47 125 85 / 0.5);
+}

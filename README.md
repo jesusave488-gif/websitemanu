@@ -34,7 +34,7 @@ src/
       not-found.tsx       → page 404 traduite
     sitemap.ts, robots.ts → SEO
   components/             → Header, Hero, Work/WorkGrid/ProjectCard, About,
-                            Experience, Services, Clients, ContactCard, Footer,
+                            Experience, Services, Clients, Recognitions, Footer,
                             MediaFrame, ThemeToggle, LangSwitch, Reveal
     study/                → étude de cas : barre latérale, sommaire, blocs
   content/
@@ -97,15 +97,18 @@ Pour remplacer un emplacement « Projet à venir », il suffit de remplir son fi
 
 ### Brouillons : visibles en local, masqués en ligne
 
-- Les projets `status: "upcoming"` et les témoignages `published: false` s'affichent avec
+- Les projets `status: "upcoming"` s'affichent avec
   `npm run dev`, mais **pas sur le site en ligne**. La section Travaux n'apparaît en ligne
   que lorsqu'au moins un projet est `"published"`.
 - Pour prévisualiser le site complet en production : `NEXT_PUBLIC_SHOW_DRAFTS=true npm run build`.
 
-### Témoignages
+### Distinctions et certificats
 
-Dans `src/content/testimonials.ts` : citation FR/EN, nom, poste. Passez `published: true`
-une fois la citation validée par la personne.
+Dans `src/content/recognitions.ts` : titre FR/EN, structure, domaine, année.
+Déposez le scan du certificat dans `public/images/certificats/` (JPG ou PNG) et indiquez
+son chemin dans `certificate.src`, par exemple `"/images/certificats/epitech.jpg"`.
+Ajustez `ratio` aux dimensions de l'image (largeur / hauteur). Tant que `src` est vide,
+un certificat dessiné aux couleurs du site s'affiche à la place.
 
 ### Liens et chiffres clés d'une étude de cas
 

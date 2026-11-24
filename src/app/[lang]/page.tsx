@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { projects } from "@/content/projects";
-import { testimonials } from "@/content/testimonials";
 import { site } from "@/content/site";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -11,8 +10,7 @@ import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Services from "@/components/Services";
 import Clients from "@/components/Clients";
-import Testimonials from "@/components/Testimonials";
-import ContactCard from "@/components/ContactCard";
+import Recognitions from "@/components/Recognitions";
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -29,8 +27,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <Experience dict={dict.experience} />
       <Services dict={dict.services} contactMessage={dict.contact.whatsappMessage} />
       <Clients title={dict.clients.title} clients={site.clients} />
-      <Testimonials title={dict.testimonials.title} items={testimonials} locale={lang} />
-      <ContactCard dict={dict.contact} />
+      <Recognitions locale={lang} dict={dict.recognitions} />
     </>
   );
 }

@@ -106,21 +106,35 @@ const en: Dictionary = {
   clients: {
     title: "They trusted me",
   },
-  testimonials: {
-    title: "Kind words",
+  recognitions: {
+    title: "Awards and recognition",
+    intro: "Certified training that complements my design practice.",
+    hint: "Hover over an award to see the certificate.",
+    issuedBy: "Issued by",
+    view: "View the certificate",
+    close: "Close",
+    placeholder: "Certificate to be added",
   },
   contact: {
     title: "Your message deserves to be seen.",
     accent: "Write to me.",
+    text: "A website, a brand identity, a report to lay out? Tell me about your project, in English or in French.",
     whatsappCta: "Message me on WhatsApp",
     emailCta: "Send an email",
     whatsappMessage: "Hello Emmanuel, I saw your portfolio and would like to discuss a project.",
     floatingLabel: "Chat on WhatsApp",
   },
   footer: {
-    navLabel: "Navigation",
+    tagline: "Website, brand and document designer.",
+    navLabel: "Pages",
     socialLabel: "Social",
-    location: "Based in Cotonou, Benin",
+    contactLabel: "Contact",
+    location: "Cotonou, Benin",
+    links: {
+      experience: "Experience",
+      services: "Services",
+      recognitions: "Awards",
+    },
   },
   project: {
     work: "Work",
