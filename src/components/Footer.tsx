@@ -12,54 +12,50 @@ type FooterProps = {
 
 export default function Footer({ locale, nav, dict }: FooterProps) {
   const home = `/${locale}`;
+  const links = [
+    { href: `${home}#top`, label: nav.homeText },
+    { href: `${home}#travaux`, label: nav.work },
+    { href: `${home}#a-propos`, label: nav.about },
+    { href: `${home}#contact`, label: nav.contact },
+  ];
 
   return (
-    <footer className="container">
-      <div className={styles.footer}>
-      <nav aria-label={dict.navLabel}>
-        <ul className={styles.list}>
-          <li>
-            <Link href={`${home}#top`} className={styles.link}>
-              {nav.home}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${home}#travaux`} className={styles.link}>
-              {nav.work}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${home}#a-propos`} className={styles.link}>
-              {nav.about}
-            </Link>
-          </li>
-          <li>
-            <Link href={`${home}#contact`} className={styles.link}>
-              {nav.contact}
-            </Link>
-          </li>
+    <footer className={`container ${styles.footer}`}>
+      <div className={styles.row}>
+        <nav aria-label={dict.navLabel}>
+          <ul className={styles.list}>
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={styles.link}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <ul className={styles.list} aria-label={dict.socialLabel}>
+          {site.social.map((social) => (
+            <li key={social.label}>
+              {/* URL à compléter dans src/content/site.ts */}
+              <a
+                href={social.url || "#"}
+                className={styles.link}
+                target={social.url ? "_blank" : undefined}
+                rel={social.url ? "noopener noreferrer" : undefined}
+              >
+                {social.label}
+              </a>
+            </li>
+          ))}
         </ul>
-      </nav>
+      </div>
 
-      <ul className={styles.list} aria-label={dict.socialLabel}>
-        {site.social.map((social) => (
-          <li key={social.label}>
-            {/* URL à compléter dans src/content/site.ts */}
-            <a
-              href={social.url || "#"}
-              className={styles.link}
-              target={social.url ? "_blank" : undefined}
-              rel={social.url ? "noopener noreferrer" : undefined}
-            >
-              {social.label} ↗
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <p className={`label ${styles.copy}`}>
-        © {site.year} {site.name}
-      </p>
+      <div className={`${styles.row} ${styles.bottom}`}>
+        <p className={styles.meta}>{dict.location}</p>
+        <p className={styles.meta}>
+          © {site.year} {site.name}
+        </p>
       </div>
     </footer>
   );

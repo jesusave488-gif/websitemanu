@@ -1,0 +1,80 @@
+import Link from "next/link";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
+import type { Project } from "@/content/projects";
+import LangSwitch from "@/components/LangSwitch";
+import ThemeToggle from "@/components/ThemeToggle";
+import MediaFrame from "@/components/MediaFrame";
+import StudyNav from "./StudyNav";
+import styles from "./Study.module.css";
+
+type StudySidebarProps = {
+  project: Project;
+  related?: Project;
+  locale: Locale;
+  dict: Dictionary;
+};
+
+/** Barre latérale fixe : fil d'Ariane, titre du projet, sommaire, projet suivant. */
+export default function StudySidebar({ project, related, locale, dict }: StudySidebarProps) {
+  const isUpcoming = project.status === "upcoming";
+
+  return (
+    <aside className={styles.sidebar}>
+      <div className={styles.topbar}>
+        <Link href={`/${locale}`} className={styles.home} aria-label={dict.nav.homeText}>
+          {dict.nav.home}
+        </Link>
+        <p className={`label ${styles.crumbs}`}>
+          <Link href={`/${locale}#travaux`} className={styles.crumbLink}>
+            {dict.project.work}
+          </Link>
+          <span className={styles.crumbCurrent}>{project.title[locale]}</span>
+        </p>
+        <div className={styles.tools}>
+          <LangSwitch locale={locale} label={dict.nav.switchTo} ariaLabel={dict.nav.switchLabel} />
+          <ThemeToggle label={dict.nav.theme} />
+        </div>
+      </div>
+
+      <div className={styles.intro}>
+        <h1 className={styles.title}>
+          {project.title[locale]}
+          <span className={styles.subtitle}>{project.subtitle[locale]}</span>
+        </h1>
+        <p className={`label ${styles.meta}`}>
+          {project.category[locale]} · {project.year}
+          {isUpcoming ? <span className={styles.badge}>{dict.project.upcomingNote}</span> : null}
+        </p>
+      </div>
+
+      <StudyNav
+        label={dict.project.sectionsLabel}
+        items={project.sections.map((section) => ({ id: section.id, label: section.nav[locale] }))}
+      />
+
+      {related ? (
+        <Link href={`/${locale}/projets/${related.slug}`} className={styles.related}>
+          <MediaFrame
+            media={related.cover}
+            locale={locale}
+            ratio="1 / 1"
+            sizes="96px"
+            tone="forest"
+            className={styles.relatedThumb}
+          />
+          <span className={styles.relatedText}>
+            <span className={styles.relatedTitle}>
+              {related.status === "upcoming" ? dict.work.upcoming : related.title[locale]}
+            </span>
+            <span className={styles.relatedSubtitle}>{related.category[locale]}</span>
+            <span className={`label ${styles.relatedTag}`}>{dict.project.seeAlso}</span>
+          </span>
+          <span className={styles.relatedArrow} aria-hidden="true">
+            ↗
+          </span>
+        </Link>
+      ) : null}
+    </aside>
+  );
+}

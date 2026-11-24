@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import LangSwitch from "./LangSwitch";
+import ThemeToggle from "./ThemeToggle";
 import styles from "./Header.module.css";
 
 type HeaderProps = {
@@ -13,12 +14,12 @@ export default function Header({ locale, dict }: HeaderProps) {
   const home = `/${locale}`;
 
   return (
-    <header className={styles.header}>
-      <nav className={`container ${styles.inner}`}>
-        <Link href={`${home}#top`} className={styles.home} aria-label={dict.homeLabel}>
-          {dict.home}
-        </Link>
+    <header className={`container ${styles.header}`}>
+      <Link href={`${home}#top`} className={styles.home} aria-label={dict.homeLabel}>
+        {dict.home}
+      </Link>
 
+      <nav className={styles.nav}>
         <ul className={styles.links}>
           <li>
             <Link href={`${home}#travaux`} className={styles.link}>
@@ -35,10 +36,11 @@ export default function Header({ locale, dict }: HeaderProps) {
               {dict.contact}
             </Link>
           </li>
-          <li>
-            <LangSwitch locale={locale} label={dict.switchTo} ariaLabel={dict.switchLabel} />
-          </li>
         </ul>
+        <div className={styles.tools}>
+          <LangSwitch locale={locale} label={dict.switchTo} ariaLabel={dict.switchLabel} />
+          <ThemeToggle label={dict.theme} />
+        </div>
       </nav>
     </header>
   );

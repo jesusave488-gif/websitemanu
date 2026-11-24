@@ -1,24 +1,43 @@
 .card {
   display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+  isolation: isolate;
 }
 
 .card:focus-visible {
-  outline-offset: 6px;
+  outline-offset: 4px;
 }
 
-.meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  padding-top: 1rem;
+/* Zoom léger de l'image au survol. */
+.media :global(img),
+.media :global(video) {
+  transition: transform 1.1s var(--ease);
+}
+
+.card:hover .media :global(img),
+.card:hover .media :global(video) {
+  transform: scale(1.04);
+}
+
+.card:hover .media span:nth-child(2) {
+  transform: translateY(42%) scale(1.12);
+}
+
+.number {
+  opacity: 0.9;
+}
+
+.panel {
+  padding: clamp(1.25rem, 2vw, 1.875rem);
 }
 
 .title {
-  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.3;
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.625rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
   transition: color 0.25s ease;
 }
 
@@ -27,17 +46,9 @@
 }
 
 .category {
-  flex-shrink: 0;
-  text-align: right;
-}
-
-@media (max-width: 480px) {
-  .meta {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .category {
-    text-align: left;
-  }
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--muted);
 }

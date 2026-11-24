@@ -1,0 +1,75 @@
+.wrap {
+  padding-top: var(--section-space);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(26rem, 36vw, 42.5rem);
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+  border-radius: var(--radius);
+  text-align: center;
+  color: #ffffff;
+  background:
+    radial-gradient(120% 90% at 100% 100%, rgb(180 224 138 / 0.55) 0%, rgb(180 224 138 / 0) 55%),
+    linear-gradient(125deg, var(--slate-deep) 0%, var(--slate) 30%, var(--forest) 78%, #4f9a63 100%);
+}
+
+/* Cercle fin, comme sur la brochure. */
+.ring {
+  position: absolute;
+  left: -12%;
+  top: -60%;
+  width: 70%;
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.title {
+  position: relative;
+  max-width: 15ch;
+  font-size: clamp(2.25rem, 1.1rem + 3.9vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.accent {
+  font-style: italic;
+  color: var(--lime);
+}
+
+.email {
+  position: relative;
+  margin-top: clamp(1.75rem, 3.5vw, 3rem);
+  font-size: clamp(1.25rem, 0.9rem + 1.3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+  transition: color 0.25s ease;
+}
+
+.email:hover {
+  color: var(--lime);
+}
+
+.whatsapp {
+  position: relative;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8125rem, 0.75rem + 0.25vw, 1rem);
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.75);
+  transition: color 0.25s ease;
+}
+
+.whatsapp:hover {
+  color: var(--lime);
+}

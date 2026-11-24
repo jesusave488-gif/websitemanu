@@ -3,14 +3,13 @@ import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Section from "@/components/Section";
-import ProjectGrid from "@/components/ProjectGrid";
+import Work from "@/components/Work";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
-import ServiceList from "@/components/ServiceList";
-import Clients from "@/components/Clients";
-import Contact from "@/components/Contact";
+import ServicesClients from "@/components/ServicesClients";
+import ContactCard from "@/components/ContactCard";
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -19,29 +18,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
   return (
     <>
+      <Header locale={lang} dict={dict.nav} />
       <Hero dict={dict.hero} />
-
-      <Section id="travaux" label={dict.work.label} meta={dict.work.years}>
-        <ProjectGrid projects={projects.slice(0, 6)} locale={lang} upcomingLabel={dict.work.upcoming} />
-      </Section>
-
-      <Section id="a-propos" label={dict.about.label}>
-        <About dict={dict.about} portrait={site.portrait} />
-      </Section>
-
-      <Section id="experience" label={dict.experience.label}>
-        <Experience dict={dict.experience} />
-      </Section>
-
-      <Section id="services" label={dict.services.label}>
-        <ServiceList dict={dict.services} />
-      </Section>
-
-      <Section id="clients" label={dict.clients.label}>
-        <Clients clients={site.clients} />
-      </Section>
-
-      <Contact dict={dict.contact} />
+      <Work projects={projects.slice(0, 6)} locale={lang} dict={dict.work} />
+      <About locale={lang} dict={dict.about} portrait={site.portrait} />
+      <Experience dict={dict.experience} />
+      <ServicesClients services={dict.services} clientsTitle={dict.clients.title} clients={site.clients} />
+      <ContactCard dict={dict.contact} />
     </>
   );
 }

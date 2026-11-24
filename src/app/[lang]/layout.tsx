@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { site, siteUrl } from "@/content/site";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { RevealInit, RevealObserver } from "@/components/RevealScript";
 import "../globals.css";
@@ -57,10 +56,7 @@ export async function generateMetadata({ params }: Omit<LayoutProps, "children">
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F3F2EC" },
-    { media: "(prefers-color-scheme: dark)", color: "#22323C" },
-  ],
+  themeColor: "#F3F2EC",
 };
 
 export default async function LangLayout({ children, params }: LayoutProps) {
@@ -69,14 +65,13 @@ export default async function LangLayout({ children, params }: LayoutProps) {
   const dict = getDictionary(lang);
 
   return (
-    // suppressHydrationWarning : la classe "js" est ajoutée par RevealInit avant React.
+    // suppressHydrationWarning : la classe "js" et le thème sont posés par RevealInit avant React.
     <html lang={lang} className={`${inter.variable} ${plexMono.variable}`} suppressHydrationWarning>
       <body id="top">
         <RevealInit />
         <a href="#main" className="skip-link">
           {dict.nav.skip}
         </a>
-        <Header locale={lang} dict={dict.nav} />
         <main id="main">{children}</main>
         <Footer locale={lang} nav={dict.nav} dict={dict.footer} />
         <RevealObserver />

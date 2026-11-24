@@ -1,0 +1,96 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: var(--surface);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+/* ---------- Emplacement vide ---------- */
+
+.placeholder {
+  --ph-bg: var(--surface);
+  --ph-fg: var(--muted);
+  --ph-disc: transparent;
+  --ph-ring: var(--line);
+
+  background: var(--ph-bg);
+  color: var(--ph-fg);
+}
+
+.placeholder[data-tone="forest"] {
+  --ph-bg: var(--forest);
+  --ph-fg: rgb(255 255 255 / 0.85);
+  --ph-disc: var(--lime);
+  --ph-ring: rgb(255 255 255 / 0.22);
+}
+
+.placeholder[data-tone="lime"] {
+  --ph-bg: var(--lime);
+  --ph-fg: var(--slate);
+  --ph-disc: var(--forest);
+  --ph-ring: rgb(34 50 60 / 0.2);
+}
+
+.placeholder[data-tone="slate"] {
+  --ph-bg: var(--slate-deep);
+  --ph-fg: rgb(255 255 255 / 0.8);
+  --ph-disc: var(--forest);
+  --ph-ring: rgb(255 255 255 / 0.16);
+}
+
+.placeholder[data-tone="paper"] {
+  --ph-bg: var(--surface-strong);
+  --ph-fg: var(--fg);
+  --ph-disc: var(--lime);
+  --ph-ring: var(--line);
+}
+
+/* Cercle fin + demi-disque : les formes de la brochure. */
+/* Positions calées sur la largeur (translate en % de la forme), pour un rendu
+   identique en paysage comme en carré. */
+.ring {
+  position: absolute;
+  left: 18%;
+  top: 0;
+  width: 95%;
+  aspect-ratio: 1;
+  border: 1px solid var(--ph-ring);
+  border-radius: 50%;
+  transform: translateY(-38%);
+}
+
+.disc {
+  position: absolute;
+  right: -12%;
+  bottom: 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ph-disc);
+  transform: translateY(42%);
+  transition: transform 1.1s var(--ease);
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}

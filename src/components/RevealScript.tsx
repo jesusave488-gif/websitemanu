@@ -1,12 +1,18 @@
-// Deux petits scripts inline pour l'apparition au scroll des éléments .reveal.
+// Petits scripts inline, exécutés avant React pour éviter tout « flash » à l'affichage.
 //
-// 1. RevealInit (tout début du <body>) : ajoute la classe "js" sur <html>, ce qui masque
-//    les éléments .reveal (voir globals.css). Sans JavaScript, rien n'est masqué.
-// 2. RevealObserver (fin du <body>) : anime chaque élément quand il entre dans l'écran,
+// 1. RevealInit (tout début du <body>) :
+//    - applique le thème mémorisé (clair par défaut, sombre si choisi auparavant) ;
+//    - ajoute la classe "js" sur <html>, ce qui masque les éléments .reveal (voir globals.css).
+//      Sans JavaScript, rien n'est masqué.
+// 2. RevealObserver (fin du <body>) : anime chaque élément .reveal quand il entre dans l'écran,
 //    y compris ceux ajoutés plus tard lors d'une navigation entre pages.
 //    En cas de mouvement réduit ou de navigateur trop ancien, tout est affiché directement.
 
-const init = `document.documentElement.classList.add("js");`;
+const init = `(function () {
+  var root = document.documentElement;
+  try { if (localStorage.getItem("theme") === "dark") root.setAttribute("data-theme", "dark"); } catch (e) {}
+  root.classList.add("js");
+})();`;
 
 const observer = `(function () {
   var root = document.documentElement;
