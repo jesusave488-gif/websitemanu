@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import type { Locale } from "@/i18n/config";
 import type { StudyBlock } from "@/content/projects";
-import MediaFrame from "@/components/MediaFrame";
+import MediaFrame, { type Tone } from "@/components/MediaFrame";
 import Reveal from "@/components/Reveal";
+import CountUp from "./CountUp";
 import styles from "./Study.module.css";
 
 type StudyBlocksProps = {
@@ -11,6 +12,10 @@ type StudyBlocksProps = {
   placeholderLabel: string;
   /** La toute première image de la page est chargée en priorité. */
   priorityFirst?: boolean;
+  /** Numéro de la section (« 01 »), affiché devant son premier texte. */
+  number?: string;
+  /** Couleur des emplacements vides : celle du service pour le premier visuel, puis claire. */
+  tone?: Tone;
 };
 
 /** Choisit un texte clair ou foncé selon la couleur de fond d'une pastille. */
@@ -22,8 +27,17 @@ function readableOn(hex: string): string {
   return luminance > 0.55 ? "#22323C" : "#FFFFFF";
 }
 
-export default function StudyBlocks({ blocks, locale, placeholderLabel, priorityFirst }: StudyBlocksProps) {
+export default function StudyBlocks({
+  blocks,
+  locale,
+  placeholderLabel,
+  priorityFirst,
+  number,
+  tone = "neutral",
+}: StudyBlocksProps) {
   const placeholder = <span className="label">{placeholderLabel}</span>;
+  const firstText = blocks.findIndex((block) => block.type === "text");
+  let mediaCount = 0;
 
   return (
     <>
@@ -36,6 +50,7 @@ export default function StudyBlocks({ blocks, locale, placeholderLabel, priority
             return (
               <Reveal key={key} className={styles.text}>
                 <div className={styles.textAside}>
+                  {number && index === firstText ? <span className={styles.sectionNumber}>{number}</span> : null}
                   {block.label ? (
                     <p className={`label ${styles.textLabel}`}>{block.label[locale]}</p>
                   ) : (
@@ -67,6 +82,7 @@ export default function StudyBlocks({ blocks, locale, placeholderLabel, priority
                     locale={locale}
                     sizes={block.items.length > 1 ? "(max-width: 900px) 100vw, 40vw" : "(max-width: 900px) 100vw, 75vw"}
                     priority={priority && i === 0}
+                    tone={mediaCount++ === 0 ? tone : "paper"}
                     className={styles.mediaItem}
                     placeholder={placeholder}
                   />
@@ -101,7 +117,7 @@ export default function StudyBlocks({ blocks, locale, placeholderLabel, priority
                 {block.items.map((item, i) => (
                   <div key={i} className={styles.figure}>
                     <dt className={styles.figureLabel}>{item.label[locale]}</dt>
-                    <dd className={styles.figureValue}>{item.value}</dd>
+                    <CountUp value={item.value} className={styles.figureValue} />
                   </div>
                 ))}
               </Reveal>

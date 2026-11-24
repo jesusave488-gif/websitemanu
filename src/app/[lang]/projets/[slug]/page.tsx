@@ -5,6 +5,8 @@ import { getDictionary } from "@/i18n";
 import { getProject, getRelatedProject, projects } from "@/content/projects";
 import StudySidebar from "@/components/study/StudySidebar";
 import StudyBlocks from "@/components/study/StudyBlocks";
+import NextProject from "@/components/study/NextProject";
+import { serviceTones } from "@/components/tones";
 import styles from "@/components/study/Study.module.css";
 
 type ProjectPageProps = {
@@ -39,25 +41,36 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const dict = getDictionary(lang);
 
+  const related = getRelatedProject(project);
+  const tone = serviceTones[project.service];
+
   return (
-    <>
-      <div className={styles.study}>
-        <StudySidebar project={project} related={getRelatedProject(project)} locale={lang} dict={dict} />
+    <div className={styles.study}>
+      <StudySidebar project={project} locale={lang} dict={dict} />
 
-        <article className={styles.content}>
-          {project.sections.map((section, i) => (
-            <section key={section.id} id={section.id} className={styles.section} aria-label={section.nav[lang]}>
-              <StudyBlocks
-                blocks={section.blocks}
-                locale={lang}
-                placeholderLabel={dict.project.mediaPlaceholder}
-                priorityFirst={i === 0}
-              />
-            </section>
-          ))}
-        </article>
-      </div>
+      <article className={styles.content}>
+        {project.sections.map((section, i) => (
+          <section key={section.id} id={section.id} className={styles.section} aria-label={section.nav[lang]}>
+            <StudyBlocks
+              blocks={section.blocks}
+              locale={lang}
+              placeholderLabel={dict.project.mediaPlaceholder}
+              priorityFirst={i === 0}
+              number={String(i + 1).padStart(2, "0")}
+              tone={tone}
+            />
+          </section>
+        ))}
 
-    </>
+        {related ? (
+          <NextProject
+            project={related}
+            locale={lang}
+            label={dict.project.next}
+            upcomingLabel={dict.work.upcoming}
+          />
+        ) : null}
+      </article>
+    </div>
   );
 }

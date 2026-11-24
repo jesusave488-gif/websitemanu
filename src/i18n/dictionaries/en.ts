@@ -145,6 +145,10 @@ const en: Dictionary = {
     seeAlso: "See also",
     mediaPlaceholder: "Visual coming soon",
     upcomingNote: "Case study in progress",
+    client: "Client",
+    service: "Service",
+    year: "Year",
+    next: "Next project",
   },
   notFound: {
     title: "Page not found.",

@@ -5,20 +5,23 @@ import type { Project } from "@/content/projects";
 import { showDrafts } from "@/content/site";
 import LangSwitch from "@/components/LangSwitch";
 import Logo from "@/components/Logo";
-import MediaFrame from "@/components/MediaFrame";
 import StudyNav from "./StudyNav";
 import styles from "./Study.module.css";
 
 type StudySidebarProps = {
   project: Project;
-  related?: Project;
   locale: Locale;
   dict: Dictionary;
 };
 
-/** Barre latérale fixe : fil d'Ariane, titre du projet, sommaire, projet suivant. */
-export default function StudySidebar({ project, related, locale, dict }: StudySidebarProps) {
+/** Barre latérale fixe : fil d'Ariane, titre et fiche du projet, sommaire avec progression. */
+export default function StudySidebar({ project, locale, dict }: StudySidebarProps) {
   const isUpcoming = project.status === "upcoming";
+  const facts = [
+    { label: dict.project.client, value: project.client },
+    { label: dict.project.service, value: dict.services.items[project.service].title },
+    { label: dict.project.year, value: project.year },
+  ].filter((fact) => fact.value);
 
   return (
     <aside className={styles.sidebar}>
@@ -42,10 +45,17 @@ export default function StudySidebar({ project, related, locale, dict }: StudySi
           {project.title[locale]}
           <span className={styles.subtitle}>{project.subtitle[locale]}</span>
         </h1>
-        <p className={`label ${styles.meta}`}>
-          {project.category[locale]} · {project.year}
-          {isUpcoming ? <span className={styles.badge}>{dict.project.upcomingNote}</span> : null}
-        </p>
+        {isUpcoming ? <p className={`label ${styles.badge}`}>{dict.project.upcomingNote}</p> : null}
+        <p className={styles.description}>{project.description[locale]}</p>
+
+        <dl className={styles.facts}>
+          {facts.map((fact) => (
+            <div key={fact.label} className={styles.fact}>
+              <dt className="label">{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
         {project.links?.length ? (
           <div className={styles.links}>
             {/* Un lien sans adresse n'apparaît qu'en local, grisé, pour rappeler de le remplir. */}
@@ -75,29 +85,6 @@ export default function StudySidebar({ project, related, locale, dict }: StudySi
         label={dict.project.sectionsLabel}
         items={project.sections.map((section) => ({ id: section.id, label: section.nav[locale] }))}
       />
-
-      {related ? (
-        <Link href={`/${locale}/projets/${related.slug}`} className={styles.related}>
-          <MediaFrame
-            media={related.cover}
-            locale={locale}
-            ratio="1 / 1"
-            sizes="96px"
-            tone="forest"
-            className={styles.relatedThumb}
-          />
-          <span className={styles.relatedText}>
-            <span className={styles.relatedTitle}>
-              {related.status === "upcoming" ? dict.work.upcoming : related.title[locale]}
-            </span>
-            <span className={styles.relatedSubtitle}>{related.category[locale]}</span>
-            <span className={`label ${styles.relatedTag}`}>{dict.project.seeAlso}</span>
-          </span>
-          <span className={styles.relatedArrow} aria-hidden="true">
-            ↗
-          </span>
-        </Link>
-      ) : null}
     </aside>
   );
 }

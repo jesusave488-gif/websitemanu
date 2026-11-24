@@ -1,18 +1,10 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Project } from "@/content/projects";
-import { serviceNumber, type ServiceId } from "@/content/services";
-import MediaFrame, { type Tone } from "./MediaFrame";
+import { serviceNumber } from "@/content/services";
+import MediaFrame from "./MediaFrame";
+import { serviceTones as tones } from "./tones";
 import styles from "./ProjectCard.module.css";
-
-/** Couleur de l'emplacement selon le service. */
-const tones: Record<ServiceId, Tone> = {
-  web: "forest",
-  brand: "lime",
-  documents: "slate",
-  dataviz: "paper",
-  motion: "forest",
-};
 
 type ProjectCardProps = {
   project: Project;

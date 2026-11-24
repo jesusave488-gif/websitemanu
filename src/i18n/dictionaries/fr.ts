@@ -152,6 +152,10 @@ const fr = {
     seeAlso: "À voir aussi",
     mediaPlaceholder: "Visuel à venir",
     upcomingNote: "Étude de cas en préparation",
+    client: "Client",
+    service: "Service",
+    year: "Année",
+    next: "Projet suivant",
   },
   notFound: {
     title: "Page introuvable.",
