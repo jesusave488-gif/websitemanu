@@ -15,7 +15,6 @@ const fr = {
     contact: "Contact",
     switchTo: "EN",
     switchLabel: "Read in English",
-    theme: "Basculer entre mode clair et mode sombre",
     skip: "Aller au contenu",
   },
   hero: {

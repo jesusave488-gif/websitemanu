@@ -5,7 +5,6 @@ import type { Project } from "@/content/projects";
 import { showDrafts } from "@/content/site";
 import LangSwitch from "@/components/LangSwitch";
 import Logo from "@/components/Logo";
-import ThemeToggle from "@/components/ThemeToggle";
 import MediaFrame from "@/components/MediaFrame";
 import StudyNav from "./StudyNav";
 import styles from "./Study.module.css";
@@ -35,7 +34,6 @@ export default function StudySidebar({ project, related, locale, dict }: StudySi
         </p>
         <div className={styles.tools}>
           <LangSwitch locale={locale} label={dict.nav.switchTo} ariaLabel={dict.nav.switchLabel} />
-          <ThemeToggle label={dict.nav.theme} />
         </div>
       </div>
 

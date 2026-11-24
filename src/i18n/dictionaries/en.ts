@@ -16,7 +16,6 @@ const en: Dictionary = {
     contact: "Contact",
     switchTo: "FR",
     switchLabel: "Lire en français",
-    theme: "Switch between light and dark mode",
     skip: "Skip to content",
   },
   hero: {

@@ -23,10 +23,6 @@
   rotate: -18deg;
 }
 
-:global(html[data-theme="dark"]) .hand {
-  color: var(--lime);
-}
-
 .hello {
   font-weight: 750;
   letter-spacing: -0.045em;
@@ -144,10 +140,6 @@
   background: var(--forest);
 }
 
-:global(html[data-theme="dark"]) .tag::before {
-  background: var(--lime);
-}
-
 .scroll {
   flex-shrink: 0;
   display: grid;
@@ -161,10 +153,6 @@
 
 .scroll:hover {
   background: color-mix(in srgb, var(--lime) 35%, transparent);
-}
-
-:global(html[data-theme="dark"]) .scroll {
-  color: var(--lime);
 }
 
 .arrow {

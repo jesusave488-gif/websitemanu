@@ -16,10 +16,6 @@
   color: var(--f-fg);
 }
 
-:global(html[data-theme="dark"]) .footer {
-  border-top: 1px solid rgb(255 255 255 / 0.06);
-}
-
 .inner {
   position: relative;
 }

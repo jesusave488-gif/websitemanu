@@ -1,7 +1,6 @@
 /* ==========================================================================
    DA Emmanuel KIKI — tokens
-   Mode clair par défaut. Le mode sombre s'active avec le bouton du menu
-   (attribut data-theme="dark" sur <html>, mémorisé dans le navigateur).
+   Un seul thème, clair.
    ========================================================================== */
 
 :root {
@@ -64,26 +63,6 @@
   color-scheme: light;
 }
 
-/* Thème sombre « ardoise nuit » : l'ardoise de la brochure, plus profonde et légèrement
-   teintée de vert, avec un halo forêt en haut de page (voir body::before). */
-:root[data-theme="dark"] {
-  --night: #0e171b;
-  --bg: var(--night);
-  --band: #121e24;
-  --fg: #f2f4ef;
-  --muted: color-mix(in srgb, #f2f4ef 66%, var(--night));
-  --muted-display: color-mix(in srgb, #f2f4ef 56%, var(--night));
-  --line: color-mix(in srgb, #ffffff 10%, transparent);
-  --surface: #15222a;
-  --surface-strong: #1b2b34;
-  --accent: var(--lime);
-  --ambient:
-    radial-gradient(55% 40% at 92% -6%, rgb(47 125 85 / 0.24), transparent 70%),
-    radial-gradient(40% 35% at -6% 32%, rgb(180 224 138 / 0.05), transparent 70%);
-
-  color-scheme: dark;
-}
-
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -113,16 +92,6 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-}
-
-/* Halo d'ambiance (mode sombre uniquement), fixe derrière le contenu. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: var(--ambient, none);
 }
 
 h1,

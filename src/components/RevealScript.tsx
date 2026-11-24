@@ -1,7 +1,6 @@
 // Petits scripts inline, exécutés avant React pour éviter tout « flash » à l'affichage.
 //
 // 1. RevealInit (tout début du <body>) :
-//    - applique le thème mémorisé (clair par défaut, sombre si choisi auparavant) ;
 //    - ajoute la classe "js" sur <html>, ce qui masque les éléments .reveal (voir globals.css).
 //      Sans JavaScript, rien n'est masqué.
 // 2. RevealObserver (fin du <body>) : anime chaque élément .reveal quand il entre dans l'écran,
@@ -10,7 +9,6 @@
 
 const init = `(function () {
   var root = document.documentElement;
-  try { if (localStorage.getItem("theme") === "dark") root.setAttribute("data-theme", "dark"); } catch (e) {}
   root.classList.add("js");
 })();`;
 

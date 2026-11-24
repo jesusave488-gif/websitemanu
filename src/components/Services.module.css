@@ -10,11 +10,6 @@
   padding-top: var(--section-space);
 }
 
-:root[data-theme="dark"] .wrap {
-  --card: var(--surface);
-  --icon-bg: color-mix(in srgb, var(--lime) 16%, transparent);
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -210,20 +205,6 @@
 
 .card[data-featured] .description {
   color: rgb(255 255 255 / 0.74);
-}
-
-:root[data-theme="dark"] .card[data-featured] {
-  --icon-bg: var(--slate);
-  --icon-fg: var(--lime);
-
-  background: var(--lime);
-  color: var(--slate);
-}
-
-:root[data-theme="dark"] .card[data-featured] .number,
-:root[data-theme="dark"] .card[data-featured] .more,
-:root[data-theme="dark"] .card[data-featured] .description {
-  color: var(--slate);
 }
 
 /* Sur grand écran, la carte mise en avant est légèrement inclinée, comme une fiche posée sur la table. */

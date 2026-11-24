@@ -35,7 +35,7 @@ src/
     sitemap.ts, robots.ts → SEO
   components/             → Header, Hero, Work/WorkGrid/ProjectCard, About,
                             Experience, Services, Clients, Recognitions, Footer,
-                            MediaFrame, ThemeToggle, LangSwitch, Reveal
+                            MediaFrame, LangSwitch, Reveal
     study/                → étude de cas : barre latérale, sommaire, blocs
   content/
     site.ts               → email, WhatsApp, réseaux sociaux, portrait, clients

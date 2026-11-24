@@ -34,12 +34,6 @@
     var(--paper);
 }
 
-:global(html[data-theme="dark"]) .frame {
-  background:
-    radial-gradient(60% 80% at 50% 100%, rgb(180 224 138 / 0.12), transparent 70%),
-    linear-gradient(165deg, #1d2e37 0%, #14232b 45%, #12301f 100%);
-}
-
 /* Grand disque vert forêt derrière la personne, comme sur la brochure. */
 .disc {
   position: absolute;
@@ -70,10 +64,6 @@
   right: 4%;
   top: 25%;
   width: 40%;
-}
-
-:global(html[data-theme="dark"]) .ring {
-  border-color: rgb(255 255 255 / 0.08);
 }
 
 /* La photo détourée est posée sur le bas du cadre. */
@@ -108,11 +98,6 @@
   border-radius: 50%;
   background: var(--slate);
   color: var(--lime);
-}
-
-:global(html[data-theme="dark"]) .bulb {
-  background: var(--lime);
-  color: var(--slate);
 }
 
 .bulbIcon {

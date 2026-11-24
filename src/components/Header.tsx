@@ -3,7 +3,6 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import LangSwitch from "./LangSwitch";
 import Logo from "./Logo";
-import ThemeToggle from "./ThemeToggle";
 import styles from "./Header.module.css";
 
 type HeaderProps = {
@@ -40,7 +39,6 @@ export default function Header({ locale, dict }: HeaderProps) {
         </ul>
         <div className={styles.tools}>
           <LangSwitch locale={locale} label={dict.switchTo} ariaLabel={dict.switchLabel} />
-          <ThemeToggle label={dict.theme} />
         </div>
       </nav>
     </header>
