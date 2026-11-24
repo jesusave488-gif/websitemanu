@@ -7,9 +7,9 @@ import Header from "@/components/Header";
 import MediaFrame from "@/components/MediaFrame";
 import Reveal from "@/components/Reveal";
 import { serviceTones } from "@/components/tones";
-import StudyBlocks from "../StudyBlocks";
+import StudyBlocks from "./StudyBlocks";
 import SectionTabs from "./SectionTabs";
-import styles from "./Editorial.module.css";
+import styles from "./Study.module.css";
 
 type StudyEditorialProps = {
   project: Project;
@@ -126,7 +126,6 @@ export default function StudyEditorial({ project, related, locale, dict }: Study
                   locale={locale}
                   placeholderLabel={dict.project.mediaPlaceholder}
                   tone={tone}
-                  classes={styles}
                 />
               </div>
             </section>

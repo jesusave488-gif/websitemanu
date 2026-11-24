@@ -157,10 +157,6 @@ const fr = {
     year: "Année",
     next: "Projet suivant",
     links: "Liens",
-    // Sélecteur affiché en local seulement, pour comparer les deux mises en page.
-    layoutLabel: "Mise en page",
-    layoutSidebar: "Barre latérale",
-    layoutEditorial: "Éditoriale",
   },
   notFound: {
     title: "Page introuvable.",

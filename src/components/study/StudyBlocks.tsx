@@ -4,7 +4,7 @@ import type { StudyBlock } from "@/content/projects";
 import MediaFrame, { type Tone } from "@/components/MediaFrame";
 import Reveal from "@/components/Reveal";
 import CountUp from "./CountUp";
-import defaultStyles from "./Study.module.css";
+import styles from "./Study.module.css";
 
 type StudyBlocksProps = {
   blocks: StudyBlock[];
@@ -14,8 +14,6 @@ type StudyBlocksProps = {
   priorityFirst?: boolean;
   /** Couleur des emplacements vides : celle du service pour le premier visuel, puis claire. */
   tone?: Tone;
-  /** Feuille de style des blocs (mise en page Koto par défaut, ou éditoriale). */
-  classes?: Readonly<Record<string, string>>;
 };
 
 /** Choisit un texte clair ou foncé selon la couleur de fond d'une pastille. */
@@ -33,9 +31,7 @@ export default function StudyBlocks({
   placeholderLabel,
   priorityFirst,
   tone = "neutral",
-  classes = defaultStyles,
 }: StudyBlocksProps) {
-  const styles = classes;
   const placeholder = <span className="label">{placeholderLabel}</span>;
   let mediaCount = 0;
 

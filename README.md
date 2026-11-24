@@ -36,7 +36,7 @@ src/
   components/             → Header, Hero, Work/WorkGrid/ProjectCard, About,
                             Experience, Services, Clients, Recognitions, Footer,
                             MediaFrame, LangSwitch, Reveal
-    study/                → étude de cas : barre latérale, sommaire, blocs
+    study/                → étude de cas : en-tête, barre des sections, blocs, projet suivant
   content/
     site.ts               → email, WhatsApp, réseaux sociaux, portrait, clients
     services.ts           → ordre et numéros des services
@@ -75,7 +75,7 @@ Les coordonnées, liens LinkedIn / Instagram, la photo et la liste des clients s
 
 ### Composer une étude de cas
 
-Chaque section apparaît dans le sommaire de la barre latérale (`nav`) et contient des
+Chaque section apparaît dans la barre des sections, collée en haut de la page (`nav`), et contient des
 blocs empilés dans l'ordre :
 
 | Bloc     | Rendu                                                                  |

@@ -42,7 +42,7 @@ export type ProjectLink = {
   kind: "external" | "download";
 };
 
-/** Une section de l'étude de cas = une entrée du sommaire dans la barre latérale. */
+/** Une section de l'étude de cas = un onglet de la barre des sections, collée en haut pendant la lecture. */
 export type StudySection = {
   /** Ancre dans l'URL, ex. "defi" → /fr/projets/mon-projet#defi */
   id: string;
@@ -62,7 +62,7 @@ export type Project = {
   title: Localized;
   /** Accroche courte sous le titre, ex. "Une banque simple, partout". */
   subtitle: Localized;
-  /** Catégorie affichée sur la carte et dans la barre latérale. */
+  /** Catégorie affichée sur la carte et dans le fil d'Ariane de l'étude de cas. */
   category: Localized;
   client?: string;
   /** Visuel de la carte sur l'accueil (le cadrage s'adapte : paysage ou carré). */
@@ -72,6 +72,6 @@ export type Project = {
   /** Boutons sous le titre : "Voir le site", "Télécharger le PDF"… */
   links?: ProjectLink[];
   sections: StudySection[];
-  /** Projet mis en avant en bas de la barre latérale (slug). Par défaut : le projet suivant. */
+  /** Projet proposé en fin d'étude de cas (slug). Par défaut : le projet suivant. */
   related?: string;
 };

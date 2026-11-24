@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "./Editorial.module.css";
+import styles from "./Study.module.css";
 
 type SectionTabsProps = {
   label: string;

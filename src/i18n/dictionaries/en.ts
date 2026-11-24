@@ -150,9 +150,6 @@ const en: Dictionary = {
     year: "Year",
     next: "Next project",
     links: "Links",
-    layoutLabel: "Layout",
-    layoutSidebar: "Sidebar",
-    layoutEditorial: "Editorial",
   },
   notFound: {
     title: "Page not found.",

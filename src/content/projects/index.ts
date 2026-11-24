@@ -30,7 +30,7 @@ export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
 
-/** Projet mis en avant dans la barre latérale : "related" s'il est défini, sinon le suivant. */
+/** Projet proposé en fin d'étude de cas (« Projet suivant ») : "related" s'il est défini, sinon le suivant. */
 export function getRelatedProject(project: Project): Project | undefined {
   if (project.related) return getProject(project.related);
   if (projects.length < 2) return undefined;
