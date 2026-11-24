@@ -114,3 +114,14 @@ export function BentArrowIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/** Ampoule (idée), comme sur la brochure. */
+export function BulbIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 15.5c0-1.3-.7-2.2-1.5-3.1A5.5 5.5 0 1 1 17 9c0 1.3-.5 2.4-1.5 3.4-.8.9-1.5 1.8-1.5 3.1" />
+      <path d="M9.5 18.5h5M10.5 21h3" />
+    </svg>
+  );
+}

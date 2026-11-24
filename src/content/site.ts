@@ -18,8 +18,8 @@ export const site = {
   ],
 
   // Déposez votre photo dans public/images/ puis indiquez son chemin ici,
-  // par exemple "/images/portrait.jpg". Laissez vide pour afficher l'emplacement.
-  portrait: "",
+  // par exemple "/images/portrait.png" (PNG détouré conseillé). Laissez vide pour afficher l'emplacement.
+  portrait: "/images/portrait.png",
 
   clients: ["Zeyhii", "VIP Tribe", "Ayo Agency", "Camp Régional", "International Relief"],
 };

@@ -43,7 +43,7 @@ const fr = {
       "Je réalise aussi des documents bilingues français / anglais — rapports, plans stratégiques, présentations. Je travaille depuis Cotonou, au Bénin, avec des clients d'ici et d'ailleurs.",
     ],
     portraitAlt: "Portrait d'Emmanuel KIKI",
-    portraitPlaceholder: "Portrait à venir — photo horizontale conseillée",
+    portraitPlaceholder: "Portrait à venir — photo carrée conseillée",
   },
   experience: {
     title: "Expérience",

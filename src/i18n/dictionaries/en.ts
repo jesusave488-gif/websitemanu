@@ -41,7 +41,7 @@ const en: Dictionary = {
       "I also produce bilingual French / English documents — reports, strategic plans, presentations. I work from Cotonou, Benin, with clients here and abroad.",
     ],
     portraitAlt: "Portrait of Emmanuel KIKI",
-    portraitPlaceholder: "Portrait coming soon — landscape photo recommended",
+    portraitPlaceholder: "Portrait coming soon — square photo recommended",
   },
   experience: {
     title: "Experience",
