@@ -21,7 +21,12 @@ export default function NextProject({ project, locale, label, upcomingLabel }: N
     <Reveal>
       <Link href={`/${locale}/projets/${project.slug}`} className={styles.next}>
         <span className={styles.nextText}>
-          <span className={styles.nextLabel}>{label}</span>
+          <span className={styles.nextLabel}>
+            {label}{" "}
+            <span className={styles.nextArrow} aria-hidden="true">
+              →
+            </span>
+          </span>
           <span className={styles.nextTitle}>{title}</span>
           <span className={styles.nextCategory}>{project.category[locale]}</span>
         </span>
@@ -33,9 +38,6 @@ export default function NextProject({ project, locale, label, upcomingLabel }: N
           tone={serviceTones[project.service]}
           className={styles.nextThumb}
         />
-        <span className={styles.nextArrow} aria-hidden="true">
-          →
-        </span>
       </Link>
     </Reveal>
   );

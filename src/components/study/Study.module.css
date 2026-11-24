@@ -1,25 +1,11 @@
 /* ==========================================================================
    Étude de cas — mise en page calquée sur Koto (koto.com/projects/nubank),
-   mesurée sur un écran de 1920 px :
-   - fond noir, marges de 18 px, 18 px entre la barre et les visuels ;
+   mesurée sur un écran de 1920 px, en version claire :
+   - fond blanc, marges de 18 px, 18 px entre la barre et les visuels ;
    - barre latérale de 404 px : cadre de 64 px (logo, fil d'Ariane), titre et
      sous-titre en 30 px, ligne catégorie · année, sommaire en 20 px (pas de 45 px) ;
    - visuels espacés de 10 px, coins arrondis de 8 px.
    ========================================================================== */
-
-/* La page passe en sombre (fond, textes, filets) tant que l'étude est affichée. */
-:global(html):has(.study) {
-  --bg: #000000;
-  --fg: #ffffff;
-  --muted: rgb(255 255 255 / 0.6);
-  --muted-display: rgb(255 255 255 / 0.5);
-  --line: rgb(255 255 255 / 0.14);
-  --surface: #121a21;
-  --surface-strong: #1a242d;
-  --accent: var(--mist);
-
-  color-scheme: dark;
-}
 
 .study {
   --edge: 1.125rem; /* 18 px */
@@ -67,7 +53,7 @@
   gap: 1.875rem;
   height: 4rem;
   padding-inline: 1.1875rem 1.125rem;
-  border: 1px solid rgb(255 255 255 / 0.55);
+  border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
   border-radius: 4px;
 }
 
@@ -79,7 +65,7 @@
 }
 
 .home:hover {
-  color: var(--mist);
+  color: var(--accent);
 }
 
 .logo {
@@ -101,7 +87,7 @@
 }
 
 .crumbLink:hover {
-  color: var(--mist);
+  color: var(--accent);
 }
 
 .crumbCurrent {
@@ -145,7 +131,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.8);
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
 }
 
 .badge {
@@ -167,7 +153,7 @@
 
 .link {
   font-size: 1rem;
-  color: var(--mist);
+  color: var(--accent);
   transition: color 0.25s ease;
 }
 
@@ -230,7 +216,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.8);
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
 }
 
 .textTitle {
@@ -375,7 +361,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.8);
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
 }
 
 .nextTitle {
@@ -402,18 +388,11 @@
 }
 
 .nextArrow {
-  position: absolute;
-  top: clamp(1.25rem, 3vw, 2.5rem);
-  right: clamp(1.25rem, 3vw, 2.5rem);
-  font-size: 1.25rem;
-  color: var(--muted);
-  transition:
-    color 0.3s ease,
-    transform 0.4s var(--ease);
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
 }
 
 .next:hover .nextArrow {
-  color: var(--fg);
   transform: translateX(4px);
 }
 
