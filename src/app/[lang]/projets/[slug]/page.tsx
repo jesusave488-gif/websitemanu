@@ -6,6 +6,7 @@ import { getProject, getRelatedProject, projects } from "@/content/projects";
 import StudySidebar from "@/components/study/StudySidebar";
 import StudyBlocks from "@/components/study/StudyBlocks";
 import NextProject from "@/components/study/NextProject";
+import LayoutSwitch from "@/components/study/LayoutSwitch";
 import { serviceTones } from "@/components/tones";
 import styles from "@/components/study/Study.module.css";
 
@@ -70,6 +71,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           />
         ) : null}
       </article>
+
+      <LayoutSwitch locale={lang} slug={slug} current="sidebar" dict={dict.project} />
     </div>
   );
 }

@@ -1,0 +1,41 @@
+.switch {
+  position: fixed;
+  left: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.875rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  box-shadow: 0 10px 30px -12px rgb(16 24 32 / 0.5);
+}
+
+.label {
+  margin-right: 0.375rem;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.option {
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  transition: background-color 0.25s ease;
+}
+
+.option:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.option[aria-current] {
+  background: var(--mist);
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .label {
+    display: none;
+  }
+}
