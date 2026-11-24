@@ -24,6 +24,20 @@ export const site = {
   clients: ["Zeyhii", "VIP Tribe", "Ayo Agency", "Camp Régional", "International Relief"],
 };
 
+/**
+ * Brouillons (projets "upcoming", témoignages non publiés) :
+ * visibles pendant le développement (`npm run dev`), masqués sur le site en ligne.
+ * Pour les afficher quand même en ligne : variable d'environnement NEXT_PUBLIC_SHOW_DRAFTS=true.
+ */
+export const showDrafts =
+  process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_SHOW_DRAFTS === "true";
+
+/** Lien WhatsApp avec un message pré-rempli. */
+export function whatsappLink(message?: string): string {
+  const base = `https://wa.me/${site.whatsapp.number}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
+
 /** URL publique du site (utilisée pour le SEO et le sitemap). */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??

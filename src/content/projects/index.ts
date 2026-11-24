@@ -1,4 +1,5 @@
 import type { Project } from "./types";
+import { showDrafts } from "@/content/site";
 import projetSiteWeb from "./projet-site-web";
 import projetIdentite from "./projet-identite";
 import projetRapport from "./projet-rapport";
@@ -7,10 +8,10 @@ import projetMotion from "./projet-motion";
 import projetPlanStrategique from "./projet-plan-strategique";
 
 // Ordre d'affichage sur la page d'accueil (les 6 premiers sont affichés).
-// Grille en deux colonnes : les 3 premiers à gauche, les 3 suivants à droite.
+// Grille en deux colonnes : la première moitié à gauche, la seconde à droite.
 // Pour ajouter un projet : créez son fichier dans ce dossier, importez-le ici
 // et placez-le dans la liste.
-export const projects: Project[] = [
+const allProjects: Project[] = [
   projetSiteWeb,
   projetIdentite,
   projetRapport,
@@ -18,6 +19,12 @@ export const projects: Project[] = [
   projetMotion,
   projetPlanStrategique,
 ];
+
+/**
+ * Projets visibles : seulement les projets "published" en ligne ;
+ * tous (y compris "upcoming") pendant le développement local.
+ */
+export const projects: Project[] = allProjects.filter((p) => p.status === "published" || showDrafts);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
@@ -30,4 +37,4 @@ export function getRelatedProject(project: Project): Project | undefined {
   return projects[(projects.indexOf(project) + 1) % projects.length];
 }
 
-export type { Project, Media, StudyBlock, StudySection } from "./types";
+export type { Project, Media, StudyBlock, StudySection, ProjectLink } from "./types";

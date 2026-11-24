@@ -1,8 +1,11 @@
 import type { Project } from "./types";
 
-// Emplacement "Projet à venir" — structure d'étude de cas à remplir.
+// Emplacement "Projet à venir" — trame d'étude de cas « Infographie » à remplir.
+// Visible en local (npm run dev) ; masqué en ligne tant que status vaut "upcoming".
+//
 // Images et vidéos : déposez-les dans public/projects/projet-infographie/ puis indiquez
 // leur chemin dans "src" (ex. "/projects/projet-infographie/01.jpg"). Un "src" vide affiche un emplacement.
+// Ajoutez, supprimez ou réordonnez librement les sections et les blocs.
 const projetInfographie: Project = {
   slug: "projet-infographie",
   status: "upcoming",
@@ -20,62 +23,204 @@ const projetInfographie: Project = {
   sections: [
     {
       id: "defi",
-      nav: { fr: "Défi", en: "Challenge" },
+      nav: {
+        fr: "Défi",
+        en: "Challenge"
+      },
       blocks: [
-        { type: "media", items: [{ src: "", alt: { fr: "", en: "" }, ratio: "16 / 9" }] },
+        {
+          type: "media",
+          items: [
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "16 / 9"
+            }
+          ]
+        },
         {
           type: "text",
-          title: { fr: "Titre de la section", en: "Section title" },
+          title: {
+            fr: "Titre de la section",
+            en: "Section title"
+          },
           body: {
             fr: [
               "Le point de départ : la structure, son message, son public et ce qui devait changer.",
-              "Ce qui rendait le projet difficile ou intéressant.",
+              "Ce qui rendait le projet difficile ou intéressant."
             ],
             en: [
               "The starting point: the organisation, its message, its audience and what needed to change.",
-              "What made the project difficult or interesting.",
-            ],
-          },
-        },
-      ],
+              "What made the project difficult or interesting."
+            ]
+          }
+        }
+      ]
     },
     {
-      id: "demarche",
-      nav: { fr: "Démarche", en: "Approach" },
+      id: "donnees",
+      nav: {
+        fr: "Données",
+        en: "Data"
+      },
       blocks: [
         {
           type: "text",
-          label: { fr: "Démarche", en: "Approach" },
-          title: { fr: "Titre de la section", en: "Section title" },
-          body: {
-            fr: ["Les choix de hiérarchie, de typographie, de couleur et de format, et pourquoi."],
-            en: ["The choices of hierarchy, typography, colour and format, and why."],
+          label: {
+            fr: "Données",
+            en: "Data"
           },
+          title: {
+            fr: "Titre de la section",
+            en: "Section title"
+          },
+          body: {
+            fr: [
+              "Les données de départ, ce qu'il fallait faire comprendre, et à qui."
+            ],
+            en: [
+              "The source data, what needed to be understood, and by whom."
+            ]
+          }
         },
-        { type: "media", items: [{ src: "", alt: { fr: "", en: "" }, ratio: "4 / 5" }, { src: "", alt: { fr: "", en: "" }, ratio: "4 / 5" }] },
+        {
+          type: "figures",
+          items: [
+            {
+              value: "[00]",
+              label: {
+                fr: "indicateurs mis en forme",
+                en: "indicators visualised"
+              }
+            },
+            {
+              value: "[00]",
+              label: {
+                fr: "schémas et cartes",
+                en: "diagrams and maps"
+              }
+            },
+            {
+              value: "[0]",
+              label: {
+                fr: "formats (print, web, réseaux)",
+                en: "formats (print, web, social)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: "visualisations",
+      nav: {
+        fr: "Visualisations",
+        en: "Visualisations"
+      },
+      blocks: [
+        {
+          type: "text",
+          label: {
+            fr: "Visualisations",
+            en: "Visualisations"
+          },
+          title: {
+            fr: "Titre de la section",
+            en: "Section title"
+          },
+          body: {
+            fr: [
+              "Le choix des graphiques, des couleurs et de la hiérarchie pour une lecture en quelques secondes."
+            ],
+            en: [
+              "Choosing charts, colours and hierarchy so it reads in seconds."
+            ]
+          }
+        },
+        {
+          type: "media",
+          items: [
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "16 / 9"
+            }
+          ]
+        },
         {
           type: "grid",
-          columns: 3,
-          items: [{ src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }, { src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }, { src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }, { src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }, { src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }, { src: "", alt: { fr: "", en: "" }, ratio: "1 / 1" }],
-        },
-      ],
+          columns: 2,
+          items: [
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "4 / 3"
+            },
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "4 / 3"
+            },
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "4 / 3"
+            },
+            {
+              src: "",
+              alt: {
+                fr: "",
+                en: ""
+              },
+              ratio: "4 / 3"
+            }
+          ]
+        }
+      ]
     },
     {
       id: "resultat",
-      nav: { fr: "Résultat", en: "Outcome" },
+      nav: {
+        fr: "Résultat",
+        en: "Outcome"
+      },
       blocks: [
-        { type: "media", items: [{ src: "", alt: { fr: "", en: "" }, ratio: "16 / 9" }] },
         {
           type: "text",
-          label: { fr: "Résultat", en: "Outcome" },
-          title: { fr: "Titre de la section", en: "Section title" },
-          body: {
-            fr: ["Ce qui a été livré, comment il est utilisé, et l'effet obtenu."],
-            en: ["What was delivered, how it is used, and the effect it had."],
+          label: {
+            fr: "Résultat",
+            en: "Outcome"
           },
-        },
-      ],
-    },
+          title: {
+            fr: "Titre de la section",
+            en: "Section title"
+          },
+          body: {
+            fr: [
+              "Ce qui a été livré, comment il est utilisé, et l'effet obtenu."
+            ],
+            en: [
+              "What was delivered, how it is used, and the effect it had."
+            ]
+          }
+        }
+      ]
+    }
   ],
 };
 

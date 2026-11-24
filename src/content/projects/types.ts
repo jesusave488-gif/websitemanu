@@ -23,13 +23,24 @@ export type Media = {
  * - text   : titre + paragraphes (avec un petit label mono facultatif à gauche)
  * - media  : 1 visuel pleine largeur, 2 ou 3 visuels côte à côte
  * - grid   : grille de visuels sur un panneau (ex. 12 photos, déclinaisons)
- * - colors : palette de couleurs (projets d'identité)
+ * - colors  : palette de couleurs (projets d'identité)
+ * - figures : chiffres clés (ex. "48 pages", "2 langues", "+30 % de visites")
  */
 export type StudyBlock =
   | { type: "text"; label?: Localized; title: Localized; body: Localized<string[]> }
   | { type: "media"; items: Media[] }
   | { type: "grid"; columns?: 2 | 3 | 4 | 6; items: Media[] }
-  | { type: "colors"; colors: { name: string; hex: string }[] };
+  | { type: "colors"; colors: { name: string; hex: string }[] }
+  | { type: "figures"; items: { value: string; label: Localized }[] };
+
+/** Lien affiché sous le titre de l'étude de cas (site en ligne, PDF à télécharger…). */
+export type ProjectLink = {
+  label: Localized;
+  /** Adresse complète ("https://…") ou fichier dans public/ ("/projects/mon-projet/rapport.pdf"). */
+  href: string;
+  /** "external" ouvre un nouvel onglet (↗), "download" télécharge le fichier (↓). */
+  kind: "external" | "download";
+};
 
 /** Une section de l'étude de cas = une entrée du sommaire dans la barre latérale. */
 export type StudySection = {
@@ -58,6 +69,8 @@ export type Project = {
   cover?: Media;
   /** Résumé pour Google et les partages sur les réseaux. */
   description: Localized;
+  /** Boutons sous le titre : "Voir le site", "Télécharger le PDF"… */
+  links?: ProjectLink[];
   sections: StudySection[];
   /** Projet mis en avant en bas de la barre latérale (slug). Par défaut : le projet suivant. */
   related?: string;

@@ -22,6 +22,8 @@ const fr = {
     // Première partie en couleur pleine, seconde partie en gris.
     lead: "Je suis Emmanuel — designer de sites web, de marques et de documents",
     rest: "qui aide les entreprises et les institutions à porter leur message.",
+    // Repères de positionnement affichés sous la phrase.
+    tags: ["Basé à Cotonou, Bénin", "Documents FR / EN", "Entreprises & institutions"],
   },
   work: {
     title: "Projets sélectionnés",
@@ -60,10 +62,17 @@ const fr = {
   clients: {
     title: "Clients",
   },
+  testimonials: {
+    title: "Ils en parlent",
+  },
   contact: {
     title: "Votre message mérite d'être vu.",
     accent: "Écrivez-moi.",
-    whatsappLabel: "WhatsApp",
+    whatsappCta: "Écrire sur WhatsApp",
+    emailCta: "Envoyer un email",
+    // Message pré-rempli quand on ouvre WhatsApp depuis le site.
+    whatsappMessage: "Bonjour Emmanuel, j'ai vu votre portfolio et j'aimerais échanger sur un projet.",
+    floatingLabel: "Discuter sur WhatsApp",
   },
   footer: {
     navLabel: "Navigation",

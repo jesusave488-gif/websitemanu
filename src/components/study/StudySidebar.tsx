@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import type { Project } from "@/content/projects";
+import { showDrafts } from "@/content/site";
 import LangSwitch from "@/components/LangSwitch";
 import ThemeToggle from "@/components/ThemeToggle";
 import MediaFrame from "@/components/MediaFrame";
@@ -46,6 +47,29 @@ export default function StudySidebar({ project, related, locale, dict }: StudySi
           {project.category[locale]} · {project.year}
           {isUpcoming ? <span className={styles.badge}>{dict.project.upcomingNote}</span> : null}
         </p>
+        {project.links?.length ? (
+          <div className={styles.links}>
+            {/* Un lien sans adresse n'apparaît qu'en local, grisé, pour rappeler de le remplir. */}
+            {project.links.filter((link) => link.href || showDrafts).map((link) => {
+              const empty = !link.href;
+              const external = link.kind === "external";
+              return (
+                <a
+                  key={link.label.fr}
+                  href={link.href || undefined}
+                  className={styles.linkButton}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  download={link.kind === "download" ? "" : undefined}
+                  aria-disabled={empty || undefined}
+                >
+                  {link.label[locale]}
+                  <span aria-hidden="true">{external ? "↗" : "↓"}</span>
+                </a>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
 
       <StudyNav

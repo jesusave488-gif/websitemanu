@@ -10,23 +10,40 @@ type WorkGridProps = {
   upcomingLabel: string;
 };
 
-const LANDSCAPE = "775 / 550";
-const SQUARE = "1 / 1";
+const L = "775 / 550"; // paysage
+const S = "1 / 1"; // carré
+const T = "7 / 10"; // vertical (≈ deux paysages empilés)
 
-// Grille décalée : colonne de gauche paysage, paysage, carré ;
-// colonne de droite carré, paysage, paysage. Les deux colonnes ont la même hauteur.
-const leftRatios = [LANDSCAPE, LANDSCAPE, SQUARE];
-const rightRatios = [SQUARE, LANDSCAPE, LANDSCAPE];
+/**
+ * Formats des images selon le nombre de projets, pour que les deux colonnes
+ * gardent à peu près la même hauteur (grille décalée du template).
+ */
+function layoutFor(count: number): [string[], string[]] {
+  switch (count) {
+    case 1:
+      return [["16 / 9"], []];
+    case 2:
+      return [[L], [L]];
+    case 3:
+      return [[L, L], [T]];
+    case 4:
+      return [[L, S], [S, L]];
+    case 5:
+      return [[L, L, S], [S, T]];
+    default:
+      return [[L, L, S], [S, L, L]];
+  }
+}
 
 export default function WorkGrid({ projects, locale, upcomingLabel }: WorkGridProps) {
-  const half = Math.ceil(projects.length / 2);
+  const [leftRatios, rightRatios] = layoutFor(projects.length);
   const columns = [
-    { items: projects.slice(0, half), ratios: leftRatios, offset: 0 },
-    { items: projects.slice(half), ratios: rightRatios, offset: half },
-  ];
+    { items: projects.slice(0, leftRatios.length), ratios: leftRatios, offset: 0 },
+    { items: projects.slice(leftRatios.length), ratios: rightRatios, offset: leftRatios.length },
+  ].filter((column) => column.items.length > 0);
 
   return (
-    <div className={styles.grid}>
+    <div className={columns.length === 1 ? `${styles.grid} ${styles.single}` : styles.grid}>
       {columns.map((column, c) => (
         <ul key={c} className={styles.column}>
           {column.items.map((project, i) => (
@@ -35,7 +52,7 @@ export default function WorkGrid({ projects, locale, upcomingLabel }: WorkGridPr
                 project={project}
                 locale={locale}
                 upcomingLabel={upcomingLabel}
-                ratio={column.ratios[i % column.ratios.length]}
+                ratio={column.ratios[i % column.ratios.length] ?? L}
                 priority={column.offset + i < 2}
               />
             </Reveal>

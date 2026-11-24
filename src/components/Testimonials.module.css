@@ -1,0 +1,62 @@
+.item {
+  padding-block: clamp(1.5rem, 2.5vw, 2.25rem);
+  border-top: 1px solid var(--line);
+}
+
+.item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.quote {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  letter-spacing: var(--ls-lead);
+  text-wrap: pretty;
+}
+
+/* Guillemet d'ouverture en vert, discret. */
+.quote p::before {
+  content: "“";
+  margin-right: 0.05em;
+  color: var(--accent);
+}
+
+.quote p::after {
+  content: "”";
+  margin-left: 0.05em;
+  color: var(--accent);
+}
+
+/* En français : guillemets « » avec espaces insécables. */
+:global(html[lang="fr"]) .quote p::before {
+  content: "«\00a0";
+  margin-right: 0;
+}
+
+:global(html[lang="fr"]) .quote p::after {
+  content: "\00a0»";
+  margin-left: 0;
+}
+
+.author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.875rem;
+  margin-top: 1rem;
+}
+
+.name {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  color: var(--muted);
+}

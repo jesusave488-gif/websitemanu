@@ -280,6 +280,75 @@
   border-radius: 12px;
 }
 
+/* Chiffres clés : grand nombre + légende, sur un panneau. */
+.figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 11rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.figureValue {
+  margin: 0;
+  font-size: var(--fs-display);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+  color: var(--fg);
+}
+
+.figureLabel {
+  font-size: var(--fs-base);
+  color: var(--muted);
+}
+
+/* Liens du projet (site en ligne, PDF). */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9375rem;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  transition:
+    background-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.linkButton:hover {
+  background: var(--accent);
+}
+
+.linkButton:active {
+  transform: scale(0.97);
+}
+
+.linkButton[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 /* Palette de couleurs. */
 .colors {
   display: grid;

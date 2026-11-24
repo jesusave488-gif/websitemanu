@@ -95,6 +95,18 @@ export default function StudyBlocks({ blocks, locale, placeholderLabel, priority
               </Reveal>
             );
 
+          case "figures":
+            return (
+              <Reveal key={key} as="dl" className={styles.figures}>
+                {block.items.map((item, i) => (
+                  <div key={i} className={styles.figure}>
+                    <dt className={styles.figureLabel}>{item.label[locale]}</dt>
+                    <dd className={styles.figureValue}>{item.value}</dd>
+                  </div>
+                ))}
+              </Reveal>
+            );
+
           case "colors":
             return (
               <Reveal key={key} className={styles.colors}>

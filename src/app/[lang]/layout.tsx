@@ -6,6 +6,7 @@ import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { site, siteUrl } from "@/content/site";
 import Footer from "@/components/Footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { RevealInit, RevealObserver } from "@/components/RevealScript";
 import "../globals.css";
 
@@ -74,6 +75,7 @@ export default async function LangLayout({ children, params }: LayoutProps) {
         </a>
         <main id="main">{children}</main>
         <Footer locale={lang} nav={dict.nav} dict={dict.footer} />
+        <WhatsAppFloat label={dict.contact.floatingLabel} message={dict.contact.whatsappMessage} />
         <RevealObserver />
       </body>
     </html>

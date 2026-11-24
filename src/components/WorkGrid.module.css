@@ -5,6 +5,10 @@
   align-items: start;
 }
 
+.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .column {
   display: grid;
   gap: var(--gap);

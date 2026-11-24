@@ -22,6 +22,7 @@ const en: Dictionary = {
   hero: {
     lead: "I'm Emmanuel — a website, brand and document designer",
     rest: "who helps businesses and institutions carry their message.",
+    tags: ["Based in Cotonou, Benin", "FR / EN documents", "Businesses & institutions"],
   },
   work: {
     title: "Selected work",
@@ -59,10 +60,16 @@ const en: Dictionary = {
   clients: {
     title: "Clients",
   },
+  testimonials: {
+    title: "Kind words",
+  },
   contact: {
     title: "Your message deserves to be seen.",
     accent: "Write to me.",
-    whatsappLabel: "WhatsApp",
+    whatsappCta: "Message me on WhatsApp",
+    emailCta: "Send an email",
+    whatsappMessage: "Hello Emmanuel, I saw your portfolio and would like to discuss a project.",
+    floatingLabel: "Chat on WhatsApp",
   },
   footer: {
     navLabel: "Navigation",

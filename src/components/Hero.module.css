@@ -16,5 +16,35 @@
 }
 
 .rest {
-  color: var(--muted);
+  color: var(--muted-display);
+}
+
+/* Positionnement : trois repères en mono sous la phrase. */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4375rem 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--fg);
+}
+
+.tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--forest);
+}
+
+:global(html[data-theme="dark"]) .tag::before {
+  background: var(--lime);
 }

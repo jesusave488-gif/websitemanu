@@ -84,6 +84,7 @@ blocs empilés dans l'ordre :
 | `media`  | 1 visuel pleine largeur, ou 2–3 visuels côte à côte                    |
 | `grid`   | grille de visuels sur un panneau (`columns` : 2, 3, 4 ou 6)            |
 | `colors` | palette de couleurs (nom + code hexadécimal)                           |
+| `figures`| chiffres clés (grand nombre + légende)                                 |
 
 Un visuel : `{ src: "/projects/mon-projet/01.jpg", alt: { fr: "…", en: "…" }, ratio: "16 / 9" }`.
 Options : `kind: "video"` (lecture en boucle sans son), `poster`, `fit: "contain"` +
@@ -91,7 +92,26 @@ Options : `kind: "video"` (lecture en boucle sans son), `poster`, `fit: "contain
 Un `src` vide (`""`) affiche un emplacement « Visuel à venir ».
 
 Pour remplacer un emplacement « Projet à venir », il suffit de remplir son fichier existant
-(et éventuellement de renommer son `slug`).
+(et éventuellement de renommer son `slug`). Chaque fichier contient déjà une trame adaptée
+à son service (site web, identité, document FR/EN, infographie, motion).
+
+### Brouillons : visibles en local, masqués en ligne
+
+- Les projets `status: "upcoming"` et les témoignages `published: false` s'affichent avec
+  `npm run dev`, mais **pas sur le site en ligne**. La section Travaux n'apparaît en ligne
+  que lorsqu'au moins un projet est `"published"`.
+- Pour prévisualiser le site complet en production : `NEXT_PUBLIC_SHOW_DRAFTS=true npm run build`.
+
+### Témoignages
+
+Dans `src/content/testimonials.ts` : citation FR/EN, nom, poste. Passez `published: true`
+une fois la citation validée par la personne.
+
+### Liens et chiffres clés d'une étude de cas
+
+- `links` : boutons sous le titre (`kind: "external"` pour un site, `"download"` pour un PDF
+  déposé dans `public/projects/mon-projet/`).
+- Bloc `figures` : `{ type: "figures", items: [{ value: "48", label: { fr: "pages", en: "pages" } }] }`.
 
 ## Déploiement (GitHub + Vercel)
 
