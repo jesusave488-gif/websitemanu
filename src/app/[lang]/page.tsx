@@ -20,7 +20,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   return (
     <>
       <Header locale={lang} dict={dict.nav} />
-      <Hero dict={dict.hero} />
+      <Hero dict={dict.hero} next={projects.length > 0 ? "#travaux" : "#a-propos"} />
       {/* La section Travaux n'apparaît que s'il y a au moins un projet visible. */}
       {projects.length > 0 ? <Work projects={projects.slice(0, 6)} locale={lang} dict={dict.work} /> : null}
       <About locale={lang} dict={dict.about} portrait={site.portrait} />

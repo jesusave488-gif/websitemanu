@@ -19,6 +19,11 @@ const fr = {
     skip: "Aller au contenu",
   },
   hero: {
+    // Salutation au-dessus de la présentation, comme sur la brochure.
+    greeting: "Salut",
+    greetingEnd: ", hey !",
+    creativeMode: "mode créatif",
+    scrollLabel: "Découvrir la suite",
     // Première partie en couleur pleine, seconde partie en gris.
     lead: "Je suis Emmanuel — designer de sites web, de marques et de documents",
     rest: "qui aide les entreprises et les institutions à porter leur message.",

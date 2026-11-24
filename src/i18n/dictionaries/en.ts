@@ -20,6 +20,10 @@ const en: Dictionary = {
     skip: "Skip to content",
   },
   hero: {
+    greeting: "Hello",
+    greetingEnd: ", hey!",
+    creativeMode: "creative mode",
+    scrollLabel: "See what's next",
     lead: "I'm Emmanuel — a website, brand and document designer",
     rest: "who helps businesses and institutions carry their message.",
     tags: ["Based in Cotonou, Benin", "FR / EN documents", "Businesses & institutions"],

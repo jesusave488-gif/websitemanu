@@ -16,9 +16,8 @@
      --muted 4,6:1 pour le texte courant ; --muted-display 3,2:1 réservé aux très
      grands textes ; --accent 5,3:1 (vert forêt légèrement foncé pour les petits textes). */
   --bg: #ffffff;
-  /* Bandes de section (distinctions) et pied de page */
+  /* Bandes de section (distinctions) */
   --band: var(--paper);
-  --ink: #111417;
   --fg: var(--slate);
   --muted: color-mix(in srgb, var(--slate) 68%, var(--paper));
   --muted-display: color-mix(in srgb, var(--slate) 55%, var(--paper));
@@ -65,16 +64,22 @@
   color-scheme: light;
 }
 
+/* Thème sombre « ardoise nuit » : l'ardoise de la brochure, plus profonde et légèrement
+   teintée de vert, avec un halo forêt en haut de page (voir body::before). */
 :root[data-theme="dark"] {
-  --bg: var(--slate);
-  --band: var(--slate-deep);
-  --fg: #ffffff;
-  --muted: color-mix(in srgb, #ffffff 64%, var(--slate));
-  --muted-display: color-mix(in srgb, #ffffff 58%, var(--slate));
-  --line: color-mix(in srgb, #ffffff 14%, transparent);
-  --surface: color-mix(in srgb, #ffffff 6%, var(--slate));
-  --surface-strong: color-mix(in srgb, #ffffff 11%, var(--slate));
+  --night: #0e171b;
+  --bg: var(--night);
+  --band: #121e24;
+  --fg: #f2f4ef;
+  --muted: color-mix(in srgb, #f2f4ef 66%, var(--night));
+  --muted-display: color-mix(in srgb, #f2f4ef 56%, var(--night));
+  --line: color-mix(in srgb, #ffffff 10%, transparent);
+  --surface: #15222a;
+  --surface-strong: #1b2b34;
   --accent: var(--lime);
+  --ambient:
+    radial-gradient(55% 40% at 92% -6%, rgb(47 125 85 / 0.24), transparent 70%),
+    radial-gradient(40% 35% at -6% 32%, rgb(180 224 138 / 0.05), transparent 70%);
 
   color-scheme: dark;
 }
@@ -108,6 +113,16 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+/* Halo d'ambiance (mode sombre uniquement), fixe derrière le contenu. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--ambient, none);
 }
 
 h1,

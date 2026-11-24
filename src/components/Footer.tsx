@@ -30,7 +30,16 @@ export default function Footer({ locale, nav, contact, dict }: FooterProps) {
 
   return (
     <footer className={styles.footer}>
-      <div className="container">
+      {/* Décor : halos qui dérivent lentement, cercle vert et anneaux de la brochure. */}
+      <div className={styles.decor} aria-hidden="true">
+        <span className={styles.glow} />
+        <span className={styles.glowAlt} />
+        <span className={styles.arc} />
+        <span className={styles.ring} />
+        <span className={`${styles.ring} ${styles.ringAlt}`} />
+      </div>
+
+      <div className={`container ${styles.inner}`}>
         <section id="contact" className={styles.cta} aria-labelledby="contact-title">
           <Reveal as="h2" id="contact-title" className={styles.title}>
             {contact.title} <span className={styles.accent}>{contact.accent}</span>
@@ -124,10 +133,23 @@ export default function Footer({ locale, nav, contact, dict }: FooterProps) {
           </div>
         </div>
 
-        <p className={styles.copyright}>
-          © {site.year} — {site.name}
-        </p>
+        <div className={styles.bottom}>
+          <p>
+            © {site.year} — {site.name}
+          </p>
+          <a href="#top" className={styles.top}>
+            {nav.homeLabel}
+            <span className={styles.topArrow} aria-hidden="true">
+              ↑
+            </span>
+          </a>
+        </div>
       </div>
+
+      {/* Grand nom en filigrane, qui monte quand on arrive en bas de page. */}
+      <p className={styles.wordmark} aria-hidden="true">
+        {site.name}
+      </p>
     </footer>
   );
 }

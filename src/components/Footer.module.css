@@ -1,14 +1,88 @@
 /* ==========================================================================
-   Pied de page sombre (toujours noir, quel que soit le thème)
+   Pied de page : dégradé ardoise → vert forêt (pas de noir pur),
+   avec des halos animés et les formes de la brochure.
+   Identique en mode clair et en mode sombre.
    ========================================================================== */
 
 .footer {
   --f-fg: #ffffff;
-  --f-muted: rgb(255 255 255 / 0.64);
+  --f-muted: rgb(255 255 255 / 0.66);
   --f-line: rgb(255 255 255 / 0.12);
 
-  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(165deg, #1d2e37 0%, #14232b 38%, #102019 78%, #12301f 100%);
   color: var(--f-fg);
+}
+
+:global(html[data-theme="dark"]) .footer {
+  border-top: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.inner {
+  position: relative;
+}
+
+/* ---------- Décor ---------- */
+
+.decor {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.glow,
+.glowAlt {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+/* Halo vert clair qui dérive derrière l'appel à contacter. */
+.glow {
+  top: -25%;
+  right: -12%;
+  width: min(62vw, 56rem);
+  background: radial-gradient(circle, rgb(180 224 138 / 0.17), transparent 62%);
+}
+
+/* Halo vert forêt, en bas à gauche. */
+.glowAlt {
+  bottom: -35%;
+  left: -18%;
+  width: min(70vw, 60rem);
+  background: radial-gradient(circle, rgb(47 125 85 / 0.32), transparent 62%);
+}
+
+/* Cercle vert plein, en haut à droite, comme sur la brochure. */
+.arc {
+  position: absolute;
+  top: calc(-1 * min(9vw, 9rem));
+  right: calc(-1 * min(4vw, 4rem));
+  width: min(18vw, 17rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(200deg, #3f9a68, var(--forest) 70%);
+  opacity: 0.85;
+}
+
+/* Fins anneaux qui traversent le fond. */
+.ring {
+  position: absolute;
+  top: -20%;
+  left: 18%;
+  width: min(70vw, 62rem);
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 0.07);
+  border-radius: 50%;
+}
+
+.ringAlt {
+  top: 30%;
+  left: 52%;
+  width: min(55vw, 48rem);
 }
 
 /* ---------- Appel à me contacter ---------- */
@@ -29,8 +103,23 @@
   text-wrap: balance;
 }
 
+/* « Écrivez-moi. » en vert clair, avec un trait qui se dessine dessous. */
 .accent {
+  position: relative;
+  display: inline-block;
   color: var(--lime);
+}
+
+.accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.25em;
+  bottom: -0.08em;
+  height: 0.08em;
+  border-radius: 999px;
+  background: var(--lime);
+  transform-origin: left;
 }
 
 .ctaBody {
@@ -65,7 +154,12 @@
     background-color 0.25s ease,
     border-color 0.25s ease,
     color 0.25s ease,
-    transform 0.15s ease;
+    box-shadow 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.button:hover {
+  transform: translateY(-2px);
 }
 
 .button:active {
@@ -79,10 +173,13 @@
 
 .primary:hover {
   background: #ffffff;
+  box-shadow: 0 12px 30px -12px rgb(180 224 138 / 0.6);
 }
 
 .secondary {
   border: 1px solid rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.04);
+  backdrop-filter: blur(6px);
 }
 
 .secondary:hover {
@@ -148,22 +245,165 @@
 
 .link,
 .plain {
+  justify-self: start;
   font-size: var(--fs-small);
   color: var(--f-muted);
 }
 
+/* Lien : un trait vert clair glisse sous le texte au survol. */
 .link {
-  transition: color 0.25s ease;
+  padding-bottom: 2px;
+  background: linear-gradient(var(--lime), var(--lime)) left bottom / 0 1px no-repeat;
+  transition:
+    color 0.25s ease,
+    background-size 0.35s var(--ease);
 }
 
 .link:hover {
   color: var(--lime);
+  background-size: 100% 1px;
 }
 
-.copyright {
-  padding-block: clamp(3rem, 5vw, 4.5rem) clamp(2rem, 3vw, 2.5rem);
+/* ---------- Bas de page ---------- */
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-block: clamp(3rem, 5vw, 4.5rem) clamp(1.5rem, 2.5vw, 2rem);
   font-size: var(--fs-small);
   color: var(--f-muted);
+}
+
+.top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.25s ease;
+}
+
+.top:hover {
+  color: var(--lime);
+}
+
+.topArrow {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--f-line);
+  border-radius: 50%;
+  transition:
+    transform 0.35s var(--ease),
+    border-color 0.25s ease;
+}
+
+.top:hover .topArrow {
+  transform: translateY(-3px);
+  border-color: var(--lime);
+}
+
+/* Grand nom en filigrane, coupé par le bas de la page. */
+.wordmark {
+  margin-bottom: -0.2em;
+  padding-inline: var(--gutter);
+  font-size: clamp(3rem, 11.4vw, 12rem);
+  font-weight: 750;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+  text-align: center;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.2), rgb(255 255 255 / 0.02) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .glow {
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+
+  .glowAlt {
+    animation: drift-alt 22s ease-in-out infinite alternate;
+  }
+
+  .arc {
+    animation: bob 9s ease-in-out infinite;
+  }
+
+  .ring {
+    animation: breathe 14s ease-in-out infinite alternate;
+  }
+
+  .ringAlt {
+    animation-duration: 18s;
+    animation-direction: alternate-reverse;
+  }
+
+  /* Liées au défilement, là où le navigateur le permet (sinon : affichage fixe). */
+  @supports (animation-timeline: view()) {
+    .accent::after {
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 45%;
+    }
+
+    .wordmark {
+      animation: rise-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate(-10vw, 8vw) scale(1.12);
+  }
+}
+
+@keyframes drift-alt {
+  to {
+    transform: translate(12vw, -6vw) scale(0.92);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-1.2vw, 1.4vw);
+  }
+}
+
+@keyframes breathe {
+  to {
+    transform: scale(1.08) translateX(-3%);
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes rise-up {
+  from {
+    opacity: 0;
+    transform: translateY(45%);
+  }
 }
 
 /* ---------- Responsive ---------- */
@@ -172,6 +412,12 @@
   .cta,
   .main {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .arc {
+    top: -15vw;
+    right: -10vw;
+    width: 30vw;
   }
 }
 
