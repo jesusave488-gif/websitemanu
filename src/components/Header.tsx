@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import LangSwitch from "./LangSwitch";
+import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
 import styles from "./Header.module.css";
 
@@ -16,7 +17,7 @@ export default function Header({ locale, dict }: HeaderProps) {
   return (
     <header className={`container ${styles.header}`}>
       <Link href={`${home}#top`} className={styles.home} aria-label={dict.homeLabel}>
-        {dict.home}
+        <Logo />
       </Link>
 
       <nav className={styles.nav}>

@@ -44,10 +44,14 @@
 }
 
 .home {
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding-block: 0.5rem;
   transition: color 0.25s ease;
+}
+
+.logo {
+  height: 1.125rem;
 }
 
 .home:hover {

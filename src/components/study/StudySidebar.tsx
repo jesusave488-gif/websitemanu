@@ -4,6 +4,7 @@ import type { Dictionary } from "@/i18n";
 import type { Project } from "@/content/projects";
 import { showDrafts } from "@/content/site";
 import LangSwitch from "@/components/LangSwitch";
+import Logo from "@/components/Logo";
 import ThemeToggle from "@/components/ThemeToggle";
 import MediaFrame from "@/components/MediaFrame";
 import StudyNav from "./StudyNav";
@@ -24,7 +25,7 @@ export default function StudySidebar({ project, related, locale, dict }: StudySi
     <aside className={styles.sidebar}>
       <div className={styles.topbar}>
         <Link href={`/${locale}`} className={styles.home} aria-label={dict.nav.homeText}>
-          {dict.nav.home}
+          <Logo className={styles.logo} />
         </Link>
         <p className={`label ${styles.crumbs}`}>
           <Link href={`/${locale}#travaux`} className={styles.crumbLink}>
