@@ -1,4 +1,5 @@
 // Petites icônes au trait, dessinées pour le site (héritent de la couleur du texte).
+import type { ReactNode } from "react";
 
 type IconProps = { className?: string };
 
@@ -20,6 +21,72 @@ export function MailIcon({ className }: IconProps) {
       strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
       <path d="m4 7.5 8 5.5 8-5.5" />
+    </svg>
+  );
+}
+
+/** Flèche en diagonale (lien qui ouvre une conversation). */
+export function ArrowIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  );
+}
+
+/* ---------- Icônes des services ---------- */
+
+const serviceIconPaths: Record<string, ReactNode> = {
+  // Fenêtre de navigateur
+  web: (
+    <>
+      <rect x="3" y="4.5" width="18" height="15" rx="2.5" />
+      <path d="M3 9h18M6.5 6.8h.01M9 6.8h.01" />
+      <path d="M7 13h6M7 16h4" />
+    </>
+  ),
+  // Plume de dessin
+  brand: (
+    <>
+      <path d="M12 3.5 18.5 10 15 19H9L5.5 10Z" />
+      <path d="M12 3.5V11" />
+      <circle cx="12" cy="12.6" r="1.6" />
+      <path d="M9 21h6" />
+    </>
+  ),
+  // Pages superposées
+  documents: (
+    <>
+      <path d="M8 3.5h7l4 4V17a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 17V5A1.5 1.5 0 0 1 8 3.5Z" />
+      <path d="M15 3.5V7.5h4M9.5 11h6M9.5 14h4" />
+      <path d="M3.5 7.5V19A1.5 1.5 0 0 0 5 20.5h9" />
+    </>
+  ),
+  // Graphique en barres
+  dataviz: (
+    <>
+      <path d="M4 20h16" />
+      <rect x="5.5" y="12" width="3" height="5.5" rx="0.8" />
+      <rect x="10.5" y="7" width="3" height="10.5" rx="0.8" />
+      <rect x="15.5" y="10" width="3" height="7.5" rx="0.8" />
+    </>
+  ),
+  // Lecture
+  motion: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M10.2 8.8v6.4l5-3.2Z" />
+    </>
+  ),
+};
+
+/** Icône d'un service (web, brand, documents, dataviz, motion). */
+export function ServiceIcon({ id, className }: IconProps & { id: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      {serviceIconPaths[id]}
     </svg>
   );
 }

@@ -34,7 +34,7 @@ src/
       not-found.tsx       → page 404 traduite
     sitemap.ts, robots.ts → SEO
   components/             → Header, Hero, Work/WorkGrid/ProjectCard, About,
-                            Experience, ServicesClients, ContactCard, Footer,
+                            Experience, Services, Clients, ContactCard, Footer,
                             MediaFrame, ThemeToggle, LangSwitch, Reveal
     study/                → étude de cas : barre latérale, sommaire, blocs
   content/

@@ -76,16 +76,35 @@ const en: Dictionary = {
   },
   services: {
     title: "Services",
+    intro: "From visual identity to website, I design clear, consistent materials, in French and in English.",
+    cta: "Let's talk about your project",
+    more: "Discuss it",
+    messagePrefix: "Hello Emmanuel, I saw your portfolio and would like to discuss a project: ",
     items: {
-      web: "Websites & landing pages",
-      brand: "Brand identity",
-      documents: "Document layout (FR / EN)",
-      dataviz: "Infographics & data visualization",
-      motion: "Motion design & animated ads",
+      web: {
+        title: "Websites & landing pages",
+        description: "Clear, fast showcase sites and landing pages built to convert, from mockup to launch.",
+      },
+      brand: {
+        title: "Brand identity",
+        description: "Logo, colours, typography and brand guidelines for a brand people recognise everywhere.",
+      },
+      documents: {
+        title: "Document layout (FR / EN)",
+        description: "Bilingual reports, strategic plans, brochures and presentations, structured to be read to the end.",
+      },
+      dataviz: {
+        title: "Infographics & data visualization",
+        description: "Complex figures and processes turned into charts and infographics people understand at a glance.",
+      },
+      motion: {
+        title: "Motion design & animated ads",
+        description: "Short videos, logo animations and social media ads that hold attention.",
+      },
     },
   },
   clients: {
-    title: "Clients",
+    title: "They trusted me",
   },
   testimonials: {
     title: "Kind words",

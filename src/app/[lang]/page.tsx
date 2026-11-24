@@ -9,7 +9,8 @@ import Hero from "@/components/Hero";
 import Work from "@/components/Work";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
-import ServicesClients from "@/components/ServicesClients";
+import Services from "@/components/Services";
+import Clients from "@/components/Clients";
 import Testimonials from "@/components/Testimonials";
 import ContactCard from "@/components/ContactCard";
 
@@ -26,7 +27,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       {projects.length > 0 ? <Work projects={projects.slice(0, 6)} locale={lang} dict={dict.work} /> : null}
       <About locale={lang} dict={dict.about} portrait={site.portrait} />
       <Experience dict={dict.experience} />
-      <ServicesClients services={dict.services} clientsTitle={dict.clients.title} clients={site.clients} />
+      <Services dict={dict.services} contactMessage={dict.contact.whatsappMessage} />
+      <Clients title={dict.clients.title} clients={site.clients} />
       <Testimonials title={dict.testimonials.title} items={testimonials} locale={lang} />
       <ContactCard dict={dict.contact} />
     </>

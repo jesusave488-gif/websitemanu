@@ -80,16 +80,36 @@ const fr = {
   },
   services: {
     title: "Services",
+    intro: "De l'identité visuelle au site web, je conçois des supports clairs et cohérents, en français comme en anglais.",
+    cta: "Parlons de votre projet",
+    more: "En discuter",
+    // Message WhatsApp pré-rempli depuis une carte : le nom du service est ajouté à la fin.
+    messagePrefix: "Bonjour Emmanuel, j'ai vu votre portfolio et j'aimerais échanger sur un projet : ",
     items: {
-      web: "Sites web & landing pages",
-      brand: "Identité de marque",
-      documents: "Mise en page de documents (FR / EN)",
-      dataviz: "Infographie & data visualisation",
-      motion: "Motion design & publicités animées",
+      web: {
+        title: "Sites web & landing pages",
+        description: "Sites vitrines et pages d'atterrissage clairs, rapides et pensés pour convertir, de la maquette à la mise en ligne.",
+      },
+      brand: {
+        title: "Identité de marque",
+        description: "Logo, couleurs, typographies et charte graphique pour une marque reconnaissable sur tous ses supports.",
+      },
+      documents: {
+        title: "Mise en page de documents (FR / EN)",
+        description: "Rapports, plans stratégiques, brochures et présentations bilingues, structurés pour être lus jusqu'au bout.",
+      },
+      dataviz: {
+        title: "Infographie & data visualisation",
+        description: "Chiffres et processus complexes traduits en graphiques et infographies que l'on comprend du premier coup d'œil.",
+      },
+      motion: {
+        title: "Motion design & publicités animées",
+        description: "Vidéos courtes, animations de logo et publicités pour les réseaux sociaux qui retiennent l'attention.",
+      },
     },
   },
   clients: {
-    title: "Clients",
+    title: "Ils m'ont fait confiance",
   },
   testimonials: {
     title: "Ils en parlent",
