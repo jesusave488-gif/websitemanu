@@ -10,12 +10,14 @@ type ProjectCardProps = {
   project: Project;
   locale: Locale;
   upcomingLabel: string;
+  /** Mention affichée sous les projets fictifs d'exemple. */
+  demoLabel: string;
   /** Format de l'image : la grille alterne paysage et carré. */
   ratio: string;
   priority?: boolean;
 };
 
-export default function ProjectCard({ project, locale, upcomingLabel, ratio, priority }: ProjectCardProps) {
+export default function ProjectCard({ project, locale, upcomingLabel, demoLabel, ratio, priority }: ProjectCardProps) {
   const isUpcoming = project.status === "upcoming";
 
   return (
@@ -32,7 +34,10 @@ export default function ProjectCard({ project, locale, upcomingLabel, ratio, pri
       />
       <div className={styles.panel}>
         <h3 className={styles.title}>{isUpcoming ? upcomingLabel : project.title[locale]}</h3>
-        <p className={styles.category}>{project.category[locale]}</p>
+        <p className={styles.category}>
+          {project.category[locale]}
+          {project.status === "demo" ? <span className={styles.demo}>{demoLabel}</span> : null}
+        </p>
       </div>
     </Link>
   );

@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Maquettes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100vw; height: 100vh; overflow: hidden; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .fill { position: absolute; inset: 0; }
+  .center { display: grid; place-items: center; }
+  .shadow { box-shadow: 0 40px 80px -30px rgba(10, 20, 30, .45), 0 2px 6px rgba(10, 20, 30, .12); }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  .cond { font-family: Bahnschrift, "Segoe UI", sans-serif; }
+  .mono { font-family: Consolas, "Courier New", monospace; }
+</style>
+</head>
+<body>
+<div id="root" class="fill"></div>
+<script>
+/* ==========================================================================
+   Maquettes fictives pour le portfolio — une image par identifiant (?id=…).
+   Chaque entrée : largeur, hauteur, fonction qui renvoie le HTML.
+   ========================================================================== */
+
+const M = {};
+const def = (id, w, h, fn) => (M[id] = { w, h, fn });
+
+/* ---------- Outils communs ---------- */
+
+const browser = (url, inner, { r = 14, bar = "#ECEFF1" } = {}) => `
+  <div style="position:absolute;inset:0;border-radius:${r}px;overflow:hidden;background:#fff;display:flex;flex-direction:column">
+    <div style="height:44px;flex:none;background:${bar};display:flex;align-items:center;gap:8px;padding:0 18px">
+      <span style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#28C840"></span>
+      <span style="margin-left:24px;flex:1;max-width:520px;height:26px;border-radius:7px;background:#fff;font-size:13px;color:#6b7680;display:flex;align-items:center;padding:0 12px">${url}</span>
+    </div>
+    <div style="position:relative;flex:1;overflow:hidden">${inner}</div>
+  </div>`;
+
+const phoneShell = (inner, { bg = "#111" } = {}) => `
+  <div style="position:absolute;inset:0;border-radius:54px;background:${bg};padding:14px">
+    <div style="position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#fff">
+      ${inner}
+      <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+    </div>
+  </div>`;
+
+const statusBar = (color = "#111") => `
+  <div style="height:64px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 34px 8px;font-size:17px;font-weight:600;color:${color}">
+    <span>9:41</span><span style="letter-spacing:2px">▮▮▮ ◔</span>
+  </div>`;
+
+const lines = (n, { w = "100%", h = 10, gap = 10, color = "rgba(0,0,0,.12)", last = "60%" } = {}) =>
+  Array.from({ length: n }, (_, i) =>
+    `<div style="height:${h}px;border-radius:${h / 2}px;background:${color};width:${i === n - 1 ? last : w};margin-bottom:${gap}px"></div>`
+  ).join("");
+
+/* ==========================================================================
+   1. LAGUNE LODGE — site web d'un écolodge à Grand-Popo
+   ========================================================================== */
+
+const LAG = { sand: "#F1E8DA", teal: "#1F6F78", deep: "#15343A", sunset: "#E8875B", light: "#FAF6EF" };
+
+const palm = (x, h, flip = false, color = "#16343A") => `
+  <svg style="position:absolute;left:${x}%;bottom:0;height:${h}%;overflow:visible;transform:${flip ? "scaleX(-1)" : "none"}" viewBox="0 0 100 300">
+    <path d="M50 300 C55 220 62 150 70 70" stroke="${color}" stroke-width="7" fill="none"/>
+    <g fill="${color}">
+      <path d="M70 70 C40 50 15 60 0 85 C25 65 45 65 70 74Z"/>
+      <path d="M70 70 C95 45 125 50 140 75 C115 60 95 62 70 74Z"/>
+      <path d="M70 70 C60 35 40 20 15 20 C42 30 55 45 68 72Z"/>
+      <path d="M70 70 C85 35 110 22 135 25 C108 33 90 48 72 72Z"/>
+      <path d="M70 70 C72 40 70 15 60 0 C78 18 80 45 72 72Z"/>
+    </g>
+  </svg>`;
+
+const lagoonPhoto = ({ sun = true, palms = true } = {}) => `
+  <div class="fill" style="background:linear-gradient(180deg,#F6C8A0 0%,#F0A77E 30%,#E8875B 47%,#A9C9C6 52%,#5E9EA0 70%,#1F6F78 100%)"></div>
+  ${sun ? `<div style="position:absolute;left:58%;top:30%;width:15%;aspect-ratio:1;border-radius:50%;background:#FFE3B8;opacity:.9;filter:blur(1px)"></div>` : ""}
+  <div class="fill" style="top:50%;background:repeating-linear-gradient(180deg,rgba(255,255,255,.18) 0 2px,transparent 2px 14px)"></div>
+  <div style="position:absolute;left:0;right:0;top:49%;height:3%;background:#2E5A5C;opacity:.55;border-radius:50%"></div>
+  ${palms ? palm(4, 78) + palm(14, 62, true) + palm(84, 70, true) : ""}`;
+
+const lagLogo = (color = LAG.deep, size = 22) => `
+  <span style="display:inline-flex;align-items:center;gap:10px;color:${color};font-size:${size}px;font-weight:600;letter-spacing:-.01em">
+    <svg width="${size * 1.4}" height="${size}" viewBox="0 0 42 30"><path d="M2 18c6-8 12-8 19 0s13 8 19 0" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M2 27c6-6 12-6 19 0s13 6 19 0" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".5"/><circle cx="21" cy="6" r="5" fill="${LAG.sunset}"/></svg>
+    <span class="serif" style="font-style:italic">Lagune Lodge</span>
+  </span>`;
+
+const lagNav = (light = false) => `
+  <div style="position:absolute;left:0;right:0;top:0;height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 64px;z-index:2">
+    ${lagLogo(light ? "#fff" : LAG.deep)}
+    <div style="display:flex;gap:36px;font-size:16px;color:${light ? "#fff" : LAG.deep}">
+      <span>Bungalows</span><span>Expériences</span><span>Restaurant</span><span>Contact</span>
+    </div>
+    <span style="padding:12px 22px;border-radius:999px;background:${light ? "#fff" : LAG.teal};color:${light ? LAG.deep : "#fff"};font-size:15px;font-weight:600">Réserver</span>
+  </div>`;
+
+const lagHome = () => `
+  <div class="fill" style="background:${LAG.light}">
+    <div style="position:absolute;left:0;right:0;top:0;height:74%;overflow:hidden">${lagoonPhoto()}<div class="fill" style="background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 30%,transparent 60%,rgba(0,0,0,.25))"></div></div>
+    ${lagNav(true)}
+    <div style="position:absolute;left:64px;top:24%;max-width:660px;color:#fff">
+      <div style="font-size:15px;letter-spacing:.2em;text-transform:uppercase;opacity:.9">Grand-Popo · Bénin</div>
+      <div class="serif" style="font-size:72px;line-height:1.02;margin-top:18px">Respirer entre lagune et océan.</div>
+      <div style="font-size:19px;margin-top:20px;opacity:.92;max-width:480px">12 bungalows en bois au bord de l'eau, une cuisine du marché et le rythme lent de la côte.</div>
+    </div>
+    <div style="position:absolute;left:64px;right:64px;top:66%;height:96px;border-radius:18px;background:#fff;display:flex;align-items:center;padding:0 28px;gap:28px" class="shadow">
+      ${["Arrivée|Ven. 12 déc.", "Départ|Dim. 14 déc.", "Voyageurs|2 adultes"].map(t => { const [a, b] = t.split("|"); return `<div style="flex:1;border-right:1px solid #E6E1D8"><div style="font-size:13px;color:#8A8F8E">${a}</div><div style="font-size:19px;color:${LAG.deep};font-weight:600;margin-top:4px">${b}</div></div>`; }).join("")}
+      <span style="padding:16px 28px;border-radius:12px;background:${LAG.sunset};color:#fff;font-weight:600;font-size:17px">Voir les disponibilités</span>
+    </div>
+    <div style="position:absolute;left:64px;right:64px;bottom:34px;display:flex;gap:28px">
+      ${["Bungalow lagune", "Balade en pirogue", "Table du marché"].map((t, i) => `<div style="flex:1;display:flex;gap:16px;align-items:center"><div style="width:58px;height:58px;border-radius:14px;background:${[LAG.teal, LAG.sunset, "#C9A46A"][i]}"></div><div><div style="font-weight:600;color:${LAG.deep};font-size:17px">${t}</div><div style="font-size:14px;color:#7c8483">Découvrir →</div></div></div>`).join("")}
+    </div>
+  </div>`;
+
+const roomCard = (name, price, hue) => `
+  <div style="border-radius:18px;overflow:hidden;background:#fff" class="shadow">
+    <div style="position:relative;height:250px;background:linear-gradient(160deg,${hue},#1F6F78)">
+      <div style="position:absolute;left:12%;right:12%;bottom:0;height:58%;background:#C9A46A;clip-path:polygon(50% 0,100% 40%,100% 100%,0 100%,0 40%)"></div>
+      <div style="position:absolute;left:40%;right:40%;bottom:0;height:26%;background:#5C3B22"></div>
+    </div>
+    <div style="padding:22px 24px">
+      <div style="font-size:21px;font-weight:600;color:${LAG.deep}">${name}</div>
+      <div style="font-size:15px;color:#7c8483;margin-top:6px">2 personnes · vue lagune · ventilateur</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px"><span style="font-size:18px;color:${LAG.deep}"><b>${price}</b> FCFA / nuit</span><span style="color:${LAG.teal};font-weight:600">Réserver →</span></div>
+    </div>
+  </div>`;
+
+const lagRooms = () => `
+  <div class="fill" style="background:${LAG.light}">
+    ${lagNav()}
+    <div style="position:absolute;left:64px;top:120px;right:64px">
+      <div style="font-size:14px;letter-spacing:.2em;color:${LAG.teal};text-transform:uppercase">Nos bungalows</div>
+      <div class="serif" style="font-size:52px;color:${LAG.deep};margin-top:10px">Dormir au bord de l'eau</div>
+      <div style="display:flex;gap:12px;margin-top:26px">${["Tous", "Vue lagune", "Vue océan", "Famille"].map((t, i) => `<span style="padding:10px 18px;border-radius:999px;border:1px solid ${i ? "#D8D1C4" : LAG.deep};background:${i ? "transparent" : LAG.deep};color:${i ? LAG.deep : "#fff"};font-size:15px">${t}</span>`).join("")}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px">
+        ${roomCard("Bungalow Héron", "45 000", "#F0A77E")}${roomCard("Bungalow Pélican", "52 000", "#A9C9C6")}${roomCard("Case Famille", "78 000", "#E8C48B")}
+      </div>
+    </div>
+  </div>`;
+
+const lagBooking = () => `
+  <div class="fill" style="background:${LAG.light}">
+    ${lagNav()}
+    <div style="position:absolute;left:64px;top:120px;width:56%">
+      <div class="serif" style="font-size:46px;color:${LAG.deep}">Votre séjour</div>
+      <div style="margin-top:26px;border-radius:18px;background:#fff;padding:28px" class="shadow">
+        <div style="display:flex;justify-content:space-between;color:${LAG.deep};font-weight:600;font-size:19px"><span>‹</span><span>Décembre 2025</span><span>›</span></div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:20px;text-align:center;font-size:16px;color:${LAG.deep}">
+          ${["L", "M", "M", "J", "V", "S", "D"].map(d => `<span style="color:#9aa09f;font-size:13px">${d}</span>`).join("")}
+          ${Array.from({ length: 31 }, (_, i) => { const d = i + 1; const sel = d >= 12 && d <= 14; const edge = d === 12 || d === 14; return `<span style="height:44px;display:grid;place-items:center;border-radius:12px;background:${edge ? LAG.teal : sel ? "#D7E7E6" : "transparent"};color:${edge ? "#fff" : LAG.deep}">${d}</span>`; }).join("")}
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;right:64px;top:120px;width:32%;border-radius:18px;background:#fff;padding:30px" class="shadow">
+      <div style="height:170px;border-radius:12px;overflow:hidden;position:relative">${lagoonPhoto({ palms: false })}</div>
+      <div style="font-size:22px;font-weight:600;color:${LAG.deep};margin-top:20px">Bungalow Héron</div>
+      <div style="font-size:15px;color:#7c8483;margin-top:4px">12 → 14 déc. · 2 nuits · 2 adultes</div>
+      <div style="margin-top:22px;border-top:1px solid #EEE8DE;padding-top:18px;font-size:16px;color:${LAG.deep}">
+        <div style="display:flex;justify-content:space-between"><span>2 nuits × 45 000</span><span>90 000</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px"><span>Petit-déjeuner</span><span>Inclus</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:16px;font-weight:700;font-size:20px"><span>Total</span><span>90 000 FCFA</span></div>
+      </div>
+      <div style="margin-top:22px;padding:16px;border-radius:12px;background:${LAG.sunset};color:#fff;text-align:center;font-weight:600;font-size:17px">Confirmer · payer par Mobile Money</div>
+    </div>
+  </div>`;
+
+const oldSite = () => `
+  <div class="fill" style="background:#e9e9e9;font-family:Arial,sans-serif;color:#333">
+    <div style="height:70px;background:#3a3a8a;color:#ff0;display:flex;align-items:center;padding:0 24px;font-size:26px;font-weight:bold">*** LAGUNE LODGE *** BIENVENUE !!!</div>
+    <div style="display:flex;gap:6px;padding:8px;background:#ccc">${["ACCUEIL", "PHOTOS", "TARIFS 2019", "NOUS CONTACTER", "LIVRE D'OR"].map(t => `<span style="padding:6px 10px;background:#fff;border:1px solid #999;font-size:13px">${t}</span>`).join("")}</div>
+    <div style="display:flex;gap:14px;padding:14px">
+      <div style="flex:1;height:240px;background:#bbb;display:grid;place-items:center;color:#777">photo.jpg</div>
+      <div style="flex:1;font-size:13px;line-height:1.5">${lines(9, { color: "#bbb", h: 9, gap: 9 })}<div style="color:red;font-weight:bold;margin-top:10px">PROMO !!! Appelez-nous au +229 ...</div></div>
+    </div>
+    <div style="margin:0 14px;padding:10px;background:#fff;border:1px dashed #999;font-size:12px">Réservation : envoyez un e-mail avec vos dates, nous vous répondrons sous 72 h.</div>
+  </div>`;
+
+def("lagune-cover", 1600, 1000, () => `
+  <div class="fill" style="background:radial-gradient(120% 90% at 80% 10%,#F6D9BF,${LAG.sand} 60%)"></div>
+  <div style="position:absolute;left:8%;top:12%;width:70%;height:72%" class="shadow">${browser("lagunelodge.bj", lagHome())}</div>
+  <div style="position:absolute;right:7%;top:26%;width:17%;height:66%;border-radius:54px" class="shadow">${phoneShell(statusBar("#fff") + `<div class="fill" style="top:0">${lagoonPhoto({ palms: false })}${palm(62, 46, true)}</div><div style="position:absolute;left:24px;right:24px;top:110px;color:#fff;z-index:2"><div class="serif" style="font-size:34px;line-height:1.05">Respirer entre lagune et océan.</div></div><div style="position:absolute;left:20px;right:20px;bottom:28px;padding:16px;border-radius:14px;background:${LAG.sunset};color:#fff;text-align:center;font-weight:600">Réserver</div>`)}</div>`);
+
+def("lagune-defi", 1600, 900, () => `
+  <div class="fill" style="background:${LAG.sand}"></div>
+  <div style="position:absolute;left:5%;top:14%;width:42%;height:66%;filter:grayscale(.2)" class="shadow">${browser("lagune-lodge.free.fr", oldSite(), { bar: "#ddd" })}</div>
+  <div style="position:absolute;left:47.5%;top:44%;font-size:56px;color:${LAG.teal}">→</div>
+  <div style="position:absolute;right:5%;top:14%;width:42%;height:66%" class="shadow">${browser("lagunelodge.bj", `<div style="position:absolute;inset:0;width:181%;height:181%;transform:scale(.553);transform-origin:0 0">${lagHome()}</div>`)}</div>
+  <div style="position:absolute;left:5%;bottom:7%;font-size:22px;color:#8a7f70">Avant · 2019</div>
+  <div style="position:absolute;right:5%;bottom:7%;font-size:22px;color:${LAG.teal};font-weight:600">Après · 2025</div>`);
+
+def("lagune-home", 1600, 1000, () => `<div class="fill" style="background:${LAG.sand};padding:40px"><div style="position:relative;width:100%;height:100%" class="shadow">${browser("lagunelodge.bj", `<div style="position:absolute;inset:0;width:110%;height:110%;transform:scale(.91);transform-origin:0 0">${lagHome()}</div>`)}</div></div>`);
+def("lagune-rooms", 1600, 1000, () => `<div class="fill" style="background:#DCE9E7;padding:40px"><div style="position:relative;width:100%;height:100%" class="shadow">${browser("lagunelodge.bj/bungalows", `<div style="position:absolute;inset:0;width:110%;height:110%;transform:scale(.91);transform-origin:0 0">${lagRooms()}</div>`)}</div></div>`);
+def("lagune-booking", 1600, 1000, () => `<div class="fill" style="background:#F6DCC8;padding:40px"><div style="position:relative;width:100%;height:100%" class="shadow">${browser("lagunelodge.bj/reserver", `<div style="position:absolute;inset:0;width:110%;height:110%;transform:scale(.91);transform-origin:0 0">${lagBooking()}</div>`)}</div></div>`);
+
+const lagPhone = (inner) => `<div class="fill" style="background:${LAG.sand};padding:36px 30px"><div style="position:relative;width:100%;height:100%;border-radius:54px" class="shadow">${phoneShell(inner)}</div></div>`;
+def("lagune-mobile-1", 600, 1267, () => lagPhone(`<div class="fill">${lagoonPhoto({ palms: false })}${palm(64, 42, true)}</div><div style="position:relative;z-index:2">${statusBar("#fff")}</div><div style="position:absolute;left:26px;top:96px;z-index:2">${lagLogo("#fff", 18)}</div><div style="position:absolute;left:26px;right:26px;top:300px;color:#fff;z-index:2"><div style="font-size:12px;letter-spacing:.2em">GRAND-POPO · BÉNIN</div><div class="serif" style="font-size:40px;line-height:1.05;margin-top:12px">Respirer entre lagune et océan.</div></div><div style="position:absolute;left:22px;right:22px;bottom:34px;padding:18px;border-radius:14px;background:#fff;color:${LAG.deep};z-index:2"><div style="font-size:12px;color:#8a8f8e">Arrivée — Départ</div><div style="font-weight:600;margin-top:4px">12 → 14 déc. · 2 adultes</div><div style="margin-top:14px;padding:13px;border-radius:10px;background:${LAG.sunset};color:#fff;text-align:center;font-weight:600">Voir les disponibilités</div></div>`));
+def("lagune-mobile-2", 600, 1267, () => lagPhone(`<div class="fill" style="background:${LAG.light}">${statusBar()}<div style="padding:10px 24px"><div class="serif" style="font-size:32px;color:${LAG.deep}">Bungalows</div><div style="display:flex;gap:8px;margin-top:14px">${["Tous", "Lagune", "Océan"].map((t, i) => `<span style="padding:7px 13px;border-radius:999px;font-size:13px;border:1px solid ${i ? "#D8D1C4" : LAG.deep};background:${i ? "transparent" : LAG.deep};color:${i ? LAG.deep : "#fff"}">${t}</span>`).join("")}</div>${["Bungalow Héron|45 000|#F0A77E", "Bungalow Pélican|52 000|#A9C9C6"].map(t => { const [n, p, c] = t.split("|"); return `<div style="margin-top:18px;border-radius:16px;overflow:hidden;background:#fff" class="shadow"><div style="height:170px;position:relative;background:linear-gradient(160deg,${c},${LAG.teal})"><div style="position:absolute;left:14%;right:14%;bottom:0;height:56%;background:#C9A46A;clip-path:polygon(50% 0,100% 40%,100% 100%,0 100%,0 40%)"></div></div><div style="padding:14px 16px"><div style="font-weight:600;color:${LAG.deep};font-size:18px">${n}</div><div style="font-size:14px;color:#7c8483;margin-top:4px"><b style="color:${LAG.deep}">${p}</b> FCFA / nuit</div></div></div>`; }).join("")}</div></div>`));
+def("lagune-mobile-3", 600, 1267, () => lagPhone(`<div class="fill" style="background:${LAG.light}">${statusBar()}<div style="padding:10px 24px;color:${LAG.deep}"><div style="font-size:14px;color:#7c8483">Étape 3 sur 3</div><div class="serif" style="font-size:32px;margin-top:6px">Paiement</div><div style="margin-top:20px;border-radius:16px;background:#fff;padding:18px" class="shadow"><div style="font-weight:600">Bungalow Héron</div><div style="font-size:14px;color:#7c8483;margin-top:4px">12 → 14 déc. · 2 nuits</div><div style="display:flex;justify-content:space-between;margin-top:16px;font-weight:700;font-size:19px"><span>Total</span><span>90 000 FCFA</span></div></div><div style="margin-top:22px;font-weight:600">Payer avec</div>${["Mobile Money|#FFCC00", "Carte bancaire|#1F6F78", "Sur place|#C9A46A"].map((t, i) => { const [n, c] = t.split("|"); return `<div style="margin-top:10px;display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;background:#fff;border:2px solid ${i ? "transparent" : LAG.teal}"><span style="width:34px;height:34px;border-radius:9px;background:${c}"></span><span style="flex:1">${n}</span><span style="width:20px;height:20px;border-radius:50%;border:2px solid ${LAG.teal};background:${i ? "#fff" : LAG.teal}"></span></div>`; }).join("")}<div style="margin-top:26px;padding:16px;border-radius:12px;background:${LAG.sunset};color:#fff;text-align:center;font-weight:600">Confirmer la réservation</div></div></div>`));
+
+/* ==========================================================================
+   2. AYABA — identité d'une torréfaction de café à Cotonou
+   ========================================================================== */
+
+const AYA = { cream: "#F4EBDD", coffee: "#3B2418", clay: "#C65A32", gold: "#D9A441" };
+
+const ayaMark = (size, { sun = AYA.gold, bean = AYA.coffee, line = AYA.cream } = {}) => `
+  <svg width="${size}" height="${size}" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="${sun}"/>
+    <ellipse cx="50" cy="54" rx="22" ry="30" transform="rotate(-24 50 54)" fill="${bean}"/>
+    <path d="M58 26 C40 40 62 62 42 82" stroke="${line}" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </svg>`;
+
+const ayaWord = (size, color = AYA.coffee, sub = true) => `
+  <div style="display:inline-flex;flex-direction:column;align-items:flex-start;color:${color}">
+    <span class="serif" style="font-size:${size}px;font-style:italic;font-weight:700;letter-spacing:-.02em;line-height:.9">ayaba</span>
+    ${sub ? `<span class="cond" style="font-size:${size * 0.16}px;letter-spacing:.32em;margin-top:${size * 0.12}px">TORRÉFACTION · COTONOU</span>` : ""}
+  </div>`;
+
+const ayaLogo = (size, color = AYA.coffee, mark = {}) => `
+  <div style="display:inline-flex;align-items:center;gap:${size * 0.3}px">${ayaMark(size * 1.05, mark)}${ayaWord(size, color)}</div>`;
+
+const coffeeBag = (w, label = AYA.clay, name = "Torréfaction foncée", origin = "Kouffo · Bénin") => `
+  <div style="position:relative;width:${w}px;height:${w * 1.45}px">
+    <div style="position:absolute;inset:0;border-radius:${w * 0.05}px ${w * 0.05}px ${w * 0.08}px ${w * 0.08}px;background:linear-gradient(90deg,#E6DAC6,#F4EBDD 40%,#E2D4BD)" class="shadow"></div>
+    <div style="position:absolute;left:0;right:0;top:0;height:${w * 0.16}px;background:repeating-linear-gradient(90deg,#D8C9B1 0 ${w * 0.02}px,#E8DCC8 ${w * 0.02}px ${w * 0.04}px);border-radius:${w * 0.05}px ${w * 0.05}px 0 0"></div>
+    <div style="position:absolute;left:10%;right:10%;top:24%;bottom:10%;border-radius:${w * 0.04}px;background:${label};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${w * 0.05}px;color:${AYA.cream};text-align:center">
+      ${ayaMark(w * 0.26, { sun: AYA.gold, bean: AYA.coffee, line: label })}
+      <span class="serif" style="font-size:${w * 0.16}px;font-style:italic;font-weight:700">ayaba</span>
+      <span class="cond" style="font-size:${w * 0.045}px;letter-spacing:.2em">${name.toUpperCase()}</span>
+      <span style="font-size:${w * 0.04}px;opacity:.8">${origin} · 250 g</span>
+    </div>
+  </div>`;
+
+def("ayaba-cover", 1600, 1000, () => `
+  <div class="fill" style="background:${AYA.clay}"></div>
+  <div class="fill" style="background:radial-gradient(60% 80% at 75% 60%,rgba(255,220,170,.35),transparent 70%)"></div>
+  <div style="position:absolute;left:8%;top:50%;transform:translateY(-50%)">${ayaLogo(150, AYA.cream, { sun: AYA.gold, bean: AYA.coffee, line: AYA.clay })}</div>
+  <div style="position:absolute;right:10%;top:50%;transform:translateY(-50%) rotate(4deg)">${coffeeBag(330, AYA.coffee)}</div>`);
+
+def("ayaba-defi", 1600, 900, () => `
+  <div class="fill" style="background:${AYA.cream};padding:60px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:22px">
+    <div style="grid-row:span 2;border-radius:18px;background:linear-gradient(160deg,#6B3A22,${AYA.coffee});position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,200,140,.4),transparent 50%)"></div><div style="position:absolute;left:28px;bottom:28px;color:${AYA.cream}" class="serif"><div style="font-size:54px;font-style:italic">matin</div><div style="font-size:18px;opacity:.8">l'odeur du café qui grille</div></div></div>
+    <div style="border-radius:18px;background:${AYA.clay}"></div>
+    <div style="border-radius:18px;background:repeating-linear-gradient(135deg,${AYA.gold} 0 16px,#E7BA62 16px 32px)"></div>
+    <div style="border-radius:18px;background:#fff;display:grid;place-items:center" class="serif"><span style="font-size:130px;font-style:italic;color:${AYA.coffee}">Aa</span></div>
+    <div style="grid-column:span 2;border-radius:18px;background:#fff;padding:30px;display:flex;flex-wrap:wrap;gap:12px;align-content:center">${["chaleur", "artisanal", "fierté locale", "partage", "terre", "soleil", "Kouffo", "cérémonie"].map((w, i) => `<span style="padding:12px 20px;border-radius:999px;font-size:22px;background:${[AYA.cream, AYA.gold, AYA.clay, AYA.coffee][i % 4]};color:${i % 4 > 1 ? AYA.cream : AYA.coffee}">${w}</span>`).join("")}</div>
+    <div style="border-radius:18px;background:${AYA.coffee};display:grid;place-items:center">${ayaMark(140)}</div>
+  </div>`);
+
+def("ayaba-logo-grid", 1200, 1200, () => `
+  <div class="fill" style="background:${AYA.cream}"></div>
+  <svg class="fill" viewBox="0 0 1200 1200">
+    ${Array.from({ length: 13 }, (_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="1200" stroke="#D9CBB4" stroke-width="1"/><line x1="0" y1="${i * 100}" x2="1200" y2="${i * 100}" stroke="#D9CBB4" stroke-width="1"/>`).join("")}
+    <circle cx="600" cy="600" r="420" fill="none" stroke="${AYA.clay}" stroke-width="2" stroke-dasharray="10 10"/>
+    <circle cx="600" cy="600" r="300" fill="none" stroke="${AYA.clay}" stroke-width="2"/>
+    <line x1="180" y1="180" x2="1020" y2="1020" stroke="${AYA.clay}" stroke-width="2" stroke-dasharray="10 10"/>
+  </svg>
+  <div class="fill center">${ayaMark(560)}</div>
+  <div class="mono" style="position:absolute;left:40px;bottom:36px;font-size:20px;color:${AYA.clay}">ø 0,72 · angle 24° · grille 12 × 12</div>`);
+
+def("ayaba-logo-variants", 1200, 1200, () => `
+  <div class="fill" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr">
+    <div class="center" style="background:${AYA.cream}">${ayaLogo(70)}</div>
+    <div class="center" style="background:${AYA.coffee}">${ayaLogo(70, AYA.cream, { line: AYA.coffee })}</div>
+    <div class="center" style="background:${AYA.clay}">${ayaMark(220, { sun: AYA.cream, bean: AYA.coffee, line: AYA.clay })}</div>
+    <div class="center" style="background:${AYA.gold}">${ayaWord(110, AYA.coffee, false)}</div>
+  </div>`);
+
+def("ayaba-type", 1600, 900, () => `
+  <div class="fill" style="background:#fff;display:grid;grid-template-columns:1fr 1fr">
+    <div style="background:${AYA.coffee};color:${AYA.cream};padding:70px;display:flex;flex-direction:column;justify-content:space-between">
+      <div class="cond" style="font-size:20px;letter-spacing:.3em">TITRES</div>
+      <div class="serif" style="font-size:300px;font-style:italic;font-weight:700;line-height:.8">Aa</div>
+      <div class="serif" style="font-size:30px;font-style:italic">Georgia Bold Italic — chaleureuse, artisanale</div>
+    </div>
+    <div style="padding:70px;color:${AYA.coffee};display:flex;flex-direction:column;justify-content:space-between">
+      <div class="cond" style="font-size:20px;letter-spacing:.3em">TEXTES</div>
+      <div class="cond" style="font-size:110px;line-height:1">Bahnschrift</div>
+      <div style="font-size:24px;line-height:1.5;color:#6b5547">Des grains du Kouffo torréfiés chaque semaine à Cotonou. Une lecture simple pour les étiquettes, les menus et l'écran.</div>
+      <div class="cond" style="font-size:26px;letter-spacing:.06em">ABCDEFGHIJKLMNOPQRSTUVWXYZ · 0123456789</div>
+    </div>
+  </div>`);
+
+const ayaApp = (bg, inner) => `<div class="fill center" style="background:${bg}">${inner}</div>`;
+def("ayaba-app-bag", 1200, 1200, () => ayaApp(AYA.cream, `<div style="transform:rotate(-4deg)">${coffeeBag(480)}</div>`));
+def("ayaba-app-cup", 1200, 1200, () => ayaApp(AYA.gold, `
+  <div style="position:relative;width:420px;height:560px">
+    <div style="position:absolute;left:0;right:0;top:0;height:60px;border-radius:14px;background:${AYA.coffee}"></div>
+    <div style="position:absolute;left:24px;right:24px;top:56px;bottom:0;background:${AYA.cream};clip-path:polygon(0 0,100% 0,88% 100%,12% 100%)" class="shadow"></div>
+    <div style="position:absolute;left:44px;right:44px;top:200px;height:200px;background:${AYA.clay};clip-path:polygon(0 0,100% 0,96% 100%,4% 100%);display:grid;place-items:center">${ayaMark(130, { line: AYA.clay })}</div>
+  </div>`));
+def("ayaba-app-cards", 1200, 1200, () => ayaApp("#E9DDCB", `
+  <div style="position:relative;width:900px;height:700px">
+    <div style="position:absolute;left:40px;top:40px;width:560px;height:340px;border-radius:16px;background:${AYA.coffee};transform:rotate(-8deg);display:grid;place-items:center" class="shadow">${ayaLogo(64, AYA.cream, { line: AYA.coffee })}</div>
+    <div style="position:absolute;right:20px;bottom:40px;width:560px;height:340px;border-radius:16px;background:${AYA.cream};transform:rotate(5deg);padding:44px;color:${AYA.coffee}" class="shadow"><div class="serif" style="font-size:42px;font-style:italic;font-weight:700">Afi Mensah</div><div class="cond" style="font-size:20px;letter-spacing:.2em;margin-top:8px;color:${AYA.clay}">MAÎTRE TORRÉFACTRICE</div><div style="font-size:20px;margin-top:70px;line-height:1.6">+229 01 00 00 00<br>bonjour@ayaba.bj</div></div>
+  </div>`));
+def("ayaba-app-shop", 1200, 1200, () => `
+  <div class="fill" style="background:linear-gradient(180deg,#F7E3C6,#F2C99A)"></div>
+  <div style="position:absolute;left:12%;right:12%;bottom:0;height:72%;background:${AYA.cream}" class="shadow"></div>
+  <div style="position:absolute;left:8%;right:8%;top:31%;height:9%;background:repeating-linear-gradient(90deg,${AYA.clay} 0 70px,${AYA.cream} 70px 140px);clip-path:polygon(0 0,100% 0,96% 100%,4% 100%)"></div>
+  <div style="position:absolute;left:50%;top:15%;transform:translateX(-50%);padding:26px 50px;background:${AYA.coffee};border-radius:14px">${ayaLogo(64, AYA.cream, { line: AYA.coffee })}</div>
+  <div style="position:absolute;left:20%;bottom:0;width:26%;height:44%;background:#5C3B22"></div>
+  <div style="position:absolute;right:20%;bottom:12%;width:30%;height:28%;background:#A7C6C9;border:10px solid ${AYA.coffee}"></div>`);
+def("ayaba-app-tote", 1200, 1200, () => ayaApp(AYA.clay, `
+  <div style="position:relative;width:560px;height:700px">
+    <div style="position:absolute;left:150px;top:0;width:260px;height:240px;border:22px solid #E8DCC4;border-bottom:none;border-radius:130px 130px 0 0"></div>
+    <div style="position:absolute;left:0;right:0;top:200px;bottom:0;background:#EFE4D0;border-radius:10px;display:grid;place-items:center" class="shadow">${ayaMark(260)}</div>
+  </div>`));
+def("ayaba-app-post", 1200, 1200, () => ayaApp(AYA.cream, `
+  <div style="width:760px;height:760px;background:${AYA.coffee};border-radius:24px;padding:60px;color:${AYA.cream};display:flex;flex-direction:column;justify-content:space-between" class="shadow">
+    <div style="display:flex;justify-content:space-between;align-items:center">${ayaMark(90, { line: AYA.coffee })}<span class="cond" style="letter-spacing:.3em;font-size:20px">NOUVEAU</span></div>
+    <div class="serif" style="font-size:96px;font-style:italic;font-weight:700;line-height:.95">Le Kouffo<br>en tasse.</div>
+    <div style="display:flex;justify-content:space-between;font-size:24px"><span>Torréfaction moyenne · 250 g</span><span style="color:${AYA.gold}">4 500 FCFA</span></div>
+  </div>`));
+
+def("ayaba-range", 1600, 900, () => `
+  <div class="fill" style="background:linear-gradient(180deg,${AYA.cream} 70%,#E4D5BE 70%)"></div>
+  <div class="fill" style="display:flex;align-items:flex-end;justify-content:center;gap:70px;padding-bottom:110px">
+    ${coffeeBag(280, AYA.gold, "Torréfaction claire", "Collines · Bénin")}
+    ${coffeeBag(320, AYA.clay, "Torréfaction moyenne", "Kouffo · Bénin")}
+    ${coffeeBag(280, AYA.coffee, "Torréfaction foncée", "Mono · Bénin")}
+  </div>`);
+
+/* ==========================================================================
+   3 & 6. DOCUMENTS — modèles communs (rapport Wémà, plan Akwaba)
+   ========================================================================== */
+
+const WEMA = { name: "Fondation Wémà", main: "#1E3A5F", accent: "#E0A43A", soft: "#8FB8DE", paper: "#FBF8F2", serif: true };
+const AKW = { name: "Collectif Akwaba Entreprendre", main: "#3E2A5C", accent: "#FF7A59", soft: "#F7C9B9", paper: "#FDF6F2", serif: false };
+
+const docFont = (b) => (b.serif ? "Georgia,serif" : "Bahnschrift,'Segoe UI',sans-serif");
+
+const page = (b, inner, { bg = b.paper } = {}) => `<div class="fill" style="background:${bg};overflow:hidden;font-size:16px;color:#222">${inner}</div>`;
+
+const docCover = (b, title, sub, year, lang) => page(b, `
+  <div class="fill" style="background:${b.main}"></div>
+  <div style="position:absolute;right:-22%;top:-12%;width:85%;aspect-ratio:1;border-radius:50%;background:${b.accent};opacity:.95"></div>
+  <div style="position:absolute;right:-6%;top:6%;width:52%;aspect-ratio:1;border-radius:50%;border:3px solid ${b.soft};opacity:.7"></div>
+  <div style="position:absolute;left:9%;top:7%;color:#fff;font-size:22px;letter-spacing:.18em;text-transform:uppercase">${b.name}</div>
+  <div style="position:absolute;left:9%;right:9%;bottom:14%;color:#fff">
+    <div style="font-family:${docFont(b)};font-size:96px;line-height:.98">${title}</div>
+    <div style="font-size:30px;margin-top:24px;opacity:.85">${sub}</div>
+  </div>
+  <div style="position:absolute;left:9%;bottom:6%;color:${b.accent};font-size:28px;font-weight:600">${year}</div>
+  <div style="position:absolute;right:9%;bottom:6%;color:#fff;font-size:22px;letter-spacing:.2em">${lang}</div>`);
+
+const docToc = (b, title, items) => page(b, `
+  <div style="position:absolute;left:9%;top:8%;font-family:${docFont(b)};font-size:84px;color:${b.main}">${title}</div>
+  <div style="position:absolute;left:9%;right:9%;top:28%">
+    ${items.map((t, i) => `<div style="display:flex;align-items:baseline;gap:30px;padding:26px 0;border-top:2px solid ${i ? "#E5DED3" : b.main}"><span style="font-size:52px;color:${b.accent};font-weight:600;min-width:90px">0${i + 1}</span><span style="flex:1;font-size:36px;color:${b.main}">${t}</span><span style="font-size:26px;color:#999">${6 + i * 8}</span></div>`).join("")}
+  </div>`);
+
+const docFigures = (b, title, figs) => page(b, `
+  <div style="position:absolute;left:9%;top:8%;font-size:22px;letter-spacing:.2em;color:${b.accent};text-transform:uppercase">${title[0]}</div>
+  <div style="position:absolute;left:9%;top:13%;font-family:${docFont(b)};font-size:68px;color:${b.main};line-height:1.05;max-width:80%">${title[1]}</div>
+  <div style="position:absolute;left:9%;right:9%;top:38%;display:grid;grid-template-columns:1fr 1fr;gap:50px 60px">
+    ${figs.map(([v, l], i) => `<div style="border-top:3px solid ${i === 0 ? b.accent : b.main};padding-top:22px"><div style="font-size:96px;font-weight:600;color:${i === 0 ? b.accent : b.main};line-height:1">${v}</div><div style="font-size:26px;color:#555;margin-top:14px;line-height:1.3">${l}</div></div>`).join("")}
+  </div>`);
+
+const docChart = (b, title, bars) => page(b, `
+  <div style="position:absolute;left:9%;top:8%;font-family:${docFont(b)};font-size:60px;color:${b.main};line-height:1.05;max-width:82%">${title}</div>
+  <div style="position:absolute;left:9%;right:9%;top:34%;bottom:20%;display:flex;align-items:flex-end;gap:5%;border-bottom:3px solid ${b.main}">
+    ${bars.map(([v, l], i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;height:100%;justify-content:flex-end"><span style="font-size:30px;font-weight:600;color:${b.main}">${v}</span><div style="width:100%;height:${v}%;background:${i === bars.length - 1 ? b.accent : b.main};border-radius:8px 8px 0 0"></div></div>`).join("")}
+  </div>
+  <div style="position:absolute;left:9%;right:9%;bottom:12%;display:flex;gap:5%">${bars.map(([, l]) => `<span style="flex:1;text-align:center;font-size:24px;color:#666">${l}</span>`).join("")}</div>
+  <div style="position:absolute;left:9%;bottom:5%;font-size:20px;color:#999">Source : données internes ${b.name}, 2025</div>`);
+
+const docText = (b, kicker, title, body, quote) => page(b, `
+  <div style="position:absolute;left:9%;top:8%;font-size:22px;letter-spacing:.2em;color:${b.accent};text-transform:uppercase">${kicker}</div>
+  <div style="position:absolute;left:9%;right:9%;top:13%;font-family:${docFont(b)};font-size:64px;color:${b.main};line-height:1.05">${title}</div>
+  <div style="position:absolute;left:9%;right:9%;top:40%;column-count:2;column-gap:50px;font-size:23px;line-height:1.6;color:#444">${body}</div>
+  <div style="position:absolute;left:9%;right:9%;bottom:7%;padding:34px 40px;background:${b.main};color:#fff;font-family:${docFont(b)};font-size:34px;line-height:1.3;border-radius:6px">« ${quote} »</div>`);
+
+const docRoadmap = (b, title, steps) => page(b, `
+  <div style="position:absolute;left:9%;top:8%;font-family:${docFont(b)};font-size:64px;color:${b.main};line-height:1.05;max-width:80%">${title}</div>
+  <div style="position:absolute;left:14%;top:30%;bottom:8%;width:4px;background:${b.soft}"></div>
+  ${steps.map(([y, t, d], i) => `<div style="position:absolute;left:9%;right:9%;top:${30 + i * 15}%;display:flex;gap:40px;align-items:flex-start"><span style="flex:none;width:90px;height:90px;border-radius:50%;background:${i === 0 ? b.accent : b.main};color:#fff;display:grid;place-items:center;font-size:24px;font-weight:600">${y}</span><div><div style="font-size:34px;color:${b.main};font-weight:600">${t}</div><div style="font-size:23px;color:#666;margin-top:6px">${d}</div></div></div>`).join("")}`);
+
+const photoBlock = (c1, c2) => `<div class="fill" style="background:linear-gradient(160deg,${c1},${c2})"></div><div style="position:absolute;left:15%;bottom:0;width:24%;height:55%;border-radius:120px 120px 0 0;background:rgba(0,0,0,.25)"></div><div style="position:absolute;left:44%;bottom:0;width:20%;height:46%;border-radius:100px 100px 0 0;background:rgba(0,0,0,.18)"></div><div style="position:absolute;left:17%;bottom:52%;width:20%;aspect-ratio:1;border-radius:50%;background:rgba(0,0,0,.25)"></div>`;
+
+const spread = (b, left, right, bg) => `
+  <div class="fill" style="background:${bg}"></div>
+  <div style="position:absolute;left:7%;right:7%;top:9%;bottom:11%;display:flex" class="shadow">
+    <div style="position:relative;flex:1;overflow:hidden">${left}</div>
+    <div style="width:2px;background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,0))"></div>
+    <div style="position:relative;flex:1;overflow:hidden">${right}</div>
+  </div>`;
+
+const scaled = (inner, w, h, s) => `<div style="position:absolute;left:0;top:0;width:${w}px;height:${h}px;transform:scale(${s});transform-origin:0 0">${inner}</div>`;
+const pageAt = (inner) => scaled(inner, 900, 1200, 1); // page native 900 × 1200
+
+/* ---------- 3. Fondation Wémà — rapport annuel bilingue ---------- */
+
+const W = {
+  coverFr: () => docCover(WEMA, "Rapport annuel 2025", "Apprendre, soigner, transmettre", "2025", "FR"),
+  coverEn: () => docCover(WEMA, "Annual Report 2025", "Learning, healing, passing on", "2025", "EN"),
+  toc: () => docToc(WEMA, "Sommaire", ["Le mot de la présidente", "Éducation", "Santé communautaire", "Nos chiffres", "Comptes 2025"]),
+  figs: () => docFigures(WEMA, ["Nos chiffres", "Une année au service de 14 villages"], [["3 200", "élèves accompagnés"], ["14", "villages partenaires"], ["86 %", "de réussite au CEP"], ["420", "consultations par mois"]]),
+  chart: () => docChart(WEMA, "Taux de réussite au CEP, villages partenaires", [["58", "2021"], ["64", "2022"], ["71", "2023"], ["79", "2024"], ["86", "2025"]]),
+  edFr: () => docText(WEMA, "Le mot de la présidente", "Une école ouverte, c'est un village qui avance.", lines(16, { h: 12, gap: 14, color: "#d9d2c5" }), "Chaque enfant qui lit à voix haute devant sa classe nous rappelle pourquoi nous sommes là."),
+  edEn: () => docText(WEMA, "A word from the chair", "An open school is a village moving forward.", lines(16, { h: 12, gap: 14, color: "#d9d2c5" }), "Every child reading aloud to their class reminds us why we are here."),
+};
+
+def("wema-cover", 1600, 1000, () => `
+  <div class="fill" style="background:linear-gradient(135deg,#DCE6EF,#F3EEE4)"></div>
+  <div style="position:absolute;left:20%;top:19%;width:440px;height:587px;transform:rotate(-6deg)" class="shadow">${scaled(W.coverFr(), 900, 1200, 440 / 900)}</div>
+  <div style="position:absolute;left:52%;top:22%;width:440px;height:587px;transform:rotate(5deg)" class="shadow">${scaled(W.coverEn(), 900, 1200, 440 / 900)}</div>`);
+
+def("wema-spread", 1600, 900, () => spread(WEMA,
+  photoBlock("#E0A43A", "#B5762A") + `<div style="position:absolute;left:8%;bottom:8%;color:#fff;font-size:40px" class="serif">Éducation</div>`,
+  scaled(W.edFr(), 900, 1200, 0.585), "#E9EEF3"));
+
+def("wema-toc", 1500, 1000, () => spread(WEMA, scaled(W.toc(), 900, 1200, 0.59), scaled(page(WEMA, `<div class="fill" style="background:${WEMA.main}"></div><div style="position:absolute;left:10%;top:30%;color:${WEMA.accent};font-size:190px;font-weight:600">02</div><div style="position:absolute;left:10%;top:54%;color:#fff;font-size:84px" class="serif">Éducation</div><div style="position:absolute;left:10%;top:66%;width:60%;color:#cfdbe8;font-size:28px;line-height:1.5">Lecture, cantines et formation des enseignants dans 14 villages.</div>`), 900, 1200, 0.59), "#F1ECE3"));
+
+def("wema-p1", 900, 1200, W.coverFr);
+def("wema-p2", 900, 1200, W.toc);
+def("wema-p3", 900, 1200, W.figs);
+def("wema-p4", 900, 1200, W.chart);
+def("wema-fr", 900, 1200, W.edFr);
+def("wema-en", 900, 1200, W.edEn);
+
+/* ---------- 6. Collectif Akwaba Entreprendre — plan stratégique ---------- */
+
+const A = {
+  coverFr: () => docCover(AKW, "Plan stratégique 2026–2030", "Entreprendre au féminin, ensemble", "2026", "FR"),
+  coverEn: () => docCover(AKW, "Strategic Plan 2026–2030", "Women entrepreneurs, together", "2026", "EN"),
+  toc: () => docToc(AKW, "Sommaire", ["Notre ambition", "4 axes stratégiques", "Feuille de route", "Gouvernance", "Budget et suivi"]),
+  axes: () => docFigures(AKW, ["4 axes", "Ce que nous voulons changer d'ici 2030"], [["01", "Former 2 000 entrepreneures"], ["02", "Ouvrir l'accès au crédit"], ["03", "Créer 6 marchés collectifs"], ["04", "Peser dans les politiques publiques"]]),
+  road: () => docRoadmap(AKW, "Feuille de route 2026–2030", [["2026", "Lancer", "Diagnostic, équipe, premiers parcours de formation"], ["2027", "Équiper", "Fonds de garantie avec deux banques partenaires"], ["2028", "Relier", "Marchés collectifs à Cotonou, Parakou, Bohicon"], ["2030", "Évaluer", "Bilan public et nouveau plan"]]),
+  axFr: () => docText(AKW, "Axe 2", "Ouvrir l'accès au crédit", lines(16, { h: 12, gap: 14, color: "#ead8cf" }), "Une garantie collective vaut mieux que mille promesses individuelles."),
+  axEn: () => docText(AKW, "Pillar 2", "Opening access to credit", lines(16, { h: 12, gap: 14, color: "#ead8cf" }), "A collective guarantee is worth more than a thousand individual promises."),
+};
+
+def("akwaba-cover", 1600, 1000, () => `
+  <div class="fill" style="background:linear-gradient(135deg,#FBE3D8,#F4EEF7)"></div>
+  <div style="position:absolute;left:20%;top:19%;width:440px;height:587px;transform:rotate(-6deg)" class="shadow">${scaled(A.coverFr(), 900, 1200, 440 / 900)}</div>
+  <div style="position:absolute;left:52%;top:22%;width:440px;height:587px;transform:rotate(5deg)" class="shadow">${scaled(A.coverEn(), 900, 1200, 440 / 900)}</div>`);
+
+def("akwaba-spread", 1600, 900, () => spread(AKW,
+  photoBlock("#FF7A59", "#C2523A") + `<div style="position:absolute;left:8%;bottom:8%;color:#fff;font-size:40px" class="cond">Notre ambition</div>`,
+  scaled(A.axes(), 900, 1200, 0.585), "#F4EEF7"));
+
+def("akwaba-toc", 1500, 1000, () => spread(AKW, scaled(A.toc(), 900, 1200, 0.59), scaled(A.road(), 900, 1200, 0.59), "#FBEFE9"));
+
+def("akwaba-p1", 900, 1200, A.coverFr);
+def("akwaba-p2", 900, 1200, A.toc);
+def("akwaba-p3", 900, 1200, A.axes);
+def("akwaba-p4", 900, 1200, A.road);
+def("akwaba-fr", 900, 1200, A.axFr);
+def("akwaba-en", 900, 1200, A.axEn);
+
+/* ==========================================================================
+   4. OBSERVATOIRE DE L'EAU DU MONO — infographies
+   ========================================================================== */
+
+const MONO = { deep: "#0B3954", aqua: "#3FB8AF", sun: "#FFD166", coral: "#EF6F6C", light: "#F2F7F7" };
+
+const drop = (s, c) => `<svg width="${s}" height="${s * 1.3}" viewBox="0 0 40 52"><path d="M20 2 C20 2 2 24 2 34 a18 18 0 0 0 36 0 C38 24 20 2 20 2Z" fill="${c}"/></svg>`;
+
+const river = (w, h, stroke = MONO.aqua) => `<svg class="fill" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><path d="M-20 ${h * 0.3} C ${w * 0.2} ${h * 0.1}, ${w * 0.3} ${h * 0.75}, ${w * 0.5} ${h * 0.55} S ${w * 0.8} ${h * 0.2}, ${w + 20} ${h * 0.6}" stroke="${stroke}" stroke-width="${h * 0.07}" fill="none" stroke-linecap="round" opacity=".9"/></svg>`;
+
+const monoTitle = (size, color = "#fff") => `<div style="color:${color}"><div style="font-size:${size * 0.3}px;letter-spacing:.2em">OBSERVATOIRE DE L'EAU DU MONO</div><div class="cond" style="font-size:${size}px;font-weight:700;line-height:1;margin-top:${size * 0.15}px">L'eau du Mono en chiffres</div></div>`;
+
+def("mono-cover", 1600, 1000, () => `
+  <div class="fill" style="background:${MONO.deep}"></div>
+  ${river(1600, 1000)}
+  <div style="position:absolute;left:0;right:0;top:9%;text-align:center">${drop(70, MONO.aqua)}</div>
+  <div style="position:absolute;left:0;right:0;top:22%;text-align:center;color:#fff"><div style="font-size:22px;letter-spacing:.2em">OBSERVATOIRE DE L'EAU DU MONO</div><div class="cond" style="font-size:76px;font-weight:700;line-height:1;margin-top:14px">L'eau du Mono<br>en chiffres</div></div>
+  <div style="position:absolute;left:0;right:0;bottom:9%;display:flex;justify-content:center;gap:56px;color:#fff;text-align:center">
+    ${[["62 %", "des foyers à moins de 500 m d'un point d'eau"], ["1 sur 3", "puits à sec en saison sèche"], ["+18 %", "de raccordements depuis 2022"]].map(([v, l], i) => `<div style="width:270px"><div class="cond" style="font-size:84px;font-weight:700;color:${[MONO.sun, MONO.aqua, MONO.coral][i]}">${v}</div><div style="font-size:20px;opacity:.85;margin-top:6px">${l}</div></div>`).join("")}
+  </div>`);
+
+def("mono-defi", 1600, 900, () => `
+  <div class="fill" style="background:${MONO.light}"></div>
+  <div style="position:absolute;left:5%;top:12%;width:42%;height:72%;background:#fff;border:1px solid #d4dcdc;overflow:hidden;font-family:Arial;font-size:15px" class="shadow">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr)">${Array.from({ length: 6 * 18 }, (_, i) => `<div style="height:34px;border-right:1px solid #e3e8e8;border-bottom:1px solid #e3e8e8;padding:7px;color:${i < 6 ? "#333" : "#777"};background:${i < 6 ? "#E8EEF0" : i % 13 === 0 ? "#FFF6D6" : "#fff"};font-weight:${i < 6 ? "bold" : "normal"}">${i < 6 ? ["Commune", "Puits", "Forages", "Taux", "Pop.", "Obs."][i] : (i * 37) % 100 + (i % 3 ? "" : ",4")}</div>`).join("")}</div>
+  </div>
+  <div style="position:absolute;left:48.5%;top:44%;font-size:56px;color:${MONO.aqua}">→</div>
+  <div style="position:absolute;right:5%;top:12%;width:42%;height:72%;background:#fff;border-radius:18px;padding:40px" class="shadow">
+    <div class="cond" style="font-size:38px;font-weight:700;color:${MONO.deep}">Accès à l'eau potable</div>
+    <div style="font-size:18px;color:#6b7b80;margin-top:6px">Part des foyers à moins de 500 m d'un point d'eau</div>
+    ${[["Lokossa", 78], ["Athiémé", 66], ["Comè", 61], ["Grand-Popo", 54], ["Bopa", 43]].map(([n, v], i) => `<div style="display:flex;align-items:center;gap:16px;margin-top:22px"><span style="width:130px;font-size:19px;color:${MONO.deep}">${n}</span><div style="flex:1;height:26px;background:#EEF3F3;border-radius:13px"><div style="width:${v}%;height:100%;border-radius:13px;background:${i === 4 ? MONO.coral : MONO.aqua}"></div></div><span class="cond" style="width:60px;font-size:22px;font-weight:700;color:${MONO.deep}">${v} %</span></div>`).join("")}
+  </div>`);
+
+def("mono-main", 1600, 900, () => `
+  <div class="fill" style="background:#fff"></div>
+  <div style="position:absolute;left:5%;top:8%">${monoTitle(58, MONO.deep)}</div>
+  <div style="position:absolute;left:0;right:0;top:34%;height:36%">${river(1600, 324)}</div>
+  ${[["Lokossa", "78 %", 12, 44], ["Athiémé", "66 %", 32, 58], ["Comè", "61 %", 52, 52], ["Grand-Popo", "54 %", 72, 40], ["Bopa", "43 %", 88, 58]].map(([n, v, x, y], i) => `<div style="position:absolute;left:${x}%;top:${y}%;transform:translate(-50%,-50%);text-align:center"><div style="width:${70 + parseInt(v) * 0.6}px;aspect-ratio:1;border-radius:50%;background:${i === 4 ? MONO.coral : MONO.sun};border:6px solid #fff;margin:0 auto" class="shadow"></div><div class="cond" style="font-size:30px;font-weight:700;color:${MONO.deep};margin-top:10px">${v}</div><div style="font-size:18px;color:#5b6b70">${n}</div></div>`).join("")}
+  <div style="position:absolute;left:5%;right:5%;bottom:7%;display:flex;justify-content:space-between;font-size:18px;color:#5b6b70;border-top:2px solid ${MONO.deep};padding-top:16px"><span>Part des foyers à moins de 500 m d'un point d'eau, par commune</span><span>Source : enquête Observatoire 2025</span></div>`);
+
+const monoCard = (title, inner) => `<div class="fill" style="background:${MONO.light};padding:56px"><div style="position:relative;width:100%;height:100%;background:#fff;border-radius:22px;padding:44px" class="shadow"><div class="cond" style="font-size:36px;font-weight:700;color:${MONO.deep}">${title}</div>${inner}</div></div>`;
+
+def("mono-bars", 1200, 900, () => monoCard("Forages construits par an", `<div style="position:absolute;left:44px;right:44px;top:130px;bottom:80px;display:flex;align-items:flex-end;gap:26px;border-bottom:3px solid ${MONO.deep}">${[[22, "2019"], [31, "2020"], [28, "2021"], [40, "2022"], [52, "2023"], [61, "2024"], [74, "2025"]].map(([v, l], i, a) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:10px"><span class="cond" style="font-size:24px;font-weight:700;color:${MONO.deep}">${v}</span><div style="width:100%;height:${v}%;border-radius:10px 10px 0 0;background:${i === a.length - 1 ? MONO.sun : MONO.aqua}"></div><span style="position:absolute;bottom:-42px;font-size:18px;color:#6b7b80">${l}</span></div>`).join("")}</div>`));
+def("mono-map", 1200, 900, () => monoCard("Points d'eau suivis", `<svg style="position:absolute;left:44px;right:44px;top:110px;bottom:40px;width:calc(100% - 88px);height:calc(100% - 150px)" viewBox="0 0 400 260"><path d="M60 20 L200 10 L300 40 L360 120 L330 220 L220 250 L110 230 L40 160 Z" fill="#E3F2F1" stroke="${MONO.deep}" stroke-width="2"/><path d="M120 15 C140 80 100 120 160 160 S240 200 260 255" stroke="${MONO.aqua}" stroke-width="6" fill="none"/>${Array.from({ length: 26 }, (_, i) => { const x = 70 + ((i * 97) % 270); const y = 40 + ((i * 53) % 190); return `<circle cx="${x}" cy="${y}" r="${4 + (i % 3) * 2}" fill="${i % 5 === 0 ? MONO.coral : MONO.deep}"/>`; }).join("")}</svg><div style="position:absolute;right:44px;top:48px;display:flex;gap:20px;font-size:17px;color:#5b6b70"><span>● fonctionnel</span><span style="color:${MONO.coral}">● en panne</span></div>`));
+def("mono-donut", 1200, 900, () => monoCard("À quoi sert l'eau ?", `<div style="position:absolute;left:44px;top:140px;width:420px;height:420px;border-radius:50%;background:conic-gradient(${MONO.aqua} 0 46%,${MONO.sun} 46% 72%,${MONO.coral} 72% 88%,${MONO.deep} 88% 100%)"><div style="position:absolute;inset:110px;border-radius:50%;background:#fff;display:grid;place-items:center"><span class="cond" style="font-size:44px;font-weight:700;color:${MONO.deep}">100 %</span></div></div><div style="position:absolute;right:60px;top:180px;display:grid;gap:30px;font-size:24px;color:${MONO.deep}">${[["Boisson et cuisine", "46 %", MONO.aqua], ["Agriculture", "26 %", MONO.sun], ["Hygiène", "16 %", MONO.coral], ["Élevage", "12 %", MONO.deep]].map(([n, v, c]) => `<div style="display:flex;align-items:center;gap:14px"><span style="width:22px;height:22px;border-radius:6px;background:${c}"></span><span style="min-width:230px">${n}</span><b class="cond">${v}</b></div>`).join("")}</div>`));
+def("mono-line", 1200, 900, () => monoCard("Niveau des puits au fil de l'année", `<svg style="position:absolute;left:44px;top:130px;width:calc(100% - 88px);height:calc(100% - 210px)" viewBox="0 0 500 250" preserveAspectRatio="none"><rect x="150" y="0" width="200" height="250" fill="#E3F2F1"/><path d="M0 170 C40 160 80 120 120 90 S200 30 250 40 S330 80 380 150 S460 210 500 200" stroke="${MONO.deep}" stroke-width="5" fill="none"/><path d="M0 170 C40 160 80 120 120 90 S200 30 250 40 S330 80 380 150 S460 210 500 200 L500 250 L0 250Z" fill="${MONO.aqua}" opacity=".25"/></svg><div style="position:absolute;left:44px;right:44px;bottom:44px;display:flex;justify-content:space-between;font-size:17px;color:#6b7b80">${["Janv.", "Mars", "Mai", "Juil.", "Sept.", "Nov."].map(m => `<span>${m}</span>`).join("")}</div><div style="position:absolute;left:44%;top:150px;font-size:18px;color:${MONO.deep}">saison des pluies</div>`));
+
+/* ==========================================================================
+   5. NOVAPAY — campagne animée (paiement mobile fictif)
+   ========================================================================== */
+
+const NOVA = { night: "#0F1226", blue: "#4D7CFE", sun: "#FFD23F", white: "#fff" };
+
+const novaLogo = (s, c = "#fff") => `<span style="display:inline-flex;align-items:center;gap:${s * 0.3}px;color:${c};font-size:${s}px;font-weight:700;letter-spacing:-.03em"><svg width="${s * 1.1}" height="${s * 1.1}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="${NOVA.blue}"/><path d="M13 27 L13 13 L27 27 L27 13" stroke="#fff" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>NovaPay</span>`;
+
+const novaPhone = (w, inner) => `<div style="position:relative;width:${w}px;height:${w * 2}px">${phoneShell(inner, { bg: "#22263F" })}</div>`;
+const payScreen = (amount = "2 500", done = true) => `<div class="fill" style="background:${NOVA.white}">${statusBar()}<div style="padding:30px 24px;text-align:center">${novaLogo(26, NOVA.night)}<div style="margin:60px auto 0;width:140px;height:140px;border-radius:50%;background:${done ? "#22C55E" : NOVA.blue};display:grid;place-items:center;color:#fff;font-size:80px">${done ? "✓" : "→"}</div><div style="font-size:22px;color:#667;margin-top:34px">${done ? "Paiement envoyé" : "Envoyer"}</div><div style="font-size:52px;font-weight:700;color:${NOVA.night};margin-top:6px">${amount} F</div><div style="font-size:18px;color:#667;margin-top:8px">à Maman Rose · Marché</div></div></div>`;
+
+const streaks = (c = NOVA.blue) => Array.from({ length: 7 }, (_, i) => `<div style="position:absolute;left:${-10 + i * 6}%;top:${18 + i * 10}%;width:${30 + (i % 3) * 12}%;height:${6 + (i % 2) * 4}px;border-radius:6px;background:${i % 3 ? c : NOVA.sun};opacity:${0.25 + (i % 3) * 0.2};transform:rotate(-12deg)"></div>`).join("");
+
+def("nova-cover", 1600, 1000, () => `
+  <div class="fill" style="background:radial-gradient(70% 90% at 70% 50%,#22307A,${NOVA.night} 70%)"></div>
+  ${streaks()}
+  <div style="position:absolute;left:7%;top:10%">${novaLogo(40)}</div>
+  <div style="position:absolute;left:7%;top:34%;color:#fff;font-size:120px;font-weight:800;line-height:.95;letter-spacing:-.04em">Payez<br>d'un <span style="color:${NOVA.sun}">geste.</span></div>
+  <div style="position:absolute;right:12%;top:9%;transform:rotate(8deg)">${novaPhone(380, payScreen())}</div>`);
+
+def("nova-defi", 1600, 900, () => `
+  <div class="fill" style="background:${NOVA.sun}"></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:42%;background:#E8B92E"></div>
+  ${[[8, 26, NOVA.blue], [30, 22, "#FF6B6B"], [52, 28, "#22C55E"], [74, 22, NOVA.night]].map(([x, w, c]) => `<div style="position:absolute;left:${x}%;bottom:30%;width:${w}%;height:30%;background:${c};clip-path:polygon(0 30%,50% 0,100% 30%,100% 100%,0 100%);opacity:.9"></div><div style="position:absolute;left:${x + 2}%;bottom:30%;width:${w - 4}%;height:8%;background:rgba(255,255,255,.6)"></div>`).join("")}
+  <div style="position:absolute;left:7%;top:10%;color:${NOVA.night};font-size:84px;font-weight:800;letter-spacing:-.04em;line-height:.95">Au marché,<br>en 3 secondes.</div>
+  <div style="position:absolute;right:10%;top:8%;transform:rotate(-6deg)">${novaPhone(300, payScreen("1 500"))}</div>`);
+
+const sketch = (n, caption, scene) => `
+  <div class="fill" style="background:#fff"></div>
+  <div style="position:absolute;inset:40px;border:4px solid #222;border-radius:6px;overflow:hidden">
+    <svg class="fill" viewBox="0 0 160 90" fill="none" stroke="#333" stroke-width=".8" stroke-linecap="round">${scene}</svg>
+  </div>
+  <div class="mono" style="position:absolute;left:60px;top:56px;font-size:34px;font-weight:700;color:${NOVA.blue}">${String(n).padStart(2, "0")}</div>
+  <div style="position:absolute;left:60px;right:60px;bottom:56px;font-size:30px;color:#333;font-style:italic">${caption}</div>`;
+
+const scenes = [
+  ["Le marché s'éveille", `<path d="M10 60 L40 45 L70 60 M60 60 L90 42 L120 60 M110 60 L140 46 L155 55"/><path d="M5 60 H155"/><circle cx="130" cy="18" r="8"/>`],
+  ["Une cliente choisit ses tomates", `<circle cx="55" cy="30" r="7"/><path d="M55 37 V60 M55 45 L70 50 M55 45 L42 52"/><circle cx="95" cy="55" r="4"/><circle cx="103" cy="55" r="4"/><circle cx="99" cy="49" r="4"/><path d="M80 60 H125"/>`],
+  ["Pas de monnaie…", `<circle cx="70" cy="30" r="7"/><path d="M70 37 V62"/><path d="M95 30 q6 -8 12 0 q6 8 12 0"/><text x="96" y="52" font-size="12" fill="#333" stroke="none">?</text>`],
+  ["Elle sort son téléphone", `<rect x="68" y="20" width="24" height="44" rx="4"/><path d="M76 24 H84"/><path d="M50 70 Q80 55 110 70"/>`],
+  ["Scan du code de la vendeuse", `<rect x="40" y="25" width="24" height="40" rx="4"/><rect x="100" y="28" width="26" height="26"/><path d="M104 32h6v6h-6zM116 32h6v6h-6zM104 44h6v6h-6z"/><path d="M66 45 L98 41" stroke-dasharray="3 3"/>`],
+  ["Paiement validé ✓", `<circle cx="80" cy="42" r="20"/><path d="M70 42 L77 49 L91 35" stroke-width="2"/>`],
+  ["Les deux sourient", `<circle cx="55" cy="35" r="9"/><path d="M50 37 q5 5 10 0"/><circle cx="105" cy="35" r="9"/><path d="M100 37 q5 5 10 0"/><path d="M55 44 V65 M105 44 V65"/>`],
+  ["Logo NovaPay · « Payez d'un geste. »", `<circle cx="80" cy="38" r="14"/><path d="M73 45 L73 31 L87 45 L87 31" stroke-width="1.5"/><path d="M50 66 H110"/>`],
+];
+scenes.forEach(([c, s], i) => def(`nova-sb-${i + 1}`, 1600, 900, () => sketch(i + 1, c, s)));
+
+def("nova-key", 1600, 900, () => `
+  <div class="fill" style="background:${NOVA.blue}"></div>
+  ${streaks(NOVA.night)}
+  <div style="position:absolute;left:7%;top:50%;transform:translateY(-50%);color:#fff;font-size:100px;font-weight:800;letter-spacing:-.04em;line-height:.95">Envoyez.<br>Recevez.<br><span style="color:${NOVA.sun}">Souriez.</span></div>
+  <div style="position:absolute;right:10%;top:7%;transform:rotate(6deg)">${novaPhone(330, payScreen("5 000"))}</div>`);
+
+const story = (bg, step, text, sub, phone) => `
+  <div class="fill" style="background:${bg}"></div>
+  ${streaks(bg === NOVA.sun ? NOVA.night : NOVA.sun)}
+  <div style="position:absolute;left:56px;top:70px">${novaLogo(34, bg === NOVA.sun ? NOVA.night : "#fff")}</div>
+  <div style="position:absolute;left:56px;right:56px;top:200px;color:${bg === NOVA.sun ? NOVA.night : "#fff"}"><div class="mono" style="font-size:30px;opacity:.7">${step}</div><div style="font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:16px">${text}</div><div style="font-size:30px;margin-top:20px;opacity:.85">${sub}</div></div>
+  <div style="position:absolute;left:50%;bottom:-120px;transform:translateX(-50%)">${novaPhone(360, phone)}</div>`;
+
+def("nova-story-1", 720, 1280, () => story(NOVA.night, "01 / 03", "Ouvrez NovaPay.", "Pas besoin de monnaie.", payScreen("2 500", false)));
+def("nova-story-2", 720, 1280, () => story(NOVA.blue, "02 / 03", "Scannez.", "Le code de la vendeuse suffit.", `<div class="fill" style="background:#111;display:grid;place-items:center"><div style="width:62%;aspect-ratio:1;border:6px solid ${NOVA.sun};border-radius:20px;background:repeating-linear-gradient(90deg,#fff 0 14px,#111 14px 28px)"></div></div>`));
+def("nova-story-3", 720, 1280, () => story(NOVA.sun, "03 / 03", "C'est payé.", "En 3 secondes, sans frais.", payScreen()));
+
+/* ---------- Rendu ---------- */
+const id = new URLSearchParams(location.search).get("id");
+if (id === "list") {
+  document.body.style.overflow = "auto";
+  document.getElementById("root").outerHTML = `<pre style="font-size:13px">${Object.entries(M).map(([k, v]) => `${k} ${v.w} ${v.h}`).join("\n")}</pre>`;
+} else if (M[id]) {
+  document.getElementById("root").innerHTML = M[id].fn();
+} else {
+  document.body.innerHTML = `<p style="padding:40px;font-size:24px">Identifiant inconnu : ${id}</p>`;
+}
+</script>
+</body>
+</html>

@@ -46,6 +46,7 @@ export default function StudyEditorial({ project, related, locale, dict }: Study
             <span aria-hidden="true">/</span>
             <span>{project.category[locale]}</span>
             {project.status === "upcoming" ? <span className={styles.badge}>{dict.project.upcomingNote}</span> : null}
+            {project.status === "demo" ? <span className={styles.badge}>{dict.project.demoNote}</span> : null}
           </Reveal>
 
           <Reveal as="h1" className={styles.title} delay={60}>

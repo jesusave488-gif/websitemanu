@@ -22,7 +22,7 @@ export default function Work({ projects, locale, dict }: WorkProps) {
         </span>
         <span className={styles.years}>{dict.years}</span>
       </Reveal>
-      <WorkGrid projects={projects} locale={locale} upcomingLabel={dict.upcoming} />
+      <WorkGrid projects={projects} locale={locale} upcomingLabel={dict.upcoming} demoLabel={dict.demo} />
     </section>
   );
 }

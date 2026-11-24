@@ -31,6 +31,7 @@ const en: Dictionary = {
     title: "Selected work",
     years: "2019–2026",
     upcoming: "Coming soon",
+    demo: "Sample project",
   },
   about: {
     title: "About",
@@ -145,6 +146,7 @@ const en: Dictionary = {
     seeAlso: "See also",
     mediaPlaceholder: "Visual coming soon",
     upcomingNote: "Case study in progress",
+    demoNote: "Fictional project — sample case study",
     client: "Client",
     service: "Service",
     year: "Year",

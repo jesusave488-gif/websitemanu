@@ -33,6 +33,7 @@ const fr = {
     title: "Projets sélectionnés",
     years: "2019–2026",
     upcoming: "Projet à venir",
+    demo: "Exemple fictif",
   },
   about: {
     title: "À propos",
@@ -152,6 +153,7 @@ const fr = {
     seeAlso: "À voir aussi",
     mediaPlaceholder: "Visuel à venir",
     upcomingNote: "Étude de cas en préparation",
+    demoNote: "Projet fictif — exemple de présentation",
     client: "Client",
     service: "Service",
     year: "Année",

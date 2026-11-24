@@ -8,6 +8,7 @@ type WorkGridProps = {
   projects: Project[];
   locale: Locale;
   upcomingLabel: string;
+  demoLabel: string;
 };
 
 const L = "775 / 550"; // paysage
@@ -35,7 +36,7 @@ function layoutFor(count: number): [string[], string[]] {
   }
 }
 
-export default function WorkGrid({ projects, locale, upcomingLabel }: WorkGridProps) {
+export default function WorkGrid({ projects, locale, upcomingLabel, demoLabel }: WorkGridProps) {
   const [leftRatios, rightRatios] = layoutFor(projects.length);
   const columns = [
     { items: projects.slice(0, leftRatios.length), ratios: leftRatios, offset: 0 },
@@ -52,6 +53,7 @@ export default function WorkGrid({ projects, locale, upcomingLabel }: WorkGridPr
                 project={project}
                 locale={locale}
                 upcomingLabel={upcomingLabel}
+                demoLabel={demoLabel}
                 ratio={column.ratios[i % column.ratios.length] ?? L}
                 priority={column.offset + i < 2}
               />

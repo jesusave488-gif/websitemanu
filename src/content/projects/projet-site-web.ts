@@ -1,249 +1,125 @@
 import type { Project } from "./types";
+import { images } from "./media";
 
-// Emplacement "Projet à venir" — trame d'étude de cas « Site web » à remplir.
-// Visible en local (npm run dev) ; masqué en ligne tant que status vaut "upcoming".
+// EXEMPLE FICTIF — « Lagune Lodge » n'existe pas. Ce projet sert à voir le rendu d'une étude
+// de cas complète. Visible en local seulement (status "demo") ; remplacez textes et images
+// par un vrai projet, puis passez status à "published".
 //
-// Images et vidéos : déposez-les dans public/projects/projet-site-web/ puis indiquez
-// leur chemin dans "src" (ex. "/projects/projet-site-web/01.jpg"). Un "src" vide affiche un emplacement.
-// Ajoutez, supprimez ou réordonnez librement les sections et les blocs.
+// Images : public/projects/projet-site-web/ — déclarées avec img("fichier", "format", "alt FR", "alt EN").
+const img = images("projet-site-web");
+
 const projetSiteWeb: Project = {
   slug: "projet-site-web",
-  status: "upcoming",
+  status: "demo",
   service: "web",
-  year: "2026",
-  title: { fr: "Site web", en: "Website" },
-  subtitle: { fr: "Une accroche courte sur le projet", en: "A short tagline for the project" },
+  year: "2025",
+  title: { fr: "Lagune Lodge", en: "Lagune Lodge" },
+  subtitle: { fr: "Un écolodge qui se réserve en trois gestes", en: "An eco-lodge you can book in three taps" },
   category: { fr: "Site web", en: "Website" },
-  client: "[Client]",
-  // cover: { src: "/projects/projet-site-web/cover.jpg", alt: { fr: "…", en: "…" } },
+  client: "Lagune Lodge, Grand-Popo",
+  cover: img("cover", "16 / 10", "Site de Lagune Lodge sur ordinateur et téléphone", "Lagune Lodge website on desktop and phone"),
   description: {
-    fr: "Une phrase qui résume le projet : pour qui, quel besoin, quel résultat.",
-    en: "One sentence that sums up the project: for whom, what need, what outcome.",
+    fr: "Refonte du site d'un écolodge de Grand-Popo : une vitrine qui donne envie et une réservation en ligne avec paiement Mobile Money.",
+    en: "Redesign of a Grand-Popo eco-lodge website: a showcase that makes people want to come, and online booking with Mobile Money payment.",
   },
-  // Lien affiché sous le titre — renseignez "href" (une adresse https:// ou un fichier dans public/).
-  links: [
-    {
-      label: {
-        fr: "Voir le site",
-        en: "Visit the site"
-      },
-      href: "",
-      kind: "external"
-    }
-  ],
+  links: [{ label: { fr: "Voir le site", en: "Visit the site" }, href: "", kind: "external" }],
   sections: [
     {
       id: "defi",
-      nav: {
-        fr: "Défi",
-        en: "Challenge"
-      },
+      nav: { fr: "Défi", en: "Challenge" },
       blocks: [
-        {
-          type: "media",
-          items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 9"
-            }
-          ]
-        },
+        { type: "media", items: [img("defi", "16 / 9", "L'ancien site de 2019 à côté du nouveau", "The 2019 website next to the new one")] },
         {
           type: "text",
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          title: { fr: "Un site de 2019 qui faisait fuir les réservations", en: "A 2019 website that scared bookings away" },
           body: {
             fr: [
-              "Le point de départ : la structure, son message, son public et ce qui devait changer.",
-              "Ce qui rendait le projet difficile ou intéressant."
+              "Le lodge recevait ses demandes par e-mail et répondait sous 72 heures. Sur téléphone, le site était illisible, et les tarifs dataient de 2019.",
+              "L'objectif : montrer le lieu tel qu'il est, et permettre de réserver et payer en ligne sans passer par une plateforme qui prend 18 % de commission.",
             ],
             en: [
-              "The starting point: the organisation, its message, its audience and what needed to change.",
-              "What made the project difficult or interesting."
-            ]
-          }
-        }
-      ]
+              "The lodge took requests by email and replied within 72 hours. On phones the site was unreadable, and prices dated back to 2019.",
+              "The goal: show the place as it really is, and let guests book and pay online without a platform taking an 18% commission.",
+            ],
+          },
+        },
+      ],
     },
     {
       id: "design",
-      nav: {
-        fr: "Design",
-        en: "Design"
-      },
+      nav: { fr: "Design", en: "Design" },
       blocks: [
         {
           type: "text",
-          label: {
-            fr: "Design",
-            en: "Design"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Design", en: "Design" },
+          title: { fr: "Donner envie, puis rassurer", en: "Make people want it, then reassure them" },
           body: {
             fr: [
-              "Arborescence, parcours, grille et composants : comment le site guide le visiteur."
+              "La page d'accueil s'ouvre sur la lagune au coucher du soleil et une barre de réservation visible tout de suite. Chaque bungalow a sa fiche avec prix, capacité et photos.",
+              "Le parcours de réservation tient en trois étapes : dates, bungalow, paiement.",
             ],
             en: [
-              "Structure, user journeys, grid and components: how the site guides visitors."
-            ]
-          }
+              "The home page opens on the lagoon at sunset, with a booking bar visible right away. Each bungalow has its own page with price, capacity and photos.",
+              "Booking takes three steps: dates, bungalow, payment.",
+            ],
+          },
         },
+        { type: "media", items: [img("home", "16 / 10", "Page d'accueil de Lagune Lodge", "Lagune Lodge home page")] },
         {
           type: "media",
           items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 10"
-            }
-          ]
+            img("rooms", "16 / 10", "Page des bungalows avec filtres", "Bungalows page with filters"),
+            img("booking", "16 / 10", "Page de réservation avec calendrier et récapitulatif", "Booking page with calendar and summary"),
+          ],
         },
-        {
-          type: "media",
-          items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 10"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 10"
-            }
-          ]
-        }
-      ]
+      ],
     },
     {
       id: "mobile",
-      nav: {
-        fr: "Mobile",
-        en: "Mobile"
-      },
+      nav: { fr: "Mobile", en: "Mobile" },
       blocks: [
         {
           type: "text",
-          label: {
-            fr: "Mobile",
-            en: "Mobile"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Mobile", en: "Mobile" },
+          title: { fr: "Pensé d'abord pour le téléphone", en: "Designed for phones first" },
           body: {
-            fr: [
-              "Les choix faits pour le téléphone, là où se trouve la majorité des visiteurs."
-            ],
-            en: [
-              "The choices made for phones, where most visitors are."
-            ]
-          }
+            fr: ["Sept visiteurs sur dix arrivent depuis un téléphone. Les boutons sont larges, les formulaires courts, et le paiement Mobile Money est proposé en premier."],
+            en: ["Seven visitors out of ten come from a phone. Buttons are large, forms are short, and Mobile Money is offered first at checkout."],
+          },
         },
         {
           type: "media",
           items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "9 / 19"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "9 / 19"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "9 / 19"
-            }
-          ]
-        }
-      ]
+            img("mobile-1", "9 / 19", "Accueil sur téléphone", "Home screen on a phone"),
+            img("mobile-2", "9 / 19", "Liste des bungalows sur téléphone", "Bungalow list on a phone"),
+            img("mobile-3", "9 / 19", "Paiement Mobile Money sur téléphone", "Mobile Money payment on a phone"),
+          ],
+        },
+      ],
     },
     {
       id: "resultat",
-      nav: {
-        fr: "Résultat",
-        en: "Outcome"
-      },
+      nav: { fr: "Résultat", en: "Outcome" },
       blocks: [
         {
           type: "figures",
           items: [
-            {
-              value: "[00]",
-              label: {
-                fr: "pages conçues",
-                en: "pages designed"
-              }
-            },
-            {
-              value: "[00 %]",
-              label: {
-                fr: "de visiteurs sur mobile",
-                en: "mobile visitors"
-              }
-            },
-            {
-              value: "[0 sem.]",
-              label: {
-                fr: "de la maquette à la mise en ligne",
-                en: "from mockup to launch"
-              }
-            }
-          ]
+            { value: "12", label: { fr: "pages conçues", en: "pages designed" } },
+            { value: "+64 %", label: { fr: "de réservations directes", en: "direct bookings" } },
+            { value: "6 sem.", label: { fr: "de la maquette à la mise en ligne", en: "from mockup to launch" } },
+          ],
         },
         {
           type: "text",
-          label: {
-            fr: "Résultat",
-            en: "Outcome"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Résultat", en: "Outcome" },
+          title: { fr: "Des réservations directes, sans intermédiaire", en: "Direct bookings, with no middleman" },
           body: {
-            fr: [
-              "Ce qui a été livré, comment il est utilisé, et l'effet obtenu."
-            ],
-            en: [
-              "What was delivered, how it is used, and the effect it had."
-            ]
-          }
-        }
-      ]
-    }
+            fr: ["Trois mois après la mise en ligne, la majorité des séjours sont réservés et payés directement sur le site. L'équipe met à jour elle-même les tarifs et les disponibilités."],
+            en: ["Three months after launch, most stays are booked and paid directly on the site. The team updates prices and availability on its own."],
+          },
+        },
+      ],
+    },
   ],
 };
 

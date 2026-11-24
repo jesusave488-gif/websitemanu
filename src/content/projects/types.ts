@@ -54,8 +54,13 @@ export type StudySection = {
 export type Project = {
   /** Identifiant dans l'URL : /fr/projets/<slug> */
   slug: string;
-  /** "upcoming" affiche "Projet à venir" sur la carte. Passez à "published" une fois rempli. */
-  status: "published" | "upcoming";
+  /**
+   * - "published" : visible en ligne.
+   * - "upcoming"  : emplacement « Projet à venir », visible en local seulement.
+   * - "demo"      : projet fictif d'exemple (titre, visuels, textes), visible en local seulement,
+   *                 avec la mention « Exemple fictif ». À remplacer par un vrai projet avant publication.
+   */
+  status: "published" | "upcoming" | "demo";
   service: ServiceId;
   year: string;
   /** Nom du projet (souvent le client). */

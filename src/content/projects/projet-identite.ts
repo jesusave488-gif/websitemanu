@@ -1,301 +1,147 @@
 import type { Project } from "./types";
+import { images } from "./media";
 
-// Emplacement "Projet à venir" — trame d'étude de cas « Identité de marque » à remplir.
-// Visible en local (npm run dev) ; masqué en ligne tant que status vaut "upcoming".
+// EXEMPLE FICTIF — « Ayaba » n'existe pas. Ce projet sert à voir le rendu d'une étude
+// de cas complète. Visible en local seulement (status "demo") ; remplacez textes et images
+// par un vrai projet, puis passez status à "published".
 //
-// Images et vidéos : déposez-les dans public/projects/projet-identite/ puis indiquez
-// leur chemin dans "src" (ex. "/projects/projet-identite/01.jpg"). Un "src" vide affiche un emplacement.
-// Ajoutez, supprimez ou réordonnez librement les sections et les blocs.
+// Images : public/projects/projet-identite/ — déclarées avec img("fichier", "format", "alt FR", "alt EN").
+const img = images("projet-identite");
+
 const projetIdentite: Project = {
   slug: "projet-identite",
-  status: "upcoming",
+  status: "demo",
   service: "brand",
-  year: "2026",
-  title: { fr: "Identité de marque", en: "Brand identity" },
-  subtitle: { fr: "Une accroche courte sur le projet", en: "A short tagline for the project" },
+  year: "2025",
+  title: { fr: "Ayaba", en: "Ayaba" },
+  subtitle: { fr: "Une marque de café qui sent la torréfaction", en: "A coffee brand that smells of the roaster" },
   category: { fr: "Identité de marque", en: "Brand identity" },
-  client: "[Client]",
-  // cover: { src: "/projects/projet-identite/cover.jpg", alt: { fr: "…", en: "…" } },
+  client: "Ayaba, torréfaction à Cotonou",
+  cover: img("cover", "16 / 10", "Logo Ayaba et sachet de café", "Ayaba logo and coffee bag"),
   description: {
-    fr: "Une phrase qui résume le projet : pour qui, quel besoin, quel résultat.",
-    en: "One sentence that sums up the project: for whom, what need, what outcome.",
+    fr: "Identité complète d'une jeune torréfaction de Cotonou : logo, couleurs, typographies, emballages et boutique.",
+    en: "Full identity for a young Cotonou coffee roaster: logo, colours, typefaces, packaging and shop.",
   },
   sections: [
     {
       id: "defi",
-      nav: {
-        fr: "Défi",
-        en: "Challenge"
-      },
+      nav: { fr: "Défi", en: "Challenge" },
       blocks: [
-        {
-          type: "media",
-          items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 9"
-            }
-          ]
-        },
+        { type: "media", items: [img("defi", "16 / 9", "Planche d'inspiration : couleurs, matières et mots-clés", "Moodboard: colours, textures and keywords")] },
         {
           type: "text",
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          title: { fr: "Faire exister un café béninois face aux marques importées", en: "Making a Beninese coffee stand out next to imported brands" },
           body: {
             fr: [
-              "Le point de départ : la structure, son message, son public et ce qui devait changer.",
-              "Ce qui rendait le projet difficile ou intéressant."
+              "Ayaba torréfie chaque semaine des grains du Kouffo, mais ses sachets ressemblaient à ceux de tout le monde et se perdaient en rayon.",
+              "Il fallait une marque chaleureuse, fière de son origine, et assez simple pour être imprimée localement à petit prix.",
             ],
             en: [
-              "The starting point: the organisation, its message, its audience and what needed to change.",
-              "What made the project difficult or interesting."
-            ]
-          }
-        }
-      ]
+              "Ayaba roasts Kouffo beans every week, but its bags looked like everyone else's and got lost on the shelf.",
+              "The brand needed to feel warm, proud of its origin, and simple enough to be printed locally at low cost.",
+            ],
+          },
+        },
+      ],
     },
     {
       id: "logo",
-      nav: {
-        fr: "Logo",
-        en: "Logo"
-      },
+      nav: { fr: "Logo", en: "Logo" },
       blocks: [
         {
           type: "text",
-          label: {
-            fr: "Logo",
-            en: "Logo"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Logo", en: "Logo" },
+          title: { fr: "Un grain de café dans le soleil du matin", en: "A coffee bean in the morning sun" },
           body: {
-            fr: [
-              "L'idée derrière le logo, sa construction et ses déclinaisons."
-            ],
-            en: [
-              "The idea behind the logo, how it is built and its variations."
-            ]
-          }
+            fr: ["Le symbole réunit le grain et le soleil levant ; le nom est écrit dans une italique généreuse qui rappelle l'écriture à la main."],
+            en: ["The mark combines the bean and the rising sun; the name is set in a generous italic that recalls handwriting."],
+          },
         },
         {
           type: "media",
           items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1",
-              background: "#F3F2EC"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1",
-              background: "#22323C"
-            }
-          ]
-        }
-      ]
+            img("logo-grid", "1 / 1", "Construction du symbole sur une grille", "Mark construction on a grid"),
+            img("logo-variants", "1 / 1", "Déclinaisons du logo sur les quatre couleurs", "Logo versions on the four colours"),
+          ],
+        },
+      ],
     },
     {
       id: "systeme",
-      nav: {
-        fr: "Système graphique",
-        en: "Graphic system"
-      },
+      nav: { fr: "Système graphique", en: "Graphic system" },
       blocks: [
         {
           type: "text",
-          label: {
-            fr: "Système graphique",
-            en: "Graphic system"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Système graphique", en: "Graphic system" },
+          title: { fr: "Quatre couleurs tirées de la torréfaction", en: "Four colours taken from roasting" },
           body: {
-            fr: [
-              "Couleurs, typographies et règles qui rendent l'identité reconnaissable partout."
-            ],
-            en: [
-              "Colours, typefaces and rules that make the identity recognisable everywhere."
-            ]
-          }
+            fr: ["Du grain vert doré au café noir : chaque couleur correspond à un degré de torréfaction et sert à distinguer les gammes."],
+            en: ["From golden green bean to dark coffee: each colour matches a roast level and helps tell the ranges apart."],
+          },
         },
         {
           type: "colors",
           colors: [
-            {
-              name: "Couleur principale",
-              hex: "#22323C"
-            },
-            {
-              name: "Couleur secondaire",
-              hex: "#354B60"
-            },
-            {
-              name: "Accent",
-              hex: "#B8D0DE"
-            },
-            {
-              name: "Fond",
-              hex: "#F3F2EC"
-            }
-          ]
+            { name: "Café", hex: "#3B2418" },
+            { name: "Terre cuite", hex: "#C65A32" },
+            { name: "Or", hex: "#D9A441" },
+            { name: "Crème", hex: "#F4EBDD" },
+          ],
         },
-        {
-          type: "media",
-          items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 9"
-            }
-          ]
-        }
-      ]
+        { type: "media", items: [img("type", "16 / 9", "Typographies : titres en italique, textes en linéale", "Typefaces: italic headings, sans-serif text")] },
+      ],
     },
     {
       id: "applications",
-      nav: {
-        fr: "Applications",
-        en: "Applications"
-      },
+      nav: { fr: "Applications", en: "Applications" },
       blocks: [
         {
           type: "text",
-          label: {
-            fr: "Applications",
-            en: "Applications"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Applications", en: "Applications" },
+          title: { fr: "Du sachet à la devanture", en: "From the bag to the shopfront" },
           body: {
-            fr: [
-              "L'identité en situation : papeterie, signalétique, réseaux sociaux, supports imprimés."
-            ],
-            en: [
-              "The identity in use: stationery, signage, social media, print."
-            ]
-          }
+            fr: ["Sachets, gobelets, cartes de visite, enseigne, tote bag et publications pour les réseaux sociaux."],
+            en: ["Bags, cups, business cards, shop sign, tote bag and social media posts."],
+          },
         },
         {
           type: "grid",
           columns: 3,
           items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            },
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "1 / 1"
-            }
-          ]
+            img("app-bag", "1 / 1", "Sachet de café 250 g", "250 g coffee bag"),
+            img("app-cup", "1 / 1", "Gobelet à emporter", "Takeaway cup"),
+            img("app-cards", "1 / 1", "Cartes de visite", "Business cards"),
+            img("app-shop", "1 / 1", "Devanture de la boutique", "Shopfront"),
+            img("app-tote", "1 / 1", "Tote bag", "Tote bag"),
+            img("app-post", "1 / 1", "Publication Instagram", "Instagram post"),
+          ],
         },
-        {
-          type: "media",
-          items: [
-            {
-              src: "",
-              alt: {
-                fr: "",
-                en: ""
-              },
-              ratio: "16 / 9"
-            }
-          ]
-        }
-      ]
+        { type: "media", items: [img("range", "16 / 9", "Les trois gammes de café côte à côte", "The three coffee ranges side by side")] },
+      ],
     },
     {
       id: "resultat",
-      nav: {
-        fr: "Résultat",
-        en: "Outcome"
-      },
+      nav: { fr: "Résultat", en: "Outcome" },
       blocks: [
         {
+          type: "figures",
+          items: [
+            { value: "3", label: { fr: "gammes de café", en: "coffee ranges" } },
+            { value: "24", label: { fr: "supports livrés", en: "items delivered" } },
+            { value: "40", label: { fr: "pages de charte graphique", en: "pages of brand guidelines" } },
+          ],
+        },
+        {
           type: "text",
-          label: {
-            fr: "Résultat",
-            en: "Outcome"
-          },
-          title: {
-            fr: "Titre de la section",
-            en: "Section title"
-          },
+          label: { fr: "Résultat", en: "Outcome" },
+          title: { fr: "Une marque qu'on reconnaît de loin", en: "A brand people recognise from afar" },
           body: {
-            fr: [
-              "Ce qui a été livré, comment il est utilisé, et l'effet obtenu."
-            ],
-            en: [
-              "What was delivered, how it is used, and the effect it had."
-            ]
-          }
-        }
-      ]
-    }
+            fr: ["Les sachets sont désormais vendus dans des épiceries fines de Cotonou, et la charte permet à l'équipe de créer seule ses publications."],
+            en: ["The bags are now sold in Cotonou delicatessens, and the guidelines let the team create its own posts."],
+          },
+        },
+      ],
+    },
   ],
 };
 

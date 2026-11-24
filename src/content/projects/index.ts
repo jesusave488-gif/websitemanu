@@ -22,7 +22,7 @@ const allProjects: Project[] = [
 
 /**
  * Projets visibles : seulement les projets "published" en ligne ;
- * tous (y compris "upcoming") pendant le développement local.
+ * tous (y compris "upcoming" et les exemples "demo") pendant le développement local.
  */
 export const projects: Project[] = allProjects.filter((p) => p.status === "published" || showDrafts);
 
