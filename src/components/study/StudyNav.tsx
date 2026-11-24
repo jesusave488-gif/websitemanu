@@ -11,7 +11,7 @@ type StudyNavProps = {
 /**
  * Sommaire numéroté de l'étude de cas.
  * - La section visible à l'écran est mise en avant.
- * - Une ligne verte se remplit à mesure de la lecture, avec une fine barre en haut de page.
+ * - Une ligne violette se remplit à mesure de la lecture, avec une fine barre en haut de page.
  */
 export default function StudyNav({ label, items }: StudyNavProps) {
   const [active, setActive] = useState(items[0]?.id);

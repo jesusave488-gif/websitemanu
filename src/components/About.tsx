@@ -13,7 +13,7 @@ type AboutProps = {
 
 /**
  * "À propos" en deux colonnes, puis le portrait dans le grand cadre pleine largeur,
- * sur un décor de la brochure (disque vert, anneaux, ampoule).
+ * sur un décor de la brochure (disque violet, anneaux, ampoule).
  */
 export default function About({ dict, portrait }: AboutProps) {
   return (

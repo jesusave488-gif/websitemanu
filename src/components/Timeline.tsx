@@ -20,7 +20,7 @@ type TimelineProps = {
 
 /**
  * Frise verticale : une ligne fine relie les étapes. Au défilement, la ligne se remplit
- * en vert et chaque point s'allume quand il passe le repère de lecture (60 % de l'écran).
+ * en violet et chaque point s'allume quand il passe le repère de lecture (60 % de l'écran).
  * Sans JavaScript ou en mouvement réduit, tout est affiché allumé.
  */
 export default function Timeline({ items, currentLabel }: TimelineProps) {

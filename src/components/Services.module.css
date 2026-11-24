@@ -4,7 +4,7 @@
 
 .wrap {
   --card: color-mix(in srgb, var(--paper) 55%, #ffffff);
-  --icon-bg: color-mix(in srgb, var(--lime) 45%, var(--card));
+  --icon-bg: color-mix(in srgb, var(--lavender) 45%, var(--card));
   --icon-fg: var(--accent);
 
   padding-top: var(--section-space);
@@ -54,8 +54,8 @@
   margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
   padding: 0.75rem 1.125rem;
   border-radius: 999px;
-  background: var(--lime);
-  color: var(--slate);
+  background: var(--violet);
+  color: #ffffff;
   font-size: var(--fs-small);
   font-weight: 600;
   transition:
@@ -64,7 +64,7 @@
 }
 
 .cta:hover {
-  background: color-mix(in srgb, var(--lime) 85%, #ffffff);
+  background: var(--slate);
 }
 
 .cta:active {
@@ -190,7 +190,7 @@
 /* ---------- Carte mise en avant ---------- */
 
 .card[data-featured] {
-  --icon-bg: var(--lime);
+  --icon-bg: var(--lavender);
   --icon-fg: var(--slate);
 
   border-color: transparent;
@@ -200,7 +200,7 @@
 
 .card[data-featured] .number,
 .card[data-featured] .more {
-  color: var(--lime);
+  color: var(--violet-light);
 }
 
 .card[data-featured] .description {

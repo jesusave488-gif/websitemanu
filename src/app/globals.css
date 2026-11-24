@@ -8,12 +8,13 @@
   --slate: #22323c;
   --slate-deep: #1a2730;
   --paper: #f3f2ec;
-  --forest: #2f7d55;
-  --lime: #b4e08a;
+  --violet: #6c4dff;
+  --lavender: #e1daff;
+  --violet-light: #a996ff; /* violet clair, pour les accents sur fond sombre */
 
   /* Thème clair — contrastes vérifiés (WCAG AA) sur le blanc cassé :
      --muted 4,6:1 pour le texte courant ; --muted-display 3,2:1 réservé aux très
-     grands textes ; --accent 5,3:1 (vert forêt légèrement foncé pour les petits textes). */
+     grands textes ; --accent 5,5:1 (violet légèrement foncé pour les petits textes). */
   --bg: #ffffff;
   /* Bandes de section (distinctions) */
   --band: var(--paper);
@@ -23,7 +24,7 @@
   --line: color-mix(in srgb, var(--slate) 14%, transparent);
   --surface: color-mix(in srgb, var(--slate) 6%, var(--paper));
   --surface-strong: color-mix(in srgb, var(--slate) 11%, var(--paper));
-  --accent: #2a704c;
+  --accent: #5b3cf0;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -129,7 +130,7 @@ button {
 }
 
 ::selection {
-  background: var(--lime);
+  background: var(--lavender);
   color: var(--slate);
 }
 

@@ -30,11 +30,11 @@
   isolation: isolate;
   aspect-ratio: 1902 / 900;
   background:
-    radial-gradient(60% 80% at 50% 100%, rgb(180 224 138 / 0.28), transparent 70%),
+    radial-gradient(60% 80% at 50% 100%, rgb(201 189 255 / 0.28), transparent 70%),
     var(--paper);
 }
 
-/* Grand disque vert forêt derrière la personne, comme sur la brochure. */
+/* Grand disque violet derrière la personne, comme sur la brochure. */
 .disc {
   position: absolute;
   left: 50%;
@@ -43,7 +43,7 @@
   width: 58%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: linear-gradient(200deg, #3f9a68, var(--forest) 70%);
+  background: linear-gradient(200deg, #9580ff, var(--violet) 70%);
   translate: -50% 0;
 }
 
@@ -97,7 +97,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--slate);
-  color: var(--lime);
+  color: var(--lavender);
 }
 
 .bulbIcon {
@@ -127,12 +127,12 @@
 @keyframes glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(180 224 138 / 0);
+    box-shadow: 0 0 0 0 rgb(201 189 255 / 0);
     translate: 0 0;
   }
 
   50% {
-    box-shadow: 0 0 0 10px rgb(180 224 138 / 0.35);
+    box-shadow: 0 0 0 10px rgb(201 189 255 / 0.35);
     translate: 0 -5px;
   }
 }

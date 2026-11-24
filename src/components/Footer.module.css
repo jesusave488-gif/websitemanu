@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pied de page : dégradé ardoise → vert forêt (pas de noir pur),
+   Pied de page : dégradé ardoise → violet (pas de noir pur),
    avec des halos animés et les formes de la brochure.
    Identique en mode clair et en mode sombre.
    ========================================================================== */
@@ -12,7 +12,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(165deg, #1d2e37 0%, #14232b 38%, #102019 78%, #12301f 100%);
+  background: linear-gradient(165deg, #1d2e37 0%, #14232b 38%, #1a1838 78%, #2a1d5c 100%);
   color: var(--f-fg);
 }
 
@@ -36,23 +36,23 @@
   border-radius: 50%;
 }
 
-/* Halo vert clair qui dérive derrière l'appel à contacter. */
+/* Halo lavande qui dérive derrière l'appel à contacter. */
 .glow {
   top: -25%;
   right: -12%;
   width: min(62vw, 56rem);
-  background: radial-gradient(circle, rgb(180 224 138 / 0.17), transparent 62%);
+  background: radial-gradient(circle, rgb(201 189 255 / 0.17), transparent 62%);
 }
 
-/* Halo vert forêt, en bas à gauche. */
+/* Halo violet, en bas à gauche. */
 .glowAlt {
   bottom: -35%;
   left: -18%;
   width: min(70vw, 60rem);
-  background: radial-gradient(circle, rgb(47 125 85 / 0.32), transparent 62%);
+  background: radial-gradient(circle, rgb(108 77 255 / 0.32), transparent 62%);
 }
 
-/* Cercle vert plein, en haut à droite, comme sur la brochure. */
+/* Cercle violet plein, en haut à droite, comme sur la brochure. */
 .arc {
   position: absolute;
   top: calc(-1 * min(9vw, 9rem));
@@ -60,7 +60,7 @@
   width: min(18vw, 17rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: linear-gradient(200deg, #3f9a68, var(--forest) 70%);
+  background: linear-gradient(200deg, #9580ff, var(--violet) 70%);
   opacity: 0.85;
 }
 
@@ -99,11 +99,11 @@
   text-wrap: balance;
 }
 
-/* « Écrivez-moi. » en vert clair, avec un trait qui se dessine dessous. */
+/* « Écrivez-moi. » en lavande, avec un trait qui se dessine dessous. */
 .accent {
   position: relative;
   display: inline-block;
-  color: var(--lime);
+  color: var(--violet-light);
 }
 
 .accent::after {
@@ -114,7 +114,7 @@
   bottom: -0.08em;
   height: 0.08em;
   border-radius: 999px;
-  background: var(--lime);
+  background: var(--violet-light);
   transform-origin: left;
 }
 
@@ -163,13 +163,14 @@
 }
 
 .primary {
-  background: var(--lime);
-  color: var(--slate);
+  background: var(--violet);
+  color: #ffffff;
 }
 
 .primary:hover {
   background: #ffffff;
-  box-shadow: 0 12px 30px -12px rgb(180 224 138 / 0.6);
+  color: var(--slate);
+  box-shadow: 0 12px 30px -12px rgb(108 77 255 / 0.7);
 }
 
 .secondary {
@@ -179,8 +180,8 @@
 }
 
 .secondary:hover {
-  border-color: var(--lime);
-  color: var(--lime);
+  border-color: var(--violet-light);
+  color: var(--violet-light);
 }
 
 .icon {
@@ -210,7 +211,7 @@
 
 .brandName .logo {
   height: 1.5rem;
-  color: var(--lime);
+  color: var(--violet-light);
 }
 
 .tagline {
@@ -246,17 +247,17 @@
   color: var(--f-muted);
 }
 
-/* Lien : un trait vert clair glisse sous le texte au survol. */
+/* Lien : un trait lavande glisse sous le texte au survol. */
 .link {
   padding-bottom: 2px;
-  background: linear-gradient(var(--lime), var(--lime)) left bottom / 0 1px no-repeat;
+  background: linear-gradient(var(--violet-light), var(--violet-light)) left bottom / 0 1px no-repeat;
   transition:
     color 0.25s ease,
     background-size 0.35s var(--ease);
 }
 
 .link:hover {
-  color: var(--lime);
+  color: var(--violet-light);
   background-size: 100% 1px;
 }
 
@@ -281,7 +282,7 @@
 }
 
 .top:hover {
-  color: var(--lime);
+  color: var(--violet-light);
 }
 
 .topArrow {
@@ -298,7 +299,7 @@
 
 .top:hover .topArrow {
   transform: translateY(-3px);
-  border-color: var(--lime);
+  border-color: var(--violet-light);
 }
 
 /* Grand nom en filigrane, coupé par le bas de la page. */

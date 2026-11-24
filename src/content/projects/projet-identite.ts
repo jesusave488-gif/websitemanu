@@ -146,11 +146,11 @@ const projetIdentite: Project = {
             },
             {
               name: "Couleur secondaire",
-              hex: "#2F7D55"
+              hex: "#6C4DFF"
             },
             {
               name: "Accent",
-              hex: "#B4E08A"
+              hex: "#E1DAFF"
             },
             {
               name: "Fond",
