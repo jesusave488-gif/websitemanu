@@ -30,14 +30,14 @@
 }
 
 .panel {
-  padding: clamp(1.25rem, 2vw, 1.875rem);
+  padding: clamp(1rem, 1.6vw, 1.5rem) clamp(1.125rem, 1.8vw, 1.625rem);
 }
 
 .title {
-  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.625rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: var(--ls-lg);
   transition: color 0.25s ease;
 }
 
@@ -46,9 +46,9 @@
 }
 
 .category {
-  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.625rem);
+  font-size: var(--fs-lg);
   font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
+  letter-spacing: var(--ls-lg);
   color: var(--muted);
 }

@@ -24,11 +24,35 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Mise en page (mesures du template : contenu ~1600 px, grandes respirations) */
-  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  /* Échelle typographique — une seule source pour tout le site.
+     Taille, interlignage et tracking vont ensemble : plus c'est grand,
+     plus l'interlignage et l'approche se resserrent. */
+  --fs-display: clamp(2.125rem, 1.15rem + 3.3vw, 4rem); /* hero, contact : 34 → 64 px */
+  --lh-display: 1.08;
+  --ls-display: -0.035em;
+
+  --fs-h2: clamp(1.5rem, 1.15rem + 1vw, 2.25rem); /* titres de section : 24 → 36 px */
+  --lh-h2: 1.15;
+  --ls-h2: -0.025em;
+
+  --fs-lead: clamp(1.1875rem, 1rem + 0.6vw, 1.5rem); /* paragraphe d'introduction : 19 → 24 px */
+  --lh-lead: 1.42;
+  --ls-lead: -0.012em;
+
+  --fs-lg: clamp(1.0625rem, 0.98rem + 0.25vw, 1.1875rem); /* listes, cartes, corps : 17 → 19 px */
+  --lh-lg: 1.45;
+  --ls-lg: -0.01em;
+
+  --fs-base: 1rem; /* navigation, textes courants : 16 px */
+  --fs-small: 0.9375rem; /* 15 px */
+  --fs-label: 0.75rem; /* labels mono : 12 px */
+
+  /* Mise en page (proportions du template : ~8 % de marge, contenu max 1600 px) */
+  --gutter: clamp(1.25rem, 7vw, 10rem);
   --max: 100rem;
-  --section-space: clamp(6rem, 13vw, 12.5rem);
-  --radius: 16px;
+  --section-space: clamp(5rem, 10vw, 10rem);
+  --gap: clamp(1rem, 2vw, 2.25rem);
+  --radius: 14px;
   --radius-sm: 10px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -137,11 +161,19 @@ button {
 /* Petit label en IBM Plex Mono, majuscules espacées (comme la brochure). */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: var(--fs-label);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Styles de texte réutilisables (échelle ci-dessus). */
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: 650;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
 }
 
 .visually-hidden {

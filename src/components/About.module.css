@@ -1,18 +1,19 @@
 .text {
   display: grid;
-  gap: clamp(1.25rem, 2vw, 2rem);
+  gap: 1.25rem;
 }
 
 .first {
-  font-size: clamp(1.375rem, 1rem + 1.2vw, 2.25rem);
-  line-height: 1.36;
-  letter-spacing: -0.01em;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  letter-spacing: var(--ls-lead);
   text-wrap: pretty;
 }
 
 .paragraph {
-  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.625rem);
-  line-height: 1.4;
+  font-size: var(--fs-lg);
+  line-height: 1.55;
+  letter-spacing: var(--ls-lg);
   color: var(--muted);
   text-wrap: pretty;
 }

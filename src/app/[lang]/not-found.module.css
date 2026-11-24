@@ -6,10 +6,10 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 1rem + 6vw, 6rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.05em;
+  font-size: var(--fs-display);
+  font-weight: 650;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
 }
 
 .text {

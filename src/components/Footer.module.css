@@ -1,6 +1,6 @@
 .footer {
-  padding-top: clamp(6rem, 15vw, 17rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(5rem, 11vw, 11rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .row {
@@ -13,19 +13,19 @@
 }
 
 .bottom {
-  margin-top: clamp(2.5rem, 5vw, 3.75rem);
-  padding-top: clamp(2.5rem, 5vw, 5.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
   border-top: 1px solid var(--line);
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem clamp(1.25rem, 1.6vw, 1.875rem);
+  gap: 0.5rem clamp(1.25rem, 1.6vw, 1.75rem);
 }
 
 .link {
-  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.375rem);
+  font-size: var(--fs-base);
   font-weight: 500;
   transition: color 0.25s ease;
 }
@@ -36,7 +36,7 @@
 
 .meta {
   font-family: var(--font-mono);
-  font-size: clamp(0.8125rem, 0.75rem + 0.3vw, 1.0625rem);
+  font-size: 0.8125rem;
   color: var(--muted);
 }
 

@@ -1,5 +1,5 @@
 .item {
-  padding-block: clamp(1.75rem, 3vw, 3.75rem);
+  padding-block: clamp(1.5rem, 2.5vw, 2.25rem);
   border-top: 1px solid var(--line);
 }
 
@@ -14,20 +14,20 @@
 
 .org,
 .role {
-  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.625rem);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: var(--ls-lg);
 }
 
 .role {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--muted);
 }
 
 .dates {
-  margin-top: 0.875rem;
+  margin-top: 0.5rem;
   font-family: var(--font-mono);
-  font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.25rem);
+  font-size: var(--fs-small);
   color: var(--muted);
 }
