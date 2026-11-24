@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pied de page : dégradé ardoise → violet (pas de noir pur),
+   Pied de page : dégradé bleu nuit → bleu acier, halo bleu brume (pas de noir pur),
    avec des halos animés et les formes de la brochure.
    Identique en mode clair et en mode sombre.
    ========================================================================== */
@@ -12,7 +12,9 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(165deg, #1d2e37 0%, #14232b 38%, #1a1838 78%, #2a1d5c 100%);
+  background:
+    radial-gradient(70% 90% at -5% 100%, rgb(184 208 222 / 0.32), transparent 60%),
+    linear-gradient(160deg, #101820 0%, #13202c 45%, #22374a 80%, #354b60 100%);
   color: var(--f-fg);
 }
 
@@ -36,23 +38,23 @@
   border-radius: 50%;
 }
 
-/* Halo lavande qui dérive derrière l'appel à contacter. */
+/* Halo bleu brume qui dérive derrière l'appel à contacter. */
 .glow {
   top: -25%;
   right: -12%;
   width: min(62vw, 56rem);
-  background: radial-gradient(circle, rgb(201 189 255 / 0.17), transparent 62%);
+  background: radial-gradient(circle, rgb(184 208 222 / 0.17), transparent 62%);
 }
 
-/* Halo violet, en bas à gauche. */
+/* Halo bleu, en bas à gauche. */
 .glowAlt {
   bottom: -35%;
   left: -18%;
   width: min(70vw, 60rem);
-  background: radial-gradient(circle, rgb(108 77 255 / 0.32), transparent 62%);
+  background: radial-gradient(circle, rgb(115 148 172 / 0.32), transparent 62%);
 }
 
-/* Cercle violet plein, en haut à droite, comme sur la brochure. */
+/* Cercle bleu plein, en haut à droite, comme sur la brochure. */
 .arc {
   position: absolute;
   top: calc(-1 * min(9vw, 9rem));
@@ -60,7 +62,7 @@
   width: min(18vw, 17rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: linear-gradient(200deg, #9580ff, var(--violet) 70%);
+  background: linear-gradient(200deg, #9db6c9, var(--blue) 70%);
   opacity: 0.85;
 }
 
@@ -99,11 +101,11 @@
   text-wrap: balance;
 }
 
-/* « Écrivez-moi. » en lavande, avec un trait qui se dessine dessous. */
+/* « Écrivez-moi. » en bleu brume, avec un trait qui se dessine dessous. */
 .accent {
   position: relative;
   display: inline-block;
-  color: var(--violet-light);
+  color: var(--mist);
 }
 
 .accent::after {
@@ -114,7 +116,7 @@
   bottom: -0.08em;
   height: 0.08em;
   border-radius: 999px;
-  background: var(--violet-light);
+  background: var(--mist);
   transform-origin: left;
 }
 
@@ -163,14 +165,14 @@
 }
 
 .primary {
-  background: var(--violet);
-  color: #ffffff;
+  background: var(--mist);
+  color: var(--ink);
 }
 
 .primary:hover {
   background: #ffffff;
-  color: var(--slate);
-  box-shadow: 0 12px 30px -12px rgb(108 77 255 / 0.7);
+  color: var(--ink);
+  box-shadow: 0 12px 30px -12px rgb(184 208 222 / 0.6);
 }
 
 .secondary {
@@ -180,8 +182,8 @@
 }
 
 .secondary:hover {
-  border-color: var(--violet-light);
-  color: var(--violet-light);
+  border-color: var(--mist);
+  color: var(--mist);
 }
 
 .icon {
@@ -211,7 +213,7 @@
 
 .brandName .logo {
   height: 1.5rem;
-  color: var(--violet-light);
+  color: var(--mist);
 }
 
 .tagline {
@@ -247,17 +249,17 @@
   color: var(--f-muted);
 }
 
-/* Lien : un trait lavande glisse sous le texte au survol. */
+/* Lien : un trait bleu brume glisse sous le texte au survol. */
 .link {
   padding-bottom: 2px;
-  background: linear-gradient(var(--violet-light), var(--violet-light)) left bottom / 0 1px no-repeat;
+  background: linear-gradient(var(--mist), var(--mist)) left bottom / 0 1px no-repeat;
   transition:
     color 0.25s ease,
     background-size 0.35s var(--ease);
 }
 
 .link:hover {
-  color: var(--violet-light);
+  color: var(--mist);
   background-size: 100% 1px;
 }
 
@@ -282,7 +284,7 @@
 }
 
 .top:hover {
-  color: var(--violet-light);
+  color: var(--mist);
 }
 
 .topArrow {
@@ -299,7 +301,7 @@
 
 .top:hover .topArrow {
   transform: translateY(-3px);
-  border-color: var(--violet-light);
+  border-color: var(--mist);
 }
 
 /* Grand nom en filigrane, coupé par le bas de la page. */

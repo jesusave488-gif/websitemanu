@@ -30,7 +30,7 @@ export default function Footer({ locale, nav, contact, dict }: FooterProps) {
 
   return (
     <footer className={styles.footer}>
-      {/* Décor : halos qui dérivent lentement, cercle violet et anneaux de la brochure. */}
+      {/* Décor : halos qui dérivent lentement, cercle bleu et anneaux de la brochure. */}
       <div className={styles.decor} aria-hidden="true">
         <span className={styles.glow} />
         <span className={styles.glowAlt} />

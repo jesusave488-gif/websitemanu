@@ -5,26 +5,26 @@
 
 :root {
   /* Couleurs de la brochure */
-  --slate: #22323c;
-  --slate-deep: #1a2730;
-  --paper: #f3f2ec;
-  --violet: #6c4dff;
-  --lavender: #e1daff;
-  --violet-light: #a996ff; /* violet clair, pour les accents sur fond sombre */
+  --ink: #101820; /* bleu nuit presque noir : texte et surfaces sombres */
+  --ink-deep: #0a1016;
+  --steel: #354b60; /* bleu acier : boutons et texte en couleur */
+  --blue: #7394ac; /* bleu gris : formes, points, détails (pas pour le petit texte) */
+  --mist: #b8d0de; /* bleu brume : fonds clairs, et accents sur fond sombre */
+  --ice: #f0f5f7; /* blanc glacé : bandes et cartes */
 
   /* Thème clair — contrastes vérifiés (WCAG AA) sur le blanc cassé :
      --muted 4,6:1 pour le texte courant ; --muted-display 3,2:1 réservé aux très
-     grands textes ; --accent 5,5:1 (violet légèrement foncé pour les petits textes). */
+     grands textes ; --accent 8,6:1 (bleu acier pour les petits textes). */
   --bg: #ffffff;
   /* Bandes de section (distinctions) */
-  --band: var(--paper);
-  --fg: var(--slate);
-  --muted: color-mix(in srgb, var(--slate) 68%, var(--paper));
-  --muted-display: color-mix(in srgb, var(--slate) 55%, var(--paper));
-  --line: color-mix(in srgb, var(--slate) 14%, transparent);
-  --surface: color-mix(in srgb, var(--slate) 6%, var(--paper));
-  --surface-strong: color-mix(in srgb, var(--slate) 11%, var(--paper));
-  --accent: #5b3cf0;
+  --band: var(--ice);
+  --fg: var(--ink);
+  --muted: color-mix(in srgb, var(--ink) 68%, var(--ice));
+  --muted-display: color-mix(in srgb, var(--ink) 55%, var(--ice));
+  --line: color-mix(in srgb, var(--ink) 14%, transparent);
+  --surface: color-mix(in srgb, var(--ink) 6%, var(--ice));
+  --surface-strong: color-mix(in srgb, var(--ink) 11%, var(--ice));
+  --accent: var(--steel);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -130,8 +130,8 @@ button {
 }
 
 ::selection {
-  background: var(--lavender);
-  color: var(--slate);
+  background: var(--mist);
+  color: var(--ink);
 }
 
 :focus-visible {

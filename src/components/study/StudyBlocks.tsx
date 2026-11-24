@@ -24,7 +24,7 @@ function readableOn(hex: string): string {
   const full = value.length === 3 ? value.replace(/./g, (c) => c + c) : value;
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(full.slice(i, i + 2), 16) / 255);
   const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return luminance > 0.55 ? "#22323C" : "#FFFFFF";
+  return luminance > 0.55 ? "#101820" : "#FFFFFF";
 }
 
 export default function StudyBlocks({
@@ -82,7 +82,7 @@ export default function StudyBlocks({
                     locale={locale}
                     sizes={block.items.length > 1 ? "(max-width: 900px) 100vw, 40vw" : "(max-width: 900px) 100vw, 75vw"}
                     priority={priority && i === 0}
-                    tone={mediaCount++ === 0 ? tone : "paper"}
+                    tone={mediaCount++ === 0 ? tone : "ice"}
                     className={styles.mediaItem}
                     placeholder={placeholder}
                   />
@@ -104,7 +104,7 @@ export default function StudyBlocks({
                     locale={locale}
                     ratio={media.ratio ?? "1 / 1"}
                     sizes="(max-width: 900px) 50vw, 20vw"
-                    tone="paper"
+                    tone="ice"
                     className={styles.gridItem}
                   />
                 ))}

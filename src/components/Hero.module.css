@@ -18,7 +18,7 @@
   width: 1.15em;
   height: 1.15em;
   margin-right: 0.3rem;
-  color: var(--violet);
+  color: var(--blue);
   transform-origin: 70% 85%;
   rotate: -18deg;
 }
@@ -70,7 +70,7 @@
   width: 1.125rem;
   height: 1.125rem;
   border-radius: 50%;
-  background-color: var(--violet-light);
+  background-color: var(--mist);
   translate: 1.25rem 0;
 }
 
@@ -137,7 +137,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--violet);
+  background: var(--blue);
 }
 
 .scroll {
@@ -147,12 +147,12 @@
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  color: var(--violet);
+  color: var(--blue);
   transition: background-color 0.3s var(--ease);
 }
 
 .scroll:hover {
-  background: color-mix(in srgb, var(--lavender) 35%, transparent);
+  background: color-mix(in srgb, var(--mist) 35%, transparent);
 }
 
 .arrow {

@@ -13,11 +13,11 @@
     width: 3.25rem;
     height: 3.25rem;
     border-radius: 50%;
-    background: var(--violet);
+    background: var(--steel);
     color: #ffffff;
     box-shadow:
-      0 6px 18px rgb(34 50 60 / 0.22),
-      0 1px 3px rgb(34 50 60 / 0.2);
+      0 6px 18px rgb(16 24 32 / 0.22),
+      0 1px 3px rgb(16 24 32 / 0.2);
     transition: transform 0.15s ease;
   }
 

@@ -233,8 +233,8 @@
 }
 
 .close:hover {
-  border-color: var(--violet-light);
-  color: var(--violet-light);
+  border-color: var(--mist);
+  color: var(--mist);
 }
 
 @keyframes dialog-in {

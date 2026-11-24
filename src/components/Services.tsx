@@ -13,7 +13,7 @@ type ServicesProps = {
 
 /**
  * Services : présentation et bouton de contact dans la première case de la grille,
- * puis une carte par service. La première carte est mise en avant (fond ardoise, légèrement inclinée).
+ * puis une carte par service. La première carte est mise en avant (fond bleu nuit, légèrement inclinée).
  */
 export default function Services({ dict, contactMessage }: ServicesProps) {
   return (

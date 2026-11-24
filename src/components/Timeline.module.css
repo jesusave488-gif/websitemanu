@@ -14,7 +14,7 @@
   gap: clamp(2.75rem, 5vw, 4rem);
 }
 
-/* Ligne de fond (grise) et remplissage (violet) qui avance avec le défilement. */
+/* Ligne de fond (grise) et remplissage (bleu) qui avance avec le défilement. */
 .track {
   position: absolute;
   left: calc(var(--dot) / 2 - 0.5px);
@@ -59,11 +59,11 @@
     box-shadow 0.4s var(--ease);
 }
 
-/* Poste actuel : point lavande avec un halo. */
+/* Poste actuel : point bleu brume avec un halo. */
 .entry[data-current] .dot {
-  border-color: var(--violet);
-  background: var(--lavender);
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--lavender) 35%, transparent);
+  border-color: var(--steel);
+  background: var(--mist);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--mist) 35%, transparent);
 }
 
 /* Avant d'être atteintes au défilement, les étapes sont atténuées (comme sur les références). */
@@ -99,8 +99,8 @@
 .badge {
   padding: 0.125rem 0.5rem;
   border-radius: 999px;
-  background: var(--lavender);
-  color: var(--slate);
+  background: var(--mist);
+  color: var(--ink);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 500;

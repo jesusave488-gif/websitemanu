@@ -5,7 +5,7 @@ import type { Media } from "@/content/projects";
 import styles from "./MediaFrame.module.css";
 
 /** Couleurs des emplacements vides, tirées de la DA. */
-export type Tone = "violet" | "lavender" | "slate" | "paper" | "neutral";
+export type Tone = "steel" | "mist" | "ink" | "ice" | "neutral";
 
 type MediaFrameProps = {
   media?: Media;

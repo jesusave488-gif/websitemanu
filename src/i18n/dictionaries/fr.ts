@@ -50,7 +50,7 @@ const fr = {
     period: "2019 — Aujourd'hui",
     currentLabel: "En cours",
     // À compléter : une entrée par expérience, de la plus récente à la plus ancienne.
-    // current: true marque le poste actuel (point lavande).
+    // current: true marque le poste actuel (point bleu brume).
     // tags : 2 à 4 mots-clés (missions, outils). location et description sont facultatifs.
     items: [
       {

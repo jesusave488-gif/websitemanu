@@ -30,11 +30,11 @@
   isolation: isolate;
   aspect-ratio: 1902 / 900;
   background:
-    radial-gradient(60% 80% at 50% 100%, rgb(201 189 255 / 0.28), transparent 70%),
-    var(--paper);
+    radial-gradient(60% 80% at 50% 100%, rgb(184 208 222 / 0.28), transparent 70%),
+    var(--ice);
 }
 
-/* Grand disque violet derrière la personne, comme sur la brochure. */
+/* Grand disque bleu derrière la personne, comme sur la brochure. */
 .disc {
   position: absolute;
   left: 50%;
@@ -43,7 +43,7 @@
   width: 58%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: linear-gradient(200deg, #9580ff, var(--violet) 70%);
+  background: linear-gradient(200deg, #9db6c9, var(--blue) 70%);
   translate: -50% 0;
 }
 
@@ -55,7 +55,7 @@
   z-index: -2;
   width: 48%;
   aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--slate) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
   border-radius: 50%;
 }
 
@@ -86,7 +86,7 @@
   color: var(--muted);
 }
 
-/* Ampoule dans un rond ardoise, comme sur la brochure. */
+/* Ampoule dans un rond bleu nuit, comme sur la brochure. */
 .bulb {
   position: absolute;
   right: clamp(1.25rem, 8vw, 10rem);
@@ -96,8 +96,8 @@
   width: clamp(3.25rem, 5vw, 4.75rem);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--slate);
-  color: var(--lavender);
+  background: var(--ink);
+  color: var(--mist);
 }
 
 .bulbIcon {
@@ -127,12 +127,12 @@
 @keyframes glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(201 189 255 / 0);
+    box-shadow: 0 0 0 0 rgb(184 208 222 / 0);
     translate: 0 0;
   }
 
   50% {
-    box-shadow: 0 0 0 10px rgb(201 189 255 / 0.35);
+    box-shadow: 0 0 0 10px rgb(184 208 222 / 0.35);
     translate: 0 -5px;
   }
 }
