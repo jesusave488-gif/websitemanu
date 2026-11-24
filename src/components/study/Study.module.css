@@ -2,7 +2,7 @@
    Étude de cas — mise en page calquée sur Koto (koto.com/projects/nubank),
    mesurée sur un écran de 1920 px, en version claire :
    - fond blanc, marges de 18 px, 18 px entre la barre et les visuels ;
-   - barre latérale de 404 px : cadre de 64 px (logo, fil d'Ariane), titre et
+   - barre latérale de 404 px : bandeau de 64 px sans cadre (logo, fil d'Ariane), titre et
      sous-titre en 30 px, ligne catégorie · année, sommaire en 20 px (pas de 45 px) ;
    - visuels espacés de 10 px, coins arrondis de 8 px.
    ========================================================================== */
@@ -45,16 +45,14 @@
   scrollbar-width: none;
 }
 
-/* Cadre du haut : logo, fil d'Ariane, langue. */
+/* Haut de la barre : logo, fil d'Ariane, langue (sans cadre, aligné sur le titre). */
 .topbar {
   display: flex;
   flex-shrink: 0;
   align-items: center;
   gap: 1.875rem;
   height: 4rem;
-  padding-inline: 1.1875rem 1.125rem;
-  border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
-  border-radius: 4px;
+  padding-inline: 1.0625rem;
 }
 
 .home {
