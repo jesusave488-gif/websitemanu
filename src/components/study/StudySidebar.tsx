@@ -14,14 +14,10 @@ type StudySidebarProps = {
   dict: Dictionary;
 };
 
-/** Barre latérale fixe : fil d'Ariane, titre et fiche du projet, sommaire avec progression. */
+/** Barre latérale fixe (mise en page Koto) : cadre avec logo et fil d'Ariane, titre, sommaire. */
 export default function StudySidebar({ project, locale, dict }: StudySidebarProps) {
   const isUpcoming = project.status === "upcoming";
-  const facts = [
-    { label: dict.project.client, value: project.client },
-    { label: dict.project.service, value: dict.services.items[project.service].title },
-    { label: dict.project.year, value: project.year },
-  ].filter((fact) => fact.value);
+  const links = (project.links ?? []).filter((link) => link.href || showDrafts);
 
   return (
     <aside className={styles.sidebar}>
@@ -29,7 +25,7 @@ export default function StudySidebar({ project, locale, dict }: StudySidebarProp
         <Link href={`/${locale}`} className={styles.home} aria-label={dict.nav.homeText}>
           <Logo className={styles.logo} />
         </Link>
-        <p className={`label ${styles.crumbs}`}>
+        <p className={styles.crumbs}>
           <Link href={`/${locale}#travaux`} className={styles.crumbLink}>
             {dict.project.work}
           </Link>
@@ -45,39 +41,32 @@ export default function StudySidebar({ project, locale, dict }: StudySidebarProp
           {project.title[locale]}
           <span className={styles.subtitle}>{project.subtitle[locale]}</span>
         </h1>
-        {isUpcoming ? <p className={`label ${styles.badge}`}>{dict.project.upcomingNote}</p> : null}
-        <p className={styles.description}>{project.description[locale]}</p>
+        <p className={styles.meta}>
+          {project.category[locale]} · {project.year}
+          {isUpcoming ? <span className={styles.badge}>{dict.project.upcomingNote}</span> : null}
+        </p>
 
-        <dl className={styles.facts}>
-          {facts.map((fact) => (
-            <div key={fact.label} className={styles.fact}>
-              <dt className="label">{fact.label}</dt>
-              <dd>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-        {project.links?.length ? (
-          <div className={styles.links}>
+        {links.length ? (
+          <p className={styles.links}>
             {/* Un lien sans adresse n'apparaît qu'en local, grisé, pour rappeler de le remplir. */}
-            {project.links.filter((link) => link.href || showDrafts).map((link) => {
-              const empty = !link.href;
+            {links.map((link) => {
               const external = link.kind === "external";
               return (
                 <a
                   key={link.label.fr}
                   href={link.href || undefined}
-                  className={styles.linkButton}
+                  className={styles.link}
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   download={link.kind === "download" ? "" : undefined}
-                  aria-disabled={empty || undefined}
+                  aria-disabled={!link.href || undefined}
                 >
                   {link.label[locale]}
-                  <span aria-hidden="true">{external ? "↗" : "↓"}</span>
+                  <span aria-hidden="true">{external ? " ↗" : " ↓"}</span>
                 </a>
               );
             })}
-          </div>
+          </p>
         ) : null}
       </div>
 

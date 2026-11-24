@@ -12,8 +12,6 @@ type StudyBlocksProps = {
   placeholderLabel: string;
   /** La toute première image de la page est chargée en priorité. */
   priorityFirst?: boolean;
-  /** Numéro de la section (« 01 »), affiché devant son premier texte. */
-  number?: string;
   /** Couleur des emplacements vides : celle du service pour le premier visuel, puis claire. */
   tone?: Tone;
 };
@@ -32,11 +30,9 @@ export default function StudyBlocks({
   locale,
   placeholderLabel,
   priorityFirst,
-  number,
   tone = "neutral",
 }: StudyBlocksProps) {
   const placeholder = <span className="label">{placeholderLabel}</span>;
-  const firstText = blocks.findIndex((block) => block.type === "text");
   let mediaCount = 0;
 
   return (
@@ -50,9 +46,8 @@ export default function StudyBlocks({
             return (
               <Reveal key={key} className={styles.text}>
                 <div className={styles.textAside}>
-                  {number && index === firstText ? <span className={styles.sectionNumber}>{number}</span> : null}
                   {block.label ? (
-                    <p className={`label ${styles.textLabel}`}>{block.label[locale]}</p>
+                    <p className={styles.textLabel}>{block.label[locale]}</p>
                   ) : (
                     <h2 className={styles.textTitle}>{block.title[locale]}</h2>
                   )}

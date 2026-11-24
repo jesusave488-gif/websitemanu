@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Study.module.css";
 
 type StudyNavProps = {
@@ -8,15 +8,9 @@ type StudyNavProps = {
   items: { id: string; label: string }[];
 };
 
-/**
- * Sommaire numéroté de l'étude de cas.
- * - La section visible à l'écran est mise en avant.
- * - Une ligne bleue se remplit à mesure de la lecture, avec une fine barre en haut de page.
- */
+/** Sommaire de l'étude de cas : la section visible à l'écran passe en blanc, avec un point. */
 export default function StudyNav({ label, items }: StudyNavProps) {
   const [active, setActive] = useState(items[0]?.id);
-  const navRef = useRef<HTMLElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
   const ids = items.map((item) => item.id).join(",");
 
   useEffect(() => {
@@ -24,25 +18,15 @@ export default function StudyNav({ label, items }: StudyNavProps) {
       .split(",")
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
-    const article = sections[0]?.parentElement;
 
     let frame = 0;
     const update = () => {
       frame = 0;
-      const anchor = window.innerHeight * 0.4;
       let current = sections[0]?.id;
       for (const section of sections) {
-        if (section.getBoundingClientRect().top < anchor) current = section.id;
+        if (section.getBoundingClientRect().top < window.innerHeight * 0.4) current = section.id;
       }
       setActive(current);
-
-      // Progression de lecture : 0 en haut de l'étude, 1 quand sa fin passe sous le repère.
-      if (article) {
-        const box = article.getBoundingClientRect();
-        const progress = Math.min(Math.max((anchor - box.top) / (box.height - anchor * 0.5), 0), 1);
-        navRef.current?.style.setProperty("--progress", progress.toFixed(4));
-        barRef.current?.style.setProperty("--progress", progress.toFixed(4));
-      }
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -59,25 +43,20 @@ export default function StudyNav({ label, items }: StudyNavProps) {
   }, [ids]);
 
   return (
-    <>
-      <div ref={barRef} className={styles.progressBar} aria-hidden="true" />
-      <nav ref={navRef} className={styles.nav} aria-label={label}>
-        <span className={styles.navTrack} aria-hidden="true" />
-        <ul>
-          {items.map((item, i) => (
-            <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                className={styles.navLink}
-                aria-current={active === item.id ? "location" : undefined}
-              >
-                <span className={styles.navNumber}>{String(i + 1).padStart(2, "0")}</span>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </>
+    <nav className={styles.nav} aria-label={label}>
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            <a
+              href={`#${item.id}`}
+              className={styles.navLink}
+              aria-current={active === item.id ? "location" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }

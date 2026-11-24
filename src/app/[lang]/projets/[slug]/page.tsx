@@ -56,7 +56,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               locale={lang}
               placeholderLabel={dict.project.mediaPlaceholder}
               priorityFirst={i === 0}
-              number={String(i + 1).padStart(2, "0")}
               tone={tone}
             />
           </section>

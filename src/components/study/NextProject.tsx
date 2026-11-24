@@ -21,7 +21,7 @@ export default function NextProject({ project, locale, label, upcomingLabel }: N
     <Reveal>
       <Link href={`/${locale}/projets/${project.slug}`} className={styles.next}>
         <span className={styles.nextText}>
-          <span className={`label ${styles.nextLabel}`}>{label}</span>
+          <span className={styles.nextLabel}>{label}</span>
           <span className={styles.nextTitle}>{title}</span>
           <span className={styles.nextCategory}>{project.category[locale]}</span>
         </span>
