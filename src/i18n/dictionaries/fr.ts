@@ -42,11 +42,40 @@ const fr = {
   },
   experience: {
     title: "Expérience",
-    // À compléter : une ligne par expérience (structure / poste / dates).
+    intro: "7 ans à concevoir des identités, des documents et des sites pour des entreprises et des institutions.",
+    period: "2019 — Aujourd'hui",
+    currentLabel: "En cours",
+    // À compléter : une entrée par expérience, de la plus récente à la plus ancienne.
+    // current: true marque le poste actuel (point vert clair).
+    // tags : 2 à 4 mots-clés (missions, outils). location et description sont facultatifs.
     items: [
-      { org: "[Structure]", role: "[Poste]", dates: "[Dates]" },
-      { org: "[Structure]", role: "[Poste]", dates: "[Dates]" },
-      { org: "[Structure]", role: "[Poste]", dates: "[Dates]" },
+      {
+        org: "[Structure]",
+        role: "[Poste]",
+        dates: "[2023] — Aujourd'hui",
+        location: "[Ville, Pays]",
+        description: "[Une à deux phrases : vos missions principales et ce que vous y avez apporté.]",
+        tags: ["[Mission]", "[Outil]"],
+        current: true,
+      },
+      {
+        org: "[Structure]",
+        role: "[Poste]",
+        dates: "[2021] — [2023]",
+        location: "[Ville, Pays]",
+        description: "[Une à deux phrases : vos missions principales et ce que vous y avez apporté.]",
+        tags: ["[Mission]", "[Outil]"],
+        current: false,
+      },
+      {
+        org: "[Structure]",
+        role: "[Poste]",
+        dates: "[2019] — [2021]",
+        location: "[Ville, Pays]",
+        description: "[Une à deux phrases : vos missions principales et ce que vous y avez apporté.]",
+        tags: ["[Mission]", "[Outil]"],
+        current: false,
+      },
     ],
   },
   services: {
