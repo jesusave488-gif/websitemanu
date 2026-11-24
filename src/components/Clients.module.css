@@ -20,7 +20,7 @@
   align-items: center;
   gap: clamp(1.75rem, 3vw, 3rem);
   font-size: var(--fs-lg);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: var(--ls-lg);
   color: var(--muted);
   white-space: nowrap;

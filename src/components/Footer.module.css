@@ -94,8 +94,8 @@
 
 .title {
   max-width: 18ch;
-  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
-  font-weight: 600;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.03em;
   text-wrap: balance;
@@ -147,7 +147,7 @@
   padding: 0.625rem 1.125rem;
   border-radius: 8px;
   font-size: var(--fs-small);
-  font-weight: 600;
+  font-weight: 500;
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
@@ -206,8 +206,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
-  font-weight: 600;
+  font-size: clamp(1.125rem, 1.05rem + 0.2vw, 1.25rem);
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
@@ -234,7 +234,7 @@
 .heading {
   margin-bottom: 1rem;
   font-size: var(--fs-small);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .list {
@@ -309,7 +309,7 @@
   margin-bottom: -0.2em;
   padding-inline: var(--gutter);
   font-size: clamp(3rem, 11.4vw, 12rem);
-  font-weight: 750;
+  font-weight: 500;
   line-height: 0.9;
   letter-spacing: -0.055em;
   white-space: nowrap;
