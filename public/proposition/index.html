@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposition de refonte — Emmanuel KIKI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<!--
+  MAQUETTE DE PROPOSITION (temporaire) — fusion des références Pinterest.
+  Non reliée au site : rien n'est remplacé tant que la proposition n'est pas validée.
+  À supprimer une fois la refonte intégrée dans les vraies pages.
+-->
+<style>
+  :root {
+    --ink: #101820; --steel: #354b60; --blue: #7394ac; --mist: #b8d0de; --ice: #f0f5f7; --white: #fff;
+    --muted: #5d6a74; --line: rgba(16, 24, 32, .14); --line-dark: rgba(255, 255, 255, .16);
+    --g: clamp(1.25rem, 3vw, 3rem); /* marge latérale */
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --sans: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--white); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ul { list-style: none; }
+
+  /* Repères typographiques (les « micro-labels » des références) */
+  .meta { font-size: .8125rem; line-height: 1.35; color: var(--muted); }
+  .tag { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+  .brace::before { content: "{ "; } .brace::after { content: " }"; }
+  .paren::before { content: "("; } .paren::after { content: ")"; }
+  .rule { border-top: 1px solid var(--line); }
+  .dark { background: var(--ink); color: var(--white); --line: var(--line-dark); --muted: rgba(255,255,255,.55); }
+  .wrap { padding-inline: var(--g); }
+
+  /* ---------- Barre du haut ---------- */
+  .top { position: sticky; top: 0; z-index: 40; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+         gap: 1rem; height: 64px; padding-inline: var(--g); background: rgba(255,255,255,.88); backdrop-filter: blur(12px); }
+  .top .who b { display: block; font-weight: 500; color: var(--ink); }
+  .top nav { display: flex; gap: clamp(1rem, 2vw, 2rem); font-size: .9375rem; }
+  .top nav a { color: var(--muted); transition: color .25s; }
+  .top nav a:hover { color: var(--ink); }
+  .top .end { display: flex; justify-content: flex-end; gap: 1.25rem; align-items: center; font-size: .9375rem; }
+  .pill { display: inline-flex; align-items: center; gap: .625rem; padding: .625rem .75rem .625rem 1.125rem; border-radius: 999px;
+          background: var(--ink); color: #fff; font-size: .9375rem; transition: transform .3s var(--ease); }
+  .pill .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; font-size: .8rem; transition: transform .3s var(--ease); }
+  .pill:hover .dot { transform: rotate(-45deg); }
+  .pill.light { background: #fff; color: var(--ink); box-shadow: 0 1px 0 var(--line), 0 0 0 1px var(--line) inset; }
+
+  /* ---------- 1. Hero : portrait détouré devant le nom géant ---------- */
+  .hero { position: relative; height: min(100svh - 64px, 60rem); min-height: 38rem; overflow: hidden; background: #e1eaf0; }
+  .hero .giant { position: absolute; left: 50%; bottom: -.16em; transform: translateX(-50%); white-space: nowrap;
+                 font-size: 18.5vw; font-weight: 400; letter-spacing: -.06em; line-height: 1; color: #fff; user-select: none; }
+  .hero .photo { position: absolute; left: 50%; bottom: 0; height: 88%; transform: translateX(-38%); }
+  .hero .photo img { height: 100%; width: auto; filter: drop-shadow(0 30px 40px rgba(16,24,32,.18)); }
+  .hero .intro { position: absolute; left: var(--g); top: 12%; max-width: 21rem; }
+  .hero .intro p { font-size: 1.0625rem; line-height: 1.45; margin-bottom: 1.5rem; }
+  .hero .intro .hey { display: block; font-size: .8125rem; color: var(--muted); margin-bottom: .75rem; }
+  .hero .card { position: absolute; right: var(--g); bottom: 12%; display: flex; gap: .875rem; align-items: center; max-width: 21rem;
+                padding: .625rem .875rem .625rem .625rem; border-radius: 14px; background: #fff; font-size: .875rem; line-height: 1.4;
+                box-shadow: 0 20px 40px -20px rgba(16,24,32,.35); }
+  .hero .card img { width: 54px; height: 54px; border-radius: 10px; object-fit: cover; object-position: 50% 15%; background: var(--mist); }
+  .hero .card b { font-weight: 500; }
+  .hero .side { position: absolute; left: var(--g); bottom: 6%; display: grid; gap: 1rem; }
+  .hero .side div b { display: block; font-weight: 500; font-size: .8125rem; color: var(--ink); }
+  .hero .scroll { position: absolute; right: var(--g); top: 12%; font-size: .8125rem; color: var(--muted); }
+
+  /* ---------- 2. À propos + chiffres ---------- */
+  .about { display: grid; grid-template-columns: 4fr 8fr; gap: 2rem var(--g); padding-block: clamp(4rem, 9vw, 8rem); }
+  .about .lists { display: grid; gap: 1.25rem; align-content: start; }
+  .about .lists b { display: block; font-weight: 500; font-size: .875rem; }
+  .about .statement { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); line-height: 1.18; letter-spacing: -.025em; font-weight: 400; }
+  .about .statement .label { font-size: .8125rem; letter-spacing: 0; vertical-align: .55em; margin-right: 1.25rem; color: var(--muted); }
+  .about .statement .label::before { content: "● "; color: var(--blue); }
+  .stats { grid-column: 2; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(2rem, 4vw, 3.5rem); }
+  .stat { padding: 1.25rem 1rem 0 0; border-top: 1px solid var(--line); }
+  .stat + .stat { padding-left: 1.25rem; border-left: 1px solid var(--line); }
+  .stat strong { display: block; font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); font-weight: 300; letter-spacing: -.04em; line-height: 1; }
+  .stat span { font-size: .875rem; color: var(--muted); }
+
+  /* ---------- Texte défilant « Travaux » ---------- */
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); padding-block: .5rem; }
+  .marquee .track { display: flex; width: max-content; animation: slide 30s linear infinite; }
+  .marquee span { font-size: clamp(3rem, 9vw, 8rem); font-weight: 400; letter-spacing: -.05em; line-height: 1; padding-right: .35em; }
+  .marquee span:nth-child(even) { color: var(--mist); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- 3. Travaux : grande image + légende ---------- */
+  .work { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem); display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); }
+  .case { display: block; }
+  .case .cap { display: grid; grid-template-columns: 4fr 5fr 3fr; align-items: baseline; gap: 1rem; padding-block: .75rem; border-top: 1px solid var(--line); font-size: .9375rem; }
+  .case .cap b { font-weight: 500; }
+  .case .cap .go { justify-self: end; transition: transform .3s var(--ease); }
+  .case:hover .cap .go { transform: translateX(4px); }
+  .case .img { overflow: hidden; border-radius: 6px; background: var(--ice); }
+  .case .img img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .case:hover .img img { transform: scale(1.03); }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); }
+  .duo .case .img img { aspect-ratio: 4 / 3; }
+  .work .all { justify-self: center; }
+
+  /* ---------- 4. Services : liste géante (fond sombre) ---------- */
+  .services { padding-block: clamp(4rem, 8vw, 7rem); }
+  .services .head { display: grid; grid-template-columns: 1fr 1fr 1fr; padding-bottom: .875rem; border-bottom: 1px solid var(--line); }
+  .services .head span:nth-child(2) { text-align: center; } .services .head span:last-child { text-align: right; }
+  .services .body { display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); margin-top: clamp(2rem, 4vw, 3.5rem); }
+  .services .preview { position: sticky; top: 96px; align-self: start; }
+  .services .preview .frame { position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: var(--steel); }
+  .services .preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .5s var(--ease), transform .8s var(--ease); }
+  .services .preview img.on { opacity: 1; transform: none; }
+  .services .preview p { margin-top: 1rem; font-size: .9375rem; color: var(--muted); min-height: 3em; }
+  .svc { display: flex; align-items: baseline; gap: 1.25rem; cursor: pointer; }
+  .svc .n { font-family: var(--mono); font-size: .75rem; color: var(--muted); width: 2rem; }
+  .svc .t { font-size: clamp(2.25rem, 1rem + 4vw, 5.25rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; color: rgba(255,255,255,.26); transition: color .35s var(--ease); }
+  .svc.on .t, .svc:hover .t { color: #fff; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2.5rem; }
+  .chip { display: inline-flex; align-items: center; gap: .625rem; padding: .5rem .875rem .5rem .5rem; border-radius: 10px; color: var(--ink); font-size: 1rem; }
+  .chip i { width: 30px; height: 30px; border-radius: 7px; display: grid; place-items: center; font-style: normal; background: rgba(16,24,32,.12); font-size: .9rem; }
+
+  /* ---------- 5. Méthode : rangées numérotées ---------- */
+  .process { padding-block: clamp(4rem, 8vw, 7rem); background: var(--ice); }
+  .process .title { display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); padding-bottom: 1.5rem; }
+  .process .title h2 { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; }
+  .step { display: grid; grid-template-columns: 1fr 7fr 4fr; align-items: center; gap: var(--g); padding-block: .5rem; border-top: 1px solid var(--line); }
+  .step .num { font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); font-weight: 300; color: var(--blue); line-height: 1; }
+  .step .word { font-size: clamp(2.25rem, 1rem + 3.8vw, 4.75rem); font-weight: 400; text-transform: uppercase; letter-spacing: -.04em; line-height: 1; }
+  .step p { font-size: .875rem; color: var(--muted); }
+
+  /* ---------- 6. Distinctions + clients (tableau à filets) ---------- */
+  .table { padding-block: clamp(4rem, 8vw, 7rem); display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); }
+  .table h2 { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; }
+  .row { display: grid; grid-template-columns: 6fr 4fr 2fr; gap: 1rem; padding-block: 1rem; border-top: 1px solid var(--line); font-size: 1rem; }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+  .row span:last-child { text-align: right; color: var(--muted); }
+  .clients { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin-top: 2.5rem; font-size: 1.25rem; color: var(--muted); }
+
+  /* ---------- 7. Footer : menu géant balayé + colonnes ---------- */
+  .foot .cta { display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); padding-block: clamp(4rem, 8vw, 7rem) 3rem; }
+  .foot .cta h2 { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.15; }
+  .foot .cta h2 em { font-style: normal; color: var(--mist); }
+  .foot .cta .btns { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .bignav a { position: relative; display: flex; align-items: center; gap: 2rem; padding: .25rem var(--g); border-top: 1px solid var(--line);
+              font-size: clamp(3rem, 1rem + 7vw, 8rem); font-weight: 400; letter-spacing: -.05em; line-height: 1.05; overflow: hidden; isolation: isolate; }
+  .bignav a:last-child { border-bottom: 1px solid var(--line); }
+  .bignav a::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--ink) 0%, var(--steel) 45%, var(--mist) 100%);
+                      transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease); }
+  .bignav a:hover::before { transform: scaleX(1); }
+  .bignav a small { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--mist); opacity: 0; transform: translateX(-10px); transition: .4s var(--ease); }
+  .bignav a:hover small { opacity: 1; transform: none; }
+  .cols { display: grid; grid-template-columns: 4fr repeat(3, 2fr) 2fr; gap: var(--g); padding: 3rem var(--g) 1.5rem; font-size: .9375rem; }
+  .cols b { display: block; font-weight: 500; margin-bottom: .75rem; font-size: .8125rem; color: var(--muted); }
+  .cols a { display: block; padding-block: .125rem; }
+  .cols a:hover { color: var(--mist); }
+  .clock { font-size: 2rem; font-weight: 300; letter-spacing: -.03em; }
+  .copy { display: flex; justify-content: space-between; padding: 1.5rem var(--g) 2rem; border-top: 1px solid var(--line); font-size: .8125rem; color: var(--muted); }
+
+  /* ==========================================================================
+     ÉTUDE DE CAS (vue 2) — document à sections numérotées
+     ========================================================================== */
+  .cs-head { display: grid; grid-template-columns: 5fr 7fr; gap: var(--g); padding-block: clamp(3rem, 7vw, 6rem) 2rem; }
+  .cs-head h1 { font-size: clamp(2.25rem, 1rem + 4vw, 4.5rem); font-weight: 400; letter-spacing: -.045em; line-height: 1; }
+  .cs-head p { font-size: clamp(1.25rem, 1rem + .8vw, 1.75rem); line-height: 1.3; letter-spacing: -.02em; }
+  .cs-cap { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: var(--g); padding-block: .75rem; border-top: 1px solid var(--line); font-size: .875rem; }
+  .cs-cap span:last-child { text-align: right; }
+  .cs-cover img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+  .sec { display: grid; grid-template-columns: 2fr 10fr; gap: var(--g); padding-top: clamp(3rem, 6vw, 5rem); }
+  .sec .no { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.5rem); font-weight: 300; color: var(--blue); line-height: 1.1; }
+  .sec h2 { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.5rem); font-weight: 400; text-transform: uppercase; letter-spacing: -.03em; line-height: 1.1; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+  .sec .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); margin-top: 1.5rem; font-size: 1rem; color: var(--muted); }
+  .gal { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: 2rem; }
+  .gal img { width: 100%; border-radius: 4px; }
+  .gal .wide { grid-column: 1 / -1; }
+  .metrics { display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); margin-top: 2rem; }
+  .metrics .pic img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
+  .metrics .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem var(--g); align-content: start; }
+  .metric small { display: block; font-size: .8125rem; color: var(--ink); font-weight: 500; }
+  .metric p { font-size: .8125rem; color: var(--muted); max-width: 22rem; margin-top: .25rem; }
+  .metric strong { display: block; margin-top: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); font-size: clamp(3rem, 1.5rem + 4vw, 5.5rem); font-weight: 300; letter-spacing: -.05em; line-height: 1; color: var(--mist); }
+  .cs-process { margin-top: clamp(3rem, 6vw, 5rem); padding-block: clamp(3rem, 6vw, 5rem); }
+  .cs-process .step { grid-template-columns: 2fr 6fr 4fr; }
+  .cs-process .step .num { color: rgba(255,255,255,.35); }
+  .quote { background: var(--ice); padding-block: clamp(3rem, 6vw, 5rem); }
+  .quote blockquote { display: grid; grid-template-columns: 2fr 10fr; gap: var(--g); }
+  .quote blockquote p { font-size: clamp(1.5rem, 1rem + 1.8vw, 2.75rem); text-transform: uppercase; letter-spacing: -.03em; line-height: 1.08; }
+  .quote cite { display: grid; grid-template-columns: 2fr 10fr; gap: var(--g); margin-top: 3rem; font-style: normal; font-size: clamp(1.125rem, 1rem + .5vw, 1.5rem); text-transform: uppercase; color: var(--blue); }
+
+  /* ---------- Sélecteur de vue (maquette uniquement) ---------- */
+  .view { display: none; } .view.on { display: block; }
+  .switch { position: fixed; left: 1rem; bottom: 1rem; z-index: 90; display: flex; gap: .25rem; padding: .25rem; border-radius: 999px; background: var(--ink); box-shadow: 0 10px 30px -10px rgba(0,0,0,.5); }
+  .switch button { border: 0; background: none; color: rgba(255,255,255,.65); font: inherit; font-size: .8125rem; padding: .4rem .875rem; border-radius: 999px; cursor: pointer; }
+  .switch button.on { background: var(--mist); color: var(--ink); }
+  .note { position: fixed; right: 1rem; bottom: 1rem; z-index: 90; max-width: 17rem; padding: .625rem .875rem; border-radius: 10px; background: #fff; box-shadow: 0 10px 30px -12px rgba(0,0,0,.35); font-size: .75rem; color: var(--muted); }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 860px) {
+    .top { grid-template-columns: 1fr auto; } .top nav { display: none; }
+    .hero .photo { transform: translateX(-50%); height: 70%; } .hero .card, .hero .scroll { display: none; }
+    .hero .intro { top: 6%; right: var(--g); }
+    .about, .services .body, .process .title, .table, .foot .cta, .cs-head, .metrics, .quote blockquote, .quote cite, .sec { grid-template-columns: 1fr; }
+    .stats { grid-column: 1; grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+    .duo, .gal, .sec .cols2 { grid-template-columns: 1fr; }
+    .case .cap, .cs-cap { grid-template-columns: 1fr auto; } .case .cap span:nth-child(2), .cs-cap span:nth-child(2) { display: none; }
+    .step, .cs-process .step { grid-template-columns: auto 1fr; } .step p { grid-column: 1 / -1; }
+    .services .preview { position: static; } .services .preview .frame { aspect-ratio: 16 / 10; }
+    .cols { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .marquee .track { animation: none; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="meta who"><b>Emmanuel KIKI ©2026</b>Designer · Cotonou <span id="clock-top"></span></div>
+  <nav><a class="brace" href="#travaux">Travaux</a><a class="brace" href="#services">Services</a><a class="brace" href="#apropos">À propos</a></nav>
+  <div class="end"><span class="meta">FR / EN</span><a class="pill" href="#contact">Contact <span class="dot">↗</span></a></div>
+</header>
+
+<!-- =====================================================================
+     VUE 1 — ACCUEIL
+     ===================================================================== -->
+<main class="view on" id="v-home">
+
+  <!-- 1. Hero — Framer (mot géant derrière le portrait) + amble + Bent -->
+  <section class="hero">
+    <div class="giant" aria-hidden="true">Emmanuel</div>
+    <div class="photo"><img src="/images/portrait.png" alt="Portrait d'Emmanuel KIKI"></div>
+    <div class="intro">
+      <span class="hey">Salut, hey ! ✋</span>
+      <p>Je conçois des sites web, des marques et des documents qui aident les entreprises et les institutions à porter leur message.</p>
+      <a class="pill" href="#contact">Parlons de votre projet <span class="dot">↗</span></a>
+    </div>
+    <div class="scroll">↘ Défiler</div>
+    <div class="side meta">
+      <div><b>Secteurs</b>Entreprises · Institutions · ONG</div>
+      <div><b>Formats</b>Web · Print · Réseaux sociaux</div>
+    </div>
+    <div class="card"><img src="/images/portrait.png" alt=""><span><b>Basé à Cotonou, Bénin.</b> Je travaille en français et en anglais, avec des clients d'ici et d'ailleurs.</span></div>
+  </section>
+
+  <!-- 2. À propos + chiffres — Framer (78+), Monte (58+ 123+), Bent (statement) -->
+  <section class="about wrap" id="apropos">
+    <div class="lists meta">
+      <div><b>Services</b>Sites web · Identités · Documents FR / EN · Infographies · Motion</div>
+      <div><b>Clients</b>Zeyhii · VIP Tribe · Ayo Agency · Camp Régional · International Relief</div>
+    </div>
+    <p class="statement"><span class="label">À propos</span>Depuis 7 ans, je transforme des messages complexes en supports clairs : sites, identités, rapports et infographies — en français comme en anglais.</p>
+    <div class="stats">
+      <div class="stat"><strong>7</strong><span>ans d'expérience</span></div>
+      <div class="stat"><strong>5</strong><span>services</span></div>
+      <div class="stat"><strong>2</strong><span>langues de travail</span></div>
+      <div class="stat"><strong>5</strong><span>clients de référence</span></div>
+    </div>
+  </section>
+
+  <!-- Texte défilant — Bent (« Work Work Work ») -->
+  <div class="marquee" aria-hidden="true"><div class="track">
+    <span>Travaux</span><span>Work</span><span>Travaux</span><span>Work</span><span>Travaux</span><span>Work</span>
+    <span>Travaux</span><span>Work</span><span>Travaux</span><span>Work</span><span>Travaux</span><span>Work</span>
+  </div></div>
+
+  <!-- 3. Travaux — Creative Studio (grande image + légende « (025) Formless ») -->
+  <section class="work wrap" id="travaux">
+    <a class="case" href="#" data-view="v-case">
+      <div class="cap"><span><span class="paren">01</span> <b>Lagune Lodge</b></span><span class="meta">Site web · Réservation en ligne</span><span class="go">Voir l'étude →</span></div>
+      <div class="img"><img src="/projects/projet-site-web/cover.jpg" alt=""></div>
+    </a>
+    <div class="duo">
+      <a class="case" href="#"><div class="cap"><span><span class="paren">02</span> <b>Ayaba</b></span><span class="meta">Identité de marque</span><span class="go">→</span></div><div class="img"><img src="/projects/projet-identite/cover.jpg" alt=""></div></a>
+      <a class="case" href="#"><div class="cap"><span><span class="paren">03</span> <b>Fondation Wémà</b></span><span class="meta">Rapport FR / EN</span><span class="go">→</span></div><div class="img"><img src="/projects/projet-rapport/cover.jpg" alt=""></div></a>
+    </div>
+    <a class="case" href="#">
+      <div class="cap"><span><span class="paren">04</span> <b>NovaPay</b></span><span class="meta">Motion design · Campagne</span><span class="go">Voir l'étude →</span></div>
+      <div class="img"><img src="/projects/projet-motion/cover.jpg" alt=""></div>
+    </a>
+    <a class="pill light all" href="#">Tous les projets <span class="dot">↗</span></a>
+  </section>
+
+  <!-- 4. Services — Lemma (liste géante + aperçu), What we do (« Sec. /A »), pastilles colorées -->
+  <section class="services dark wrap" id="services">
+    <div class="head meta"><span class="brace">Ce que je fais</span><span>Sec. 03</span><span>/05</span></div>
+    <div class="body">
+      <div class="preview">
+        <div class="frame">
+          <img class="on" data-i="0" src="/projects/projet-site-web/home.jpg" alt="">
+          <img data-i="1" src="/projects/projet-identite/logo-variants.jpg" alt="">
+          <img data-i="2" src="/projects/projet-rapport/p3.jpg" alt="">
+          <img data-i="3" src="/projects/projet-infographie/main.jpg" alt="">
+          <img data-i="4" src="/projects/projet-motion/key.jpg" alt="">
+        </div>
+        <p id="svc-desc">Sites vitrines et pages d'atterrissage clairs, rapides et pensés pour convertir.</p>
+      </div>
+      <ul>
+        <li class="svc on" data-i="0" data-d="Sites vitrines et pages d'atterrissage clairs, rapides et pensés pour convertir."><span class="n">01</span><span class="t">Sites web</span></li>
+        <li class="svc" data-i="1" data-d="Logo, couleurs, typographies et charte pour une marque reconnaissable partout."><span class="n">02</span><span class="t">Identité de marque</span></li>
+        <li class="svc" data-i="2" data-d="Rapports, plans stratégiques et présentations bilingues, structurés pour être lus."><span class="n">03</span><span class="t">Documents FR / EN</span></li>
+        <li class="svc" data-i="3" data-d="Chiffres et processus complexes traduits en graphiques compris d'un coup d'œil."><span class="n">04</span><span class="t">Infographie</span></li>
+        <li class="svc" data-i="4" data-d="Vidéos courtes, animations de logo et publicités pour les réseaux sociaux."><span class="n">05</span><span class="t">Motion design</span></li>
+      </ul>
+    </div>
+    <div class="chips">
+      <span class="chip" style="background:var(--mist)"><i>◐</i>Branding</span>
+      <span class="chip" style="background:#9db6c9"><i>▭</i>Sites web</span>
+      <span class="chip" style="background:var(--ice)"><i>▤</i>Documents</span>
+      <span class="chip" style="background:#dfe9ef"><i>◔</i>Data</span>
+      <span class="chip" style="background:#c9d9e3"><i>▶</i>Motion</span>
+    </div>
+  </section>
+
+  <!-- 5. Méthode — référence « Process » (1 DISCOVER / 2 DIRECTION…) -->
+  <section class="process wrap">
+    <div class="title"><span class="meta brace">Méthode</span><h2>Une méthode simple, du premier échange à la livraison.</h2></div>
+    <div class="step"><span class="num">1</span><span class="word">Écouter</span><p>Comprendre la structure, son public et ce qui doit changer.</p></div>
+    <div class="step"><span class="num">2</span><span class="word">Clarifier</span><p>Hiérarchiser le message avant de dessiner quoi que ce soit.</p></div>
+    <div class="step"><span class="num">3</span><span class="word">Concevoir</span><p>Maquettes, allers-retours, déclinaisons FR / EN.</p></div>
+    <div class="step" style="border-bottom:1px solid var(--line)"><span class="num">4</span><span class="word">Livrer</span><p>Fichiers prêts à l'emploi, mise en ligne, charte et suivi.</p></div>
+  </section>
+
+  <!-- 6. Distinctions + clients — tableau à filets (référence « Awards ») -->
+  <section class="table wrap">
+    <div><span class="meta brace">Distinctions</span><h2 style="margin-top:.75rem">Formations certifiantes</h2></div>
+    <div>
+      <div class="row"><span>Développement web</span><span class="meta">Epitech</span><span>Certificat</span></div>
+      <div class="row"><span>Gestion de projet</span><span class="meta">Scripture Union</span><span>Certificat</span></div>
+      <div class="clients"><span>Zeyhii</span><span>VIP Tribe</span><span>Ayo Agency</span><span>Camp Régional</span><span>International Relief</span></div>
+    </div>
+  </section>
+</main>
+
+<!-- =====================================================================
+     VUE 2 — ÉTUDE DE CAS (document à sections numérotées)
+     ===================================================================== -->
+<main class="view" id="v-case">
+  <section class="cs-head wrap">
+    <h1>Lagune Lodge.</h1>
+    <p>Un écolodge qui se réserve en trois gestes : une vitrine qui donne envie, et un paiement Mobile Money sans intermédiaire.</p>
+  </section>
+  <div class="wrap"><div class="cs-cap"><span><span class="paren">01</span> Site web · Réservation en ligne</span><span class="meta">Client : Lagune Lodge, Grand-Popo</span><span class="meta">2025 · Voir le site ↗</span></div></div>
+  <div class="cs-cover"><img src="/projects/projet-site-web/cover.jpg" alt=""></div>
+
+  <section class="sec wrap">
+    <span class="no">1.0</span>
+    <div>
+      <h2>Le défi</h2>
+      <div class="cols2"><p>Le lodge recevait ses demandes par e-mail et répondait sous 72 heures. Sur téléphone, le site était illisible, et les tarifs dataient de 2019.</p><p>L'objectif : montrer le lieu tel qu'il est, et permettre de réserver et payer en ligne sans plateforme qui prélève une commission.</p></div>
+      <div class="gal"><img class="wide" src="/projects/projet-site-web/defi.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <section class="sec wrap">
+    <span class="no">2.0</span>
+    <div>
+      <h2>Le design</h2>
+      <div class="cols2"><p>La page d'accueil s'ouvre sur la lagune au coucher du soleil, avec la réservation visible tout de suite.</p><p>Le parcours tient en trois étapes : dates, bungalow, paiement.</p></div>
+      <div class="gal"><img class="wide" src="/projects/projet-site-web/home.jpg" alt=""><img src="/projects/projet-site-web/rooms.jpg" alt=""><img src="/projects/projet-site-web/booking.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <section class="sec wrap">
+    <span class="no">3.0</span>
+    <div>
+      <h2>Chiffres clés</h2>
+      <div class="metrics">
+        <div class="pic"><img src="/projects/projet-site-web/mobile-3.jpg" alt=""></div>
+        <div class="grid4">
+          <div class="metric"><small>Pages conçues</small><p>Accueil, bungalows, expériences, réservation…</p><strong>12</strong></div>
+          <div class="metric"><small>Réservations directes</small><p>Trois mois après la mise en ligne.</p><strong>+64 %</strong></div>
+          <div class="metric"><small>Visiteurs sur mobile</small><p>Le paiement Mobile Money est proposé en premier.</p><strong>70 %</strong></div>
+          <div class="metric"><small>Délai</small><p>De la maquette à la mise en ligne.</p><strong>6 sem.</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-process dark wrap">
+    <div class="sec" style="padding-top:0"><span class="no" style="color:rgba(255,255,255,.4)">4.0</span><h2>Processus</h2></div>
+    <div class="step"><span class="num">1</span><span class="word">Découvrir</span><p>Visite du lodge, entretiens avec l'équipe, analyse de l'ancien site.</p></div>
+    <div class="step"><span class="num">2</span><span class="word">Orienter</span><p>Arborescence, ton, parcours de réservation.</p></div>
+    <div class="step"><span class="num">3</span><span class="word">Concevoir</span><p>Maquettes ordinateur et mobile, tests avec des clients.</p></div>
+    <div class="step" style="border-bottom:1px solid var(--line)"><span class="num">4</span><span class="word">Livrer</span><p>Mise en ligne, formation de l'équipe, suivi.</p></div>
+  </section>
+
+  <section class="quote wrap">
+    <blockquote><span class="no" style="font-size:2rem;font-weight:300;color:var(--blue)">5.0</span><p>« Nos clients réservent maintenant directement depuis leur téléphone, et nous gérons tout nous-mêmes. »</p></blockquote>
+    <cite><span>→</span><span>Direction, Lagune Lodge <span class="meta" style="text-transform:none">(exemple fictif)</span></span></cite>
+  </section>
+
+  <nav class="bignav" style="margin-top:4rem">
+    <a href="#" data-view="v-home"><span class="meta" style="font-size:.8125rem;letter-spacing:0">Projet suivant</span>Ayaba <small>Identité de marque →</small></a>
+  </nav>
+</main>
+
+<!-- =====================================================================
+     FOOTER — Studio 9P (menu géant balayé) + Monte (CTA) + Creative Studio (heure locale)
+     ===================================================================== -->
+<footer class="foot dark" id="contact">
+  <div class="cta wrap">
+    <span class="meta brace">Contact</span>
+    <div>
+      <h2>Votre message mérite d'être vu. <em>Écrivez-moi.</em></h2>
+      <div class="btns"><a class="pill light" href="#">Écrire sur WhatsApp <span class="dot">↗</span></a><a class="pill" style="box-shadow:0 0 0 1px rgba(255,255,255,.3) inset" href="#">jemanuki@gmail.com <span class="dot">✉</span></a></div>
+    </div>
+  </div>
+  <nav class="bignav">
+    <a href="#travaux">travaux <small>C'est par ici →</small></a>
+    <a href="#services">services <small>C'est par ici →</small></a>
+    <a href="#apropos">à propos <small>C'est par ici →</small></a>
+  </nav>
+  <div class="cols">
+    <div><b>Emmanuel KIKI</b>Designer de sites web, de marques et de documents.</div>
+    <div><b>Écrire</b><a href="#">jemanuki@gmail.com</a><a href="#">+229 01 62 55 91 41</a></div>
+    <div><b>Suivre</b><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">WhatsApp</a></div>
+    <div><b>Me trouver</b>Cotonou, Bénin</div>
+    <div><b>Heure locale</b><span class="clock" id="clock">--:--</span></div>
+  </div>
+  <div class="copy"><span>© 2026 — Emmanuel KIKI</span><a href="#">Retour en haut ↑</a></div>
+</footer>
+
+<div class="switch" role="tablist" aria-label="Vue de la maquette">
+  <button class="on" data-view="v-home">Accueil</button>
+  <button data-view="v-case">Étude de cas</button>
+</div>
+<div class="note">Maquette de proposition — rien n'est encore remplacé sur le site. Les projets affichés sont les exemples fictifs.</div>
+
+<script>
+  // Heure de Cotonou (référence « New York 10:39 AM »).
+  const tick = () => {
+    const t = new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Porto-Novo" }).format(new Date());
+    document.getElementById("clock").textContent = t;
+    document.getElementById("clock-top").textContent = "· " + t;
+  };
+  tick(); setInterval(tick, 20000);
+
+  // Services : le survol change l'aperçu et la description (référence Lemma).
+  const items = document.querySelectorAll(".svc");
+  const imgs = document.querySelectorAll(".preview img");
+  items.forEach((li) => li.addEventListener("mouseenter", () => {
+    items.forEach((x) => x.classList.toggle("on", x === li));
+    imgs.forEach((im) => im.classList.toggle("on", im.dataset.i === li.dataset.i));
+    document.getElementById("svc-desc").textContent = li.dataset.d;
+  }));
+
+  // Sélecteur de vue (maquette).
+  const show = (id) => {
+    document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === id));
+    document.querySelectorAll(".switch button").forEach((b) => b.classList.toggle("on", b.dataset.view === id));
+    window.scrollTo(0, 0);
+  };
+  document.querySelectorAll("[data-view]").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); show(el.dataset.view); }));
+  if (location.hash === "#etude") show("v-case");
+</script>
+</body>
+</html>
