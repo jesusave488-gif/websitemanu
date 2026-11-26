@@ -123,10 +123,7 @@
 
   /* ---------- 4. Services : liste en accordéon (survol ou clic, marche au toucher) ---------- */
   .services .body { display: grid; grid-template-columns: 4fr 8fr; gap: var(--g); }
-  .preview { position: sticky; top: 100px; align-self: start; }
-  .preview .frame { position: relative; aspect-ratio: 16 / 10; border-radius: var(--r); overflow: hidden; background: var(--steel); }
-  .preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .5s var(--ease), transform .9s var(--ease); }
-  .preview img.on { opacity: 1; transform: none; }
+  .services .list { grid-column: 2; }
   .svc { border-top: 1px solid var(--line); }
   .svc:last-child { border-bottom: 1px solid var(--line); }
   .svc button { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: 3.5rem 1fr auto; align-items: baseline; padding-block: .75rem; cursor: pointer; }
@@ -229,7 +226,7 @@
     .hero { min-height: 0; } .hero .text { padding-block: 1rem 0; } .hero .tags { margin-top: 2rem; padding-top: 0; }
     .panel { min-height: 26rem; } .panel .word { font-size: 30vw; }
     .panel .badge { top: auto; bottom: 1rem; right: .75rem; }
-    .preview { position: static; order: 2; } .part .lab { position: static; }
+    .services .list { grid-column: 1; } .part .lab { position: static; }
     .steps { grid-template-columns: 1fr 1fr; } .step:nth-child(3) { border-left: 0; padding-left: 0; } .step h3 { margin-top: 1rem; }
     .facts { grid-template-columns: 1fr 1fr; } .facts div:nth-child(3) { border-left: 0; padding-left: 0; }
     .cols { grid-template-columns: 1fr 1fr; }
@@ -335,16 +332,7 @@
       <h2 class="title" data-en="Five crafts, one goal: making your message clear.">Cinq métiers, un seul but : rendre votre message clair.</h2>
     </div>
     <div class="body">
-      <div class="preview rv">
-        <div class="frame">
-          <img class="on" data-i="0" src="/projects/projet-site-web/home.jpg" alt="">
-          <img data-i="1" src="/projects/projet-identite/cover.jpg" alt="">
-          <img data-i="2" src="/projects/projet-rapport/spread.jpg" alt="">
-          <img data-i="3" src="/projects/projet-infographie/main.jpg" alt="">
-          <img data-i="4" src="/projects/projet-motion/key.jpg" alt="">
-        </div>
-      </div>
-      <ul class="rv d1">
+      <ul class="list rv d1">
         <li class="svc on" data-i="0"><button type="button" aria-expanded="true"><span class="n">01</span><span class="t" data-en="Websites">Sites web</span><span class="plus">+</span></button>
           <div class="more"><div><p data-en="Clear, fast showcase sites and landing pages built to convert, from mockup to launch.">Sites vitrines et pages d'atterrissage clairs, rapides et pensés pour convertir, de la maquette à la mise en ligne.</p><a href="#" data-en="See a project →">Voir un projet →</a></div></div></li>
         <li class="svc" data-i="1"><button type="button" aria-expanded="false"><span class="n">02</span><span class="t" data-en="Brand identity">Identité de marque</span><span class="plus">+</span></button>
@@ -508,10 +496,8 @@
 
   // Services : accordéon (clic ou survol, donc utilisable au toucher).
   const svcs = [...document.querySelectorAll(".svc")];
-  const imgs = [...document.querySelectorAll(".preview img")];
   const open = (li) => {
     svcs.forEach((x) => { x.classList.toggle("on", x === li); x.querySelector("button").setAttribute("aria-expanded", x === li); });
-    imgs.forEach((im) => im.classList.toggle("on", im.dataset.i === li.dataset.i));
   };
   svcs.forEach((li) => {
     li.querySelector("button").addEventListener("click", () => open(li));
