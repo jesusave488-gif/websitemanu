@@ -3,9 +3,9 @@ import type { Dictionary } from "./fr";
 
 const en: Dictionary = {
   meta: {
-    title: "Emmanuel KIKI — Websites, brand identities & bilingual documents · Cotonou",
+    title: "Emmanuel KIKI — Websites & apps, visual identities and reports · Cotonou",
     description:
-      "Web and graphic designer based in Cotonou. Websites, visual identities and bilingual FR/EN documents for companies, NGOs and institutions.",
+      "Web and graphic designer based in Cotonou. Websites and apps, visual identities and bilingual FR/EN reports for companies, NGOs and institutions.",
   },
   nav: {
     role: "Designer · Cotonou",
@@ -23,7 +23,7 @@ const en: Dictionary = {
     hello: "Hello, hey!",
     name: ["Emmanuel", "KIKI"],
     role: "Web & graphic designer",
-    lead: "I design websites, visual identities and documents for companies, NGOs and institutions that want to be taken seriously.",
+    lead: "I design websites and apps, visual identities and reports that help companies, NGOs and institutions present their work better.",
     ctaWork: "See my work",
     ctaContact: "Let's talk about your project",
     tags: ["Cotonou, Benin", "Remote projects", "English / Français"],
@@ -43,7 +43,7 @@ const en: Dictionary = {
     cta: "Request a quote",
     items: {
       web: {
-        title: "Websites & landing pages",
+        title: "Websites & apps",
         description: "Fast, easy-to-manage websites, from mockup to launch.",
       },
       brand: {
@@ -51,7 +51,7 @@ const en: Dictionary = {
         description: "Logo, colours, typography and guidelines, so you're recognised everywhere.",
       },
       documents: {
-        title: "Bilingual documents",
+        title: "Bilingual reports & documents",
         description: "Reports, strategic plans and brochures, laid out in French and English.",
       },
       dataviz: {

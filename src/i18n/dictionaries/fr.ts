@@ -2,9 +2,9 @@
 
 const fr = {
   meta: {
-    title: "Emmanuel KIKI — Sites web, identités de marque et documents bilingues · Cotonou",
+    title: "Emmanuel KIKI — Sites web & applications, identités visuelles et rapports · Cotonou",
     description:
-      "Designer web et graphique à Cotonou. Sites web, identités visuelles et documents bilingues FR/EN pour entreprises, ONG et institutions.",
+      "Designer web et graphique à Cotonou. Sites web et applications, identités visuelles et rapports bilingues FR/EN pour entreprises, ONG et institutions.",
   },
   nav: {
     role: "Designer · Cotonou",
@@ -22,7 +22,7 @@ const fr = {
     hello: "Salut, hey !",
     name: ["Emmanuel", "KIKI"],
     role: "Designer web & graphique",
-    lead: "Je conçois des sites, des identités visuelles et des documents pour les entreprises, les ONG et les institutions qui veulent être prises au sérieux.",
+    lead: "Je conçois des sites et applications, des identités visuelles et des rapports qui aident les entreprises, les ONG et les institutions à mieux présenter leur travail.",
     ctaWork: "Voir mes réalisations",
     ctaContact: "Discutons de votre projet",
     tags: ["Cotonou, Bénin", "Missions à distance", "Français / English"],
@@ -42,7 +42,7 @@ const fr = {
     cta: "Demander un devis",
     items: {
       web: {
-        title: "Sites web & landing pages",
+        title: "Sites web & applications",
         description: "Des sites vitrines rapides et faciles à gérer, de la maquette à la mise en ligne.",
       },
       brand: {
@@ -50,7 +50,7 @@ const fr = {
         description: "Logo, couleurs, typographies et charte, pour être reconnu sur chaque support.",
       },
       documents: {
-        title: "Documents bilingues",
+        title: "Rapports & documents bilingues",
         description: "Rapports, plans stratégiques et brochures, mis en page en français et en anglais.",
       },
       dataviz: {
