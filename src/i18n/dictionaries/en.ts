@@ -47,28 +47,31 @@ const en: Dictionary = {
   services: {
     label: "Services",
     title: "Five crafts, one goal: making your message clear.",
-    seeProject: "See a project →",
-    talk: "Let's talk →",
+    intro: "From visual identity to websites, I design clear, consistent materials, in French and in English.",
+    cta: "Let's talk about your project",
+    seeProject: "See a project",
+    talk: "Let's talk",
+    // Message WhatsApp pré-rempli quand il n'y a pas encore de projet : le nom du service est ajouté.
     messagePrefix: "Hello Emmanuel, I saw your portfolio and would like to discuss a project: ",
     items: {
       web: {
-        title: "Websites",
+        title: "Websites & landing pages",
         description: "Clear, fast showcase sites and landing pages built to convert, from mockup to launch.",
       },
       brand: {
         title: "Brand identity",
-        description: "Logo, colours, typography and guidelines for a brand people recognise everywhere.",
+        description: "Logo, colours, typography and brand guidelines for a brand people recognise on every medium.",
       },
       documents: {
-        title: "FR / EN documents",
-        description: "Bilingual reports, strategic plans and presentations, structured to be read to the end.",
+        title: "Document layout (FR / EN)",
+        description: "Bilingual reports, strategic plans, brochures and presentations, structured to be read to the end.",
       },
       dataviz: {
-        title: "Infographics",
-        description: "Complex figures and processes turned into charts people understand at a glance.",
+        title: "Infographics & data visualisation",
+        description: "Complex figures and processes turned into charts and infographics people understand at a glance.",
       },
       motion: {
-        title: "Motion design",
+        title: "Motion design & animated ads",
         description: "Short videos, logo animations and social media ads that hold attention.",
       },
     },

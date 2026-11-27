@@ -38,7 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <Hero dict={dict.hero} portrait={site.portrait} hasWork={hasWork} />
       <About dict={dict.about} n={num(1)} />
       {hasWork ? <Work projects={projects.slice(0, 6)} locale={lang} dict={dict.work} n={num(2)} /> : null}
-      <Services dict={dict.services} n={num(3)} items={serviceItems} />
+      <Services dict={dict.services} n={num(3)} items={serviceItems} contactHref={whatsappLink(dict.contact.whatsappMessage)} />
       <Method dict={dict.method} n={num(4)} />
       <References locale={lang} dict={dict.references} clients={site.clients} n={num(5)} />
     </>
