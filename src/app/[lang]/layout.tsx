@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { site, siteUrl } from "@/content/site";
+import { projects } from "@/content/projects";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import { RevealInit, RevealObserver } from "@/components/RevealScript";
+import Effects, { EffectsInit } from "@/components/Effects";
 import "../globals.css";
 
 const inter = Inter({
@@ -64,19 +65,20 @@ export default async function LangLayout({ children, params }: LayoutProps) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
+  const hasWork = projects.length > 0;
 
   return (
-    // suppressHydrationWarning : la classe "js" et le thème sont posés par RevealInit avant React.
+    // suppressHydrationWarning : la classe "js" est posée par EffectsInit avant React.
     <html lang={lang} className={`${inter.variable} ${plexMono.variable}`} suppressHydrationWarning>
       <body id="top">
-        <RevealInit />
+        <EffectsInit />
         <a href="#main" className="skip-link">
           {dict.nav.skip}
         </a>
+        <Header locale={lang} dict={dict.nav} hasWork={hasWork} />
         <main id="main">{children}</main>
-        <Footer locale={lang} nav={dict.nav} contact={dict.contact} dict={dict.footer} />
-        <WhatsAppFloat label={dict.contact.floatingLabel} message={dict.contact.whatsappMessage} />
-        <RevealObserver />
+        <Footer locale={lang} dict={dict} hasWork={hasWork} n={hasWork ? "06" : "05"} />
+        <Effects />
       </body>
     </html>
   );

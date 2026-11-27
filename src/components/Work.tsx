@@ -1,28 +1,43 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import type { Project } from "@/content/projects";
-import Reveal from "./Reveal";
-import WorkGrid from "./WorkGrid";
-import styles from "./Work.module.css";
 
 type WorkProps = {
   projects: Project[];
   locale: Locale;
   dict: Dictionary["work"];
+  n: string;
 };
 
-/** Section "Projets sélectionnés · 2019–2026" + grille de cartes. */
-export default function Work({ projects, locale, dict }: WorkProps) {
+/** Travaux sélectionnés : 2 colonnes, légendes alignées. */
+export default function Work({ projects, locale, dict, n }: WorkProps) {
   return (
-    <section id="travaux" className={`container ${styles.work}`} aria-labelledby="travaux-title">
-      <Reveal as="h2" id="travaux-title" className={styles.heading}>
-        {dict.title}
-        <span className={styles.dot} aria-hidden="true">
-          ·
-        </span>
-        <span className={styles.years}>{dict.years}</span>
-      </Reveal>
-      <WorkGrid projects={projects} locale={locale} upcomingLabel={dict.upcoming} demoLabel={dict.demo} />
+    <section className="work sec wrap" id="travaux" style={{ paddingTop: 0 }}>
+      <div className="head rv">
+        <p className="k"><b>({n})</b><span>{dict.label}</span></p>
+        <h2 className="title">{dict.title}</h2>
+      </div>
+      <div className="grid">
+        {projects.map((project, i) => (
+          <Link key={project.slug} className={`case rv${i % 2 ? " d1" : ""}`} href={`/${locale}/projets/${project.slug}`}>
+            <div className="img">
+              {project.cover?.src ? (
+                <Image src={project.cover.src} alt={project.cover.alt[locale]} fill sizes="(max-width: 640px) 100vw, 50vw" />
+              ) : null}
+              {project.status !== "published" ? (
+                <span className="tag k">{project.status === "demo" ? dict.demo : dict.upcoming}</span>
+              ) : null}
+            </div>
+            <div className="cap">
+              <span className="name">{project.title[locale]}</span>
+              <span className="go" aria-hidden="true">→</span>
+              <span className="cat">{project.category[locale]}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

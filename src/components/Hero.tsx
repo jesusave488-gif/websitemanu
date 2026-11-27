@@ -1,74 +1,65 @@
-import type { CSSProperties } from "react";
 import type { Dictionary } from "@/i18n";
-import { BentArrowIcon, WaveIcon } from "./Icons";
-import Reveal from "./Reveal";
-import styles from "./Hero.module.css";
 
 type HeroProps = {
   dict: Dictionary["hero"];
-  /** Ancre de la section suivante, pour la flèche « découvrir la suite ». */
-  next: string;
+  portrait: string;
+  /** Affiche le bouton « Voir les travaux » s'il y a des projets. */
+  hasWork: boolean;
 };
 
-/** Découpe une phrase en mots qui montent un à un (le texte reste lisible tel quel sans JavaScript). */
-function Words({ text, start, className }: { text: string; start: number; className: string }) {
-  const words = text.split(" ");
+/** Main qui salue (animée en CSS). */
+function Wave() {
   return (
-    <span className={className}>
-      {words.map((word, i) => (
-        <span key={i}>
-          <span className={styles.word}>
-            <span className={styles.wordInner} style={{ "--i": start + i } as CSSProperties}>
-              {word}
-            </span>
-          </span>
-          {i < words.length - 1 ? " " : null}
-        </span>
-      ))}
-    </span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 11V6a2 2 0 0 0-4 0" />
+      <path d="M14 10V4a2 2 0 0 0-4 0v2" />
+      <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+      <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+    </svg>
   );
 }
 
-/**
- * Accueil : « Salut, hey ! » avec la main qui salue (comme sur la brochure),
- * l'autocollant « mode créatif », puis la phrase de présentation qui apparaît mot par mot.
- */
-export default function Hero({ dict, next }: HeroProps) {
-  const leadCount = dict.lead.split(" ").length;
-
+export default function Hero({ dict, portrait, hasWork }: HeroProps) {
   return (
-    <section className={`container ${styles.hero}`}>
-      <p className={styles.greeting}>
-        <WaveIcon className={styles.hand} />
-        <span className={styles.hello}>{dict.greeting}</span>
-        <span className={styles.hey}>{dict.greetingEnd}</span>
-      </p>
-
-      {/* Clin d'œil à la brochure : un interrupteur qui s'allume tout seul. */}
-      <span className={styles.sticker} aria-hidden="true">
-        {dict.creativeMode}
-        <span className={styles.switch}>
-          <span className={styles.knob} />
-        </span>
-      </span>
-
-      <h1 className={styles.title}>
-        <Words text={dict.lead} start={0} className={styles.lead} />{" "}
-        <Words text={dict.rest} start={leadCount} className={styles.rest} />
-      </h1>
-
-      <div className={styles.bottom}>
-        <Reveal as="ul" className={styles.tags} delay={700}>
+    <section className="hero">
+      <div className="text">
+        <p className="hello">
+          <Wave />
+          <span>{dict.hello}</span>
+        </p>
+        <h1>
+          <span className="w"><span>{dict.name[0]}</span></span>{" "}
+          <span className="w"><span>{dict.name[1]}</span></span>
+          <br />
+          <span className="w"><span>{dict.role}</span></span>
+        </h1>
+        <p className="lead">{dict.lead}</p>
+        <div className="actions">
+          <a className="btn fill" href="#contact">
+            <span>{dict.cta}</span>
+            <span className="ic" aria-hidden="true">↗</span>
+          </a>
+          {hasWork ? (
+            <a className="btn line" href="#travaux">
+              <span>{dict.seeWork}</span>
+              <span className="ic" aria-hidden="true">↓</span>
+            </a>
+          ) : null}
+        </div>
+        <ul className="tags k">
           {dict.tags.map((tag) => (
-            <li key={tag} className={`label ${styles.tag}`}>
-              {tag}
-            </li>
+            <li key={tag}>{tag}</li>
           ))}
-        </Reveal>
-
-        <a href={next} className={styles.scroll} aria-label={dict.scrollLabel}>
-          <BentArrowIcon className={styles.arrow} />
-        </a>
+        </ul>
+      </div>
+      <div className="panel">
+        <div className="word" aria-hidden="true">KIKI</div>
+        {/* eslint-disable-next-line @next/next/no-img-element -- PNG détouré, hauteur relative au panneau */}
+        {portrait ? <img src={portrait} alt={dict.portraitAlt} fetchPriority="high" /> : null}
+        <span className="badge" aria-hidden="true">
+          <span>{dict.creativeMode}</span>
+          <i />
+        </span>
       </div>
     </section>
   );

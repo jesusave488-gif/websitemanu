@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { getProject, getRelatedProject, projects } from "@/content/projects";
-import StudyEditorial from "@/components/study/StudyEditorial";
+import CaseStudy from "@/components/study/CaseStudy";
 
 type ProjectPageProps = {
   params: Promise<{ lang: string; slug: string }>;
@@ -37,5 +37,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const dict = getDictionary(lang);
 
-  return <StudyEditorial project={project} related={getRelatedProject(project)} locale={lang} dict={dict} />;
+  return <CaseStudy project={project} related={getRelatedProject(project)} locale={lang} dict={dict} />;
 }

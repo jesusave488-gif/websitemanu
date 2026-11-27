@@ -121,6 +121,20 @@ const projetSiteWeb: Project = {
       ],
     },
   ],
+  deliverables: {
+    fr: [
+      "Site de 12 pages, ordinateur et mobile",
+      "Réservation en ligne avec paiement Mobile Money",
+      "Espace pour mettre à jour tarifs et disponibilités",
+      "Formation de l'équipe et trois mois de suivi",
+    ],
+    en: [
+      "12-page website, desktop and mobile",
+      "Online booking with Mobile Money payment",
+      "Admin space to update prices and availability",
+      "Team training and three months of follow-up",
+    ],
+  },
 };
 
 export default projetSiteWeb;

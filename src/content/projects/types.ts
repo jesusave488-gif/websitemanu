@@ -77,6 +77,8 @@ export type Project = {
   /** Boutons sous le titre : "Voir le site", "Télécharger le PDF"… */
   links?: ProjectLink[];
   sections: StudySection[];
+  /** Liste « Ce qui a été livré », affichée en fin d'étude de cas (facultatif). */
+  deliverables?: Localized<string[]>;
   /** Projet proposé en fin d'étude de cas (slug). Par défaut : le projet suivant. */
   related?: string;
 };
