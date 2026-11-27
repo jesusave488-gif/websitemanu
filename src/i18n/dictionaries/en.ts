@@ -44,7 +44,7 @@ const en: Dictionary = {
     items: {
       web: {
         title: "Websites & apps",
-        description: "Fast, easy-to-manage websites, from mockup to launch.",
+        description: "Websites, platforms and web apps: I design the interface and build it, from mockup to launch.",
       },
       brand: {
         title: "Brand identity",

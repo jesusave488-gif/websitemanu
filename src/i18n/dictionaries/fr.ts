@@ -43,7 +43,7 @@ const fr = {
     items: {
       web: {
         title: "Sites web & applications",
-        description: "Des sites vitrines rapides et faciles à gérer, de la maquette à la mise en ligne.",
+        description: "Sites vitrines, plateformes et applications web : je conçois l'interface et je la développe, de la maquette à la mise en ligne.",
       },
       brand: {
         title: "Identité de marque",
