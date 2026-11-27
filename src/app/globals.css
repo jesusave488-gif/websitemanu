@@ -32,8 +32,8 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: #fff; scroll-behavior: smooth; scroll-padding-top: 68px; -webkit-text-size-adjust: 100%; }
-body { font-family: var(--sans); color: var(--fg); background: #fff; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { overflow-x: clip; background: #fff; scroll-behavior: smooth; scroll-padding-top: 68px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); color: var(--fg); background: #fff; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 img, video { display: block; max-width: 100%; }
 ul { list-style: none; }
@@ -78,9 +78,10 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 /* ---------- Barre du haut : opaque, passe en sombre sur les sections sombres ---------- */
 .top { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem;
        height: 68px; padding-inline: var(--g); background: #fff; color: var(--ink); border-bottom: 1px solid rgba(16, 24, 32, .08);
-       transition: background-color .4s, color .4s, border-color .4s; }
+       transition: background-color .15s, color .3s, border-color .3s; }
 .top.on-dark { background: var(--ink); color: #fff; border-color: rgba(255, 255, 255, .1); }
-.top.on-band { background: transparent; border-color: transparent; }
+.top.on-band { background: var(--mist); border-color: transparent; }
+.top.on-band.at-top { background: transparent; }
 .top.on-band .menu { background: var(--mist); }
 .top .who { min-width: 0; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top .who:hover { opacity: 1; }
@@ -140,15 +141,15 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .btn.ghost { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22); color: #fff; }
 .btn.ghost .ic { background: rgba(255, 255, 255, .12); }
 .btn.ghost:hover { box-shadow: inset 0 0 0 1px #fff; }
-.figs { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); }
+.figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); }
 .figs > div { padding-right: 1.25rem; }
 .figs > div + div { padding-left: 1.25rem; border-left: 1px solid rgba(255, 255, 255, .14); }
 .figs dt { font-size: clamp(2rem, 1.5rem + 1.2vw, 2.75rem); font-weight: 300; letter-spacing: -.035em; line-height: 1; }
-.figs dd { margin-top: .5rem; font-size: .8125rem; line-height: 1.35; color: rgba(255, 255, 255, .55); }
+.figs dd { overflow-wrap: break-word; margin-top: .5rem; font-size: .8125rem; line-height: 1.35; color: rgba(255, 255, 255, .55); }
 .hero-photo { position: relative; overflow: hidden; min-height: 30rem; background: linear-gradient(180deg, #dbe6ed, #c4d6e1); }
 .hero-photo img { position: absolute; left: 50%; bottom: 0; height: 92%; width: auto; max-width: none; translate: -50% 0; filter: drop-shadow(0 30px 40px rgba(16, 24, 32, .22)); }
 /* Badge rond qui tourne, à la jonction ; il mène aux réalisations */
-.seal { position: absolute; left: 50%; top: 50%; z-index: 2; width: 132px; height: 132px; translate: -50% -50%; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 16px 30px -14px rgba(16, 24, 32, .45); transition: scale .4s var(--ease); }
+.seal { position: absolute; left: 50%; top: 50%; z-index: 2; width: 132px; height: 132px; translate: -50% -50%; border-radius: 50%; background: #fff; display: grid; place-items: center; overflow: hidden; box-shadow: 0 16px 30px -14px rgba(16, 24, 32, .45); transition: scale .4s var(--ease); }
 .seal:hover { scale: 1.06; }
 .seal .ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
 .seal text { font-family: var(--mono); font-size: 10.4px; letter-spacing: 2.2px; fill: var(--ink); }
@@ -213,11 +214,12 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .svc-text { margin-top: .75rem; font-size: .9375rem; line-height: 1.6; color: var(--muted); }
 .svc-card:hover .svc-text { color: rgba(255, 255, 255, .78); }
 /* ---------- 5. Méthode ---------- */
-.steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .step { padding: 1.5rem 1.5rem 0 0; }
 .step + .step { padding-left: 1.5rem; border-left: 1px solid var(--line); }
 .step .num { font-family: var(--mono); font-size: .75rem; color: var(--blue); }
 .step h3 { margin-top: 2.5rem; font-size: 1.5rem; font-weight: 400; letter-spacing: -.02em; }
+.step h3, .step p { overflow-wrap: break-word; hyphens: auto; }
 .step p { margin-top: .5rem; font-size: .9375rem; color: var(--muted); }
 
 /* ---------- Formations (dans À propos) et clients (sous les Réalisations) ---------- */
@@ -317,7 +319,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .svc-grid { grid-template-columns: 1fr 1fr; }
   .svc-intro { grid-column: 1 / -1; padding-right: 0; }
   .part .lab { position: static; }
-  .steps { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .step:nth-child(3) { border-left: 0; padding-left: 0; }
   .step h3 { margin-top: 1rem; }
   .facts { grid-template-columns: 1fr 1fr; }
@@ -329,6 +331,9 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .hero-mark svg { height: 90%; right: -30%; }
   .seal { width: 104px; height: 104px; }
   .hero-info .actions { flex-direction: column; gap: .75rem; }
+  .figs > div { padding-right: .75rem; }
+  .figs > div + div { padding-left: .75rem; }
+  .figs dd { font-size: .75rem; }
   .hero-info .actions .btn { justify-content: space-between; height: 3rem; }
   .gal.c4, .gal.c6 { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: 1fr; }

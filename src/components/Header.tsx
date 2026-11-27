@@ -44,6 +44,8 @@ export default function Header({ locale, dict }: HeaderProps) {
       const band = document.querySelector<HTMLElement>(".hero-band");
       const r = band?.getBoundingClientRect();
       bar.classList.toggle("on-band", !on && !!r && r.bottom >= y);
+      // Transparente seulement tout en haut : dès qu'on défile, le texte ne doit pas passer dessous.
+      bar.classList.toggle("at-top", scrollY < 2);
     };
     check();
     addEventListener("scroll", check, { passive: true });
