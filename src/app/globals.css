@@ -145,7 +145,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .figs > div { padding-right: 1.25rem; }
 .figs > div + div { padding-left: 1.25rem; border-left: 1px solid rgba(255, 255, 255, .14); }
 .figs dt { font-size: clamp(2rem, 1.5rem + 1.2vw, 2.75rem); font-weight: 300; letter-spacing: -.035em; line-height: 1; }
-.figs dd { overflow-wrap: break-word; margin-top: .5rem; font-size: .8125rem; line-height: 1.35; color: rgba(255, 255, 255, .55); }
+.figs dd { margin-top: .5rem; font-size: .8125rem; line-height: 1.35; color: rgba(255, 255, 255, .55); }
 .hero-photo { position: relative; overflow: hidden; min-height: 30rem; background: linear-gradient(180deg, #dbe6ed, #c4d6e1); }
 .hero-photo img { position: absolute; left: 50%; bottom: 0; height: 92%; width: auto; max-width: none; translate: -50% 0; filter: drop-shadow(0 30px 40px rgba(16, 24, 32, .22)); }
 /* Badge rond qui tourne, à la jonction ; il mène aux réalisations */
@@ -331,9 +331,12 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .hero-mark svg { height: 90%; right: -30%; }
   .seal { width: 104px; height: 104px; }
   .hero-info .actions { flex-direction: column; gap: .75rem; }
-  .figs > div { padding-right: .75rem; }
-  .figs > div + div { padding-left: .75rem; }
-  .figs dd { font-size: .75rem; }
+  /* Mobile : les chiffres passent en liste (chiffre à gauche, légende à droite) : aucun mot n'est coupé. */
+  .figs { grid-template-columns: 1fr; padding-top: 0; }
+  .figs > div, .figs > div + div { display: grid; grid-template-columns: 4.5rem 1fr; align-items: baseline; gap: 1rem; padding: .875rem 0; border-left: 0; }
+  .figs > div + div { border-top: 1px solid rgba(255, 255, 255, .14); }
+  .figs dt { font-size: 2rem; }
+  .figs dd { margin-top: 0; font-size: .9375rem; }
   .hero-info .actions .btn { justify-content: space-between; height: 3rem; }
   .gal.c4, .gal.c6 { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: 1fr; }
