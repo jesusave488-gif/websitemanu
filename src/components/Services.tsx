@@ -4,8 +4,6 @@ import type { ServiceId } from "@/content/services";
 
 type ServicesProps = {
   dict: Dictionary["services"];
-  /** Lien WhatsApp du bouton « Demander un devis ». */
-  quoteHref: string;
   items: { id: ServiceId; number: string }[];
 };
 
@@ -45,17 +43,8 @@ const icons: Record<ServiceId, ReactNode> = {
   ),
 };
 
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 24 24" {...stroke}>
-      <path d="M4 20l1.2-3.6A8 8 0 1 1 8 19.2z" />
-      <path d="M9 9.5c.3 2.2 2.3 4.3 4.5 4.8l1.2-1.1 1.8.8c-.2 1.1-1 1.8-2 1.8-3.5 0-6.8-3.3-6.8-6.8 0-1 .7-1.8 1.8-2l.8 1.8z" />
-    </svg>
-  );
-}
-
-/** (02) Services : cinq cartes sur fond bleu nuit, puis un seul bouton « Demander un devis ». */
-export default function Services({ dict, quoteHref, items }: ServicesProps) {
+/** (02) Services : cinq cartes sur fond bleu nuit. */
+export default function Services({ dict, items }: ServicesProps) {
   return (
     <section className="services dark sec wrap" id="services">
       <ul className="svc-grid">
@@ -79,12 +68,6 @@ export default function Services({ dict, quoteHref, items }: ServicesProps) {
         })}
       </ul>
 
-      <div className="svc-cta rv">
-        <a className="btn fill" href={quoteHref} target="_blank" rel="noopener noreferrer">
-          <span className="ic wa" aria-hidden="true"><WhatsAppIcon /></span>
-          <span>{dict.cta}</span>
-        </a>
-      </div>
     </section>
   );
 }

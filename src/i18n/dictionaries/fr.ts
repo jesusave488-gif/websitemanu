@@ -48,7 +48,6 @@ const fr = {
   services: {
     label: "Services",
     title: "Ce que je peux faire pour vous.",
-    cta: "Demander un devis",
     items: {
       web: {
         title: "Sites web & applications",
@@ -75,42 +74,32 @@ const fr = {
   method: {
     label: "Méthode",
     title: "Comment on travaille ensemble.",
-    subtitle: "Quatre étapes claires, pour savoir à chaque moment où en est votre projet.",
-    bringLabel: "Ce que vous apportez",
-    getLabel: "Ce que vous recevez",
     steps: [
       {
-        title: "Écouter",
-        text: "Un premier échange pour comprendre votre projet : vos objectifs, votre public, vos délais et votre budget.",
-        bring: "Vos idées, vos contenus existants, vos exemples de référence.",
-        get: "Une proposition claire avec le périmètre, le planning et le devis.",
+        title: "Échanger",
+        text: "Tout commence par une discussion. Vous me parlez de votre projet, de vos objectifs et de votre public, et je vous propose une approche, un délai et un devis.",
       },
       {
         title: "Structurer",
-        text: "J'organise le contenu avant toute mise en forme : arborescence d'un site, plan d'un rapport, messages clés d'une identité.",
-        bring: "Vos textes, données et validations.",
-        get: "Une structure validée ensemble, qui sert de base à la création.",
+        text: "Une fois le cadre posé, j'organise le contenu : le plan du site, la trame du rapport ou les idées fortes de la marque. C'est la base de tout le reste.",
       },
       {
         title: "Concevoir",
-        text: "Je crée les maquettes, puis on les ajuste ensemble jusqu'à ce qu'elles vous correspondent. Les versions FR / EN sont préparées en parallèle si besoin.",
-        bring: "Vos retours à chaque version.",
-        get: "Des maquettes à valider, avec un nombre de révisions défini à l'avance.",
+        text: "Sur cette base, je crée les maquettes. On les affine ensemble, à partir de vos retours, jusqu'au bon résultat.",
       },
       {
         title: "Livrer",
-        text: "Je finalise et vous remets tout ce qu'il faut pour utiliser votre support en toute autonomie.",
-        bring: "La validation finale.",
-        get: "Fichiers prêts à l'emploi (impression, web, réseaux), mise en ligne pour les sites, charte ou guide d'utilisation, et un suivi après livraison.",
+        text: "Quand tout est validé, je prépare les fichiers finaux ou je mets le site en ligne. Et je reste disponible pour les ajustements.",
       },
     ],
+    ctaText: "Envie de commencer ? Tout part d'une simple discussion.",
+    ctaButton: "Parlons de votre projet",
   },
   about: {
     label: "À propos",
-    title: "Un seul interlocuteur, de l'idée à la livraison.",
+    title: "Graphiste d'abord, développeur ensuite.",
     paragraphs: [
-      "J'ai commencé par le graphisme, puis je me suis formé au développement web et à la gestion de projet. Ce double parcours me permet de suivre un projet de bout en bout, de l'idée jusqu'au fichier livré ou au site en ligne.",
-      "Ce qui compte pour moi : comprendre votre message avant de le mettre en forme, et livrer des supports que vous pouvez vraiment utiliser.",
+      "J'ai commencé par le graphisme, puis j'ai appris le développement web à Epitech. Aujourd'hui, je fais les deux : je conçois vos supports et, quand il le faut, je les code. J'aime surtout les projets utiles, ceux qui aident une organisation à mieux expliquer ce qu'elle fait.",
     ],
     trainings: "Formations",
     certificate: "Certificat ↗",

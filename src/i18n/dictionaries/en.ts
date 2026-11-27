@@ -46,7 +46,6 @@ const en: Dictionary = {
   services: {
     label: "Services",
     title: "What I can do for you.",
-    cta: "Request a quote",
     items: {
       web: {
         title: "Websites & apps",
@@ -73,42 +72,32 @@ const en: Dictionary = {
   method: {
     label: "Process",
     title: "How we work together.",
-    subtitle: "Four clear steps, so you always know where your project stands.",
-    bringLabel: "What you bring",
-    getLabel: "What you get",
     steps: [
       {
-        title: "Listen",
-        text: "A first conversation to understand your project: your goals, audience, timeline and budget.",
-        bring: "Your ideas, existing content and reference examples.",
-        get: "A clear proposal with scope, schedule and quote.",
+        title: "Talk",
+        text: "It all starts with a conversation. You tell me about your project, your goals and your audience, and I suggest an approach, a timeline and a quote.",
       },
       {
         title: "Structure",
-        text: "I organise the content before any design work: a site map, a report outline, the key messages of a brand.",
-        bring: "Your texts, data and approvals.",
-        get: "A structure we agree on, the foundation for the design.",
+        text: "Once the frame is set, I organise the content: the site map, the report outline or the brand's key ideas. It's the foundation for everything else.",
       },
       {
         title: "Design",
-        text: "I create the mockups, then we refine them together until they fit you. French and English versions are prepared side by side when needed.",
-        bring: "Your feedback on each version.",
-        get: "Mockups to approve, with an agreed number of revisions.",
+        text: "From there, I create the mockups. We refine them together, based on your feedback, until it feels right.",
       },
       {
         title: "Deliver",
-        text: "I finalise and hand over everything you need to use your materials on your own.",
-        bring: "Final approval.",
-        get: "Ready-to-use files (print, web, social), launch for websites, brand guidelines or a user guide, and follow-up after delivery.",
+        text: "Once everything is approved, I prepare the final files or launch the website. And I stay available for adjustments.",
       },
     ],
+    ctaText: "Ready to start? It all begins with a simple conversation.",
+    ctaButton: "Let's talk about your project",
   },
   about: {
     label: "About",
-    title: "One partner, from idea to delivery.",
+    title: "Graphic designer first, developer second.",
     paragraphs: [
-      "I started in graphic design, then trained in web development and project management. This dual background lets me follow a project from start to finish, from the idea to the delivered file or the live website.",
-      "What matters to me: understanding your message before shaping it, and delivering materials you can actually use.",
+      "I started in graphic design, then learned web development at Epitech. Today I do both: I design your materials and, when needed, I build them. What I enjoy most are useful projects, the ones that help an organisation explain what it does better.",
     ],
     trainings: "Training",
     certificate: "Certificate ↗",

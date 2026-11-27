@@ -161,6 +161,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .about .grid { display: grid; grid-template-columns: 4fr 8fr; gap: 2rem var(--g); }
 .about h2.title { max-width: 26ch; }
 .about .txt { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); margin-top: 1.75rem; color: var(--muted); }
+.about .txt.one { grid-template-columns: 1fr; max-width: 42rem; font-size: var(--t-lead); line-height: 1.5; }
 .about .extra { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem var(--g); margin-top: clamp(2.5rem, 5vw, 4rem); }
 .trainings .table, .tools ul { margin-top: .875rem; }
 .tools ul { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
@@ -190,9 +191,6 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .svc-intro { padding: .5rem 2rem 2rem 0; }
 .svc-intro .title { margin-top: 1rem; }
 .svc-intro > p:not(.k) { margin-top: 1rem; max-width: 26rem; font-size: 1.0625rem; color: var(--muted); }
-.svc-cta { margin-top: 2.5rem; }
-.svc-cta .btn { padding: 0 1.25rem 0 .375rem; }
-.svc-cta .btn .ic.wa svg { width: 1.125rem; height: 1.125rem; }
 .svc-card { position: relative; display: flex; flex-direction: column; min-height: 20rem; padding: 2rem; border-radius: 14px;
             background: rgba(255, 255, 255, .04); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1);
             transition: transform .6s var(--ease), background-color .4s, box-shadow .5s var(--ease); }
@@ -210,21 +208,18 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .svc-text { margin-top: .75rem; font-size: .9375rem; line-height: 1.6; color: var(--muted); }
 .svc-card:hover .svc-text { color: rgba(255, 255, 255, .78); }
 /* ---------- 5. Méthode ---------- */
-.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-.step { padding: 1.5rem 1.5rem 0 0; }
-.step + .step { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+/* Les étapes forment une ligne de temps : un fin trait les relie, un point marque chaque étape. */
+.steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 var(--g); }
+.steps::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--steel); opacity: .35; }
+.step { position: relative; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; align-content: start; padding-top: 1.75rem; }
+.step::before { content: ""; position: absolute; left: 0; top: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--ice); box-shadow: inset 0 0 0 1.5px var(--steel); translate: 0 -50%; }
+.step:last-child::before { background: var(--steel); }
 .step .num { font-family: var(--mono); font-size: .75rem; color: var(--blue); }
-.step h3 { margin-top: 2.5rem; font-size: 1.5rem; font-weight: 400; letter-spacing: -.02em; }
-.step h3, .step p, .exchange dd { overflow-wrap: break-word; }
+.step h3 { margin-top: 1.25rem; font-size: 1.5rem; font-weight: 400; letter-spacing: -.02em; }
+.step h3, .step p { overflow-wrap: break-word; }
 .step > p { margin-top: .5rem; font-size: .9375rem; color: var(--muted); }
-/* Chaque étape partage les mêmes lignes que ses voisines : titres, textes et blocs « apportez / recevez » sont alignés. */
-.step { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
-.exchange { display: contents; }
-.exchange > div { padding-block: .75rem; border-top: 1px solid var(--line); }
-.exchange > div:first-child { margin-top: 1.5rem; }
-.exchange > div:last-child { padding-bottom: 0; }
-.exchange dt { font-family: var(--mono); font-size: .6875rem; letter-spacing: .05em; text-transform: uppercase; color: var(--steel); }
-.exchange dd { margin-top: .25rem; font-size: .8125rem; line-height: 1.5; color: var(--muted); }
+.method-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; margin-top: clamp(3rem, 5vw, 4.5rem); padding-top: 2rem; border-top: 1px solid var(--line); }
+.method-cta p { font-size: var(--t-lead); letter-spacing: -.015em; }
 
 /* ---------- Formations (dans À propos) et clients (sous les Réalisations) ---------- */
 .table .row { position: relative; display: grid; grid-template-columns: 6fr 4fr auto; gap: 1rem; align-items: center; padding-block: 1.125rem; border-top: 1px solid var(--line); }
@@ -323,10 +318,17 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .svc-grid { grid-template-columns: 1fr 1fr; }
   .svc-intro { grid-column: 1 / -1; padding-right: 0; }
   .part .lab { position: static; }
-  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .step:nth-child(3) { border-left: 0; padding-left: 0; }
-  .step:nth-child(n+3) { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
-  .step h3 { margin-top: 1rem; }
+  /* Tablette et mobile : la ligne de temps devient verticale. */
+  .steps { grid-template-columns: 1fr; padding-left: 1.75rem; }
+  .steps::before { left: 5px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; }
+  .step { display: block; grid-row: auto; padding: 0 0 2rem; }
+  .step .num { display: block; }
+  .step:last-child { padding-bottom: 0; }
+  .step::before { left: calc(-1.75rem); top: .45rem; }
+  /* Le trait s'arrête au point de la dernière étape. */
+  .step:last-child::after { content: ""; position: absolute; left: -1.75rem; top: calc(.45rem + 6px); bottom: -6px; width: 11px; background: var(--ice); }
+  .step:last-child::before { z-index: 1; }
+  .step h3 { margin-top: .5rem; }
   .facts { grid-template-columns: 1fr 1fr; }
   .facts > div:nth-child(3) { border-left: 0; padding-left: 0; }
   .gal.c4, .gal.c6 { grid-template-columns: repeat(3, 1fr); }
@@ -344,9 +346,6 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .figs dd { margin-top: 0; font-size: .9375rem; }
   .hero-info .actions .btn { justify-content: space-between; height: 3rem; }
   .gal.c4, .gal.c6 { grid-template-columns: 1fr 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .step, .step + .step, .step:nth-child(3), .step:nth-child(n+3) { margin-top: 0; padding: 1.5rem 0; border-left: 0; }
-  .step + .step { border-top: 1px solid var(--line); }
   .about .extra { grid-template-columns: 1fr; }
   .svc-grid { grid-template-columns: 1fr; }
   .svc-card { min-height: 0; padding: 1.5rem; }

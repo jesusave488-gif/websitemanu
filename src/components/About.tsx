@@ -12,7 +12,7 @@ export default function About({ dict, locale }: { dict: Dictionary["about"]; loc
         </div>
         <div>
           <h2 className="title rv">{dict.title}</h2>
-          <div className="txt rv d1">
+          <div className={`txt rv d1${dict.paragraphs.length === 1 ? " one" : ""}`}>
             {dict.paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}

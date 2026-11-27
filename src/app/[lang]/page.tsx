@@ -3,7 +3,7 @@ import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { realisations } from "@/content/realisations";
 import { serviceIds, serviceNumber } from "@/content/services";
-import { site, whatsappLink } from "@/content/site";
+import { site } from "@/content/site";
 import Hero from "@/components/Hero";
 import Realisations from "@/components/Realisations";
 import Services from "@/components/Services";
@@ -22,7 +22,6 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <Realisations items={realisations} clients={site.clients} locale={lang} dict={dict.realisations} />
       <Services
         dict={dict.services}
-        quoteHref={whatsappLink()}
         items={serviceIds.map((id) => ({ id, number: serviceNumber(id) }))}
       />
       <Method dict={dict.method} />
