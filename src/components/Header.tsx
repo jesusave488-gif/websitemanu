@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
-import Clock from "./Clock";
-import Logo from "./Logo";
 
 type HeaderProps = {
   locale: Locale;
@@ -14,7 +12,7 @@ type HeaderProps = {
 };
 
 /**
- * Barre du haut, opaque, qui passe en sombre au-dessus des sections .dark.
+ * Barre du haut, opaque : bleu brume au-dessus de la bande du haut de page, sombre au-dessus des sections .dark.
  * Sous 960 px, la navigation passe dans un menu burger (Échap ou clic sur un lien pour fermer).
  */
 export default function Header({ locale, dict }: HeaderProps) {
@@ -43,6 +41,9 @@ export default function Header({ locale, dict }: HeaderProps) {
         return r.top <= y && r.bottom >= y;
       });
       bar.classList.toggle("on-dark", on);
+      const band = document.querySelector<HTMLElement>(".hero-band");
+      const r = band?.getBoundingClientRect();
+      bar.classList.toggle("on-band", !on && !!r && r.bottom >= y);
     };
     check();
     addEventListener("scroll", check, { passive: true });
@@ -80,10 +81,7 @@ export default function Header({ locale, dict }: HeaderProps) {
   return (
     <header className={`top${open ? " menu-open" : ""}`} ref={ref}>
       <Link className="who" href={home} onClick={close}>
-        <Logo size={28} className="logo" />
-        <span className="role">
-          {dict.role} <Clock prefix="· " />
-        </span>
+        {dict.tagline}
       </Link>
 
       <nav className="main-nav" aria-label="Navigation">

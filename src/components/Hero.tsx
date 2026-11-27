@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/i18n";
+import { LOGO_PATH } from "./logo-path";
 
 type HeroProps = {
   dict: Dictionary["hero"];
@@ -17,46 +18,86 @@ function Wave() {
   );
 }
 
+/**
+ * Haut de page :
+ * - une bande bleu brume avec le titre et le grand « K » manuscrit en filigrane ;
+ * - un panneau bleu nuit (repère, phrase, boutons, chiffres) à côté du portrait ;
+ * - un badge rond qui tourne, à la jonction, et qui mène aux réalisations.
+ */
 export default function Hero({ dict, portrait }: HeroProps) {
   return (
-    <section className="hero">
-      <div className="text">
-        <p className="hello">
-          <Wave />
-          <span>{dict.hello}</span>
-        </p>
-        {/* H1 : le nom et la spécialité. */}
-        <h1>
-          <span className="w"><span>{dict.name[0]}</span></span>{" "}
-          <span className="w"><span>{dict.name[1]}</span></span>
-          <br />
-          <span className="w"><span>{dict.role}</span></span>
-        </h1>
-        <p className="lead">{dict.lead}</p>
-        <div className="actions">
-          <a className="btn fill" href="#realisations">
-            <span>{dict.ctaWork}</span>
-            <span className="ic" aria-hidden="true">↓</span>
-          </a>
-          <a className="btn line" href="#contact">
-            <span>{dict.ctaContact}</span>
-            <span className="ic" aria-hidden="true">↗</span>
-          </a>
+    <section className="hero" aria-labelledby="hero-title">
+      <div className="hero-band">
+        <div className="hero-mark" aria-hidden="true">
+          <svg viewBox="0 0 1010 928">
+            <defs>
+              {/* Premier « K » du logo, sans le début du « I » qui suit. */}
+              <clipPath id="hero-k">
+                <polygon points="0,0 1010,0 1010,600 950,700 950,928 0,928" />
+              </clipPath>
+            </defs>
+            <path clipPath="url(#hero-k)" fill="currentColor" fillRule="evenodd" d={LOGO_PATH} />
+          </svg>
         </div>
-        <ul className="tags k">
-          {dict.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
+        <div className="hero-title wrap">
+          <p className="hello">
+            <Wave />
+            <span>{dict.hello}</span>
+          </p>
+          {/* H1 : le nom et la spécialité. */}
+          <h1 id="hero-title">
+            {dict.name}
+            <span>{dict.role}</span>
+          </h1>
+        </div>
       </div>
-      <div className="panel">
-        <div className="word" aria-hidden="true">KIKI</div>
-        {/* eslint-disable-next-line @next/next/no-img-element -- PNG détouré, hauteur relative au panneau */}
-        {portrait ? <img src={portrait} alt={dict.portraitAlt} fetchPriority="high" /> : null}
-        <span className="badge" aria-hidden="true">
-          <span>{dict.creativeMode}</span>
-          <i />
-        </span>
+
+      <div className="hero-split">
+        <a className="seal" href="#realisations" aria-label={dict.sealLabel}>
+          <svg className="ring" viewBox="0 0 132 132" aria-hidden="true">
+            <defs>
+              <path id="seal-path" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0" />
+            </defs>
+            <text>
+              <textPath href="#seal-path">{dict.seal.toUpperCase()}</textPath>
+            </text>
+          </svg>
+          <span className="arrow" aria-hidden="true">↓</span>
+        </a>
+
+        <div className="hero-info">
+          <div>
+            <p className="eyebrow">
+              {dict.eyebrow.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </p>
+            <p className="lead">{dict.lead}</p>
+            <div className="actions">
+              <a className="btn mist" href="#realisations">
+                <span>{dict.ctaWork}</span>
+                <span className="ic" aria-hidden="true">↓</span>
+              </a>
+              <a className="btn ghost" href="#contact">
+                <span>{dict.ctaContact}</span>
+                <span className="ic" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+          <dl className="figs">
+            {dict.figures.map((f) => (
+              <div key={f.label}>
+                <dt>{f.value}</dt>
+                <dd>{f.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="hero-photo">
+          {/* eslint-disable-next-line @next/next/no-img-element -- PNG détouré, hauteur relative au cadre */}
+          {portrait ? <img src={portrait} alt={dict.portraitAlt} fetchPriority="high" /> : null}
+        </div>
       </div>
     </section>
   );

@@ -80,12 +80,17 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
        height: 68px; padding-inline: var(--g); background: #fff; color: var(--ink); border-bottom: 1px solid rgba(16, 24, 32, .08);
        transition: background-color .4s, color .4s, border-color .4s; }
 .top.on-dark { background: var(--ink); color: #fff; border-color: rgba(255, 255, 255, .1); }
-.top .who { display: flex; align-items: center; gap: .875rem; min-width: 0; font-size: .8125rem; line-height: 1.35; }
-.top .who .logo { flex: none; height: 28px; width: auto; }
-.top .who .role { opacity: .6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.top .main-nav { display: flex; gap: clamp(1.25rem, 2.4vw, 2.5rem); font-size: .9375rem; }
-.top .main-nav a { opacity: .65; transition: opacity .25s; }
-.top .main-nav a:hover { opacity: 1; }
+.top.on-band { background: transparent; border-color: transparent; }
+.top.on-band .menu { background: var(--mist); }
+.top .who { min-width: 0; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top .who:hover { opacity: 1; }
+/* Navigation en pilules */
+.top .main-nav { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--ice); font-size: .875rem; }
+.top .main-nav a { padding: .45rem .9rem; border-radius: 999px; transition: background-color .25s; }
+.top .main-nav a:hover { background: #fff; }
+.top.on-band .main-nav { background: rgba(255, 255, 255, .55); }
+.top.on-dark .main-nav { background: rgba(255, 255, 255, .08); }
+.top.on-dark .main-nav a:hover { background: rgba(255, 255, 255, .16); }
 .top .end { display: flex; justify-content: flex-end; align-items: center; gap: 1.25rem; }
 .lang { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; color: inherit; opacity: .7; }
 .lang:hover { opacity: 1; }
@@ -93,7 +98,9 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .top .btn .ic { width: 1.875rem; height: 1.875rem; }
 .top.on-dark .btn.fill { background: var(--mist); color: var(--ink); }
 .top.on-dark .btn.fill .ic { background: var(--ink); color: #fff; }
-/* Menu burger (sous 960 px) */
+.top.on-band .btn.fill { background: #fff; color: var(--ink); }
+.top.on-band .btn.fill .ic { background: var(--ink); color: #fff; }
+/* Menu burger (sous 1024 px) */
 .burger { display: none; position: relative; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; box-shadow: inset 0 0 0 1px currentColor; }
 .burger span { position: absolute; left: 50%; top: 50%; width: 1rem; height: 1.5px; margin-left: -.5rem; background: currentColor; transition: transform .4s var(--ease); }
 .burger span:first-child { transform: translateY(-3px); }
@@ -106,30 +113,48 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .top.on-dark .menu li a { border-color: rgba(255, 255, 255, .14); }
 .menu .lang { display: inline-block; margin-top: 1.25rem; }
 
-/* ---------- 1. Hero ---------- */
-.hero { display: grid; grid-template-columns: 5fr 7fr; gap: var(--g); align-items: stretch; padding: clamp(1.5rem, 3vw, 2.5rem) var(--g) 0; height: min(calc(100svh - 68px), 58rem); min-height: 36rem; }
-.hero .text { display: flex; flex-direction: column; justify-content: center; padding-block: 2rem 3rem; }
-.hello { display: flex; align-items: center; gap: .625rem; font-size: 1.125rem; color: var(--muted); }
-.hello svg { width: 2rem; height: 2rem; color: var(--blue); transform-origin: 70% 85%; animation: wave 5s .6s ease-in-out infinite; }
+/* ---------- 1. Haut de page : bande bleu brume + panneau bleu nuit + portrait ---------- */
+/* La bande remonte sous la barre du haut (transparente à cet endroit) : le « K » passe derrière. */
+.hero { margin-top: -68px; }
+.hero-band { position: relative; padding-top: 68px; background: var(--mist); }
+.hero-mark { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-mark svg { position: absolute; right: -4%; top: 50%; height: 135%; width: auto; translate: 0 -50%; color: rgba(115, 148, 172, .32); }
+.hero-title { position: relative; padding-block: clamp(2.25rem, 5vw, 4.5rem) clamp(2.25rem, 4vw, 3.5rem); }
+.hello { display: flex; align-items: center; gap: .625rem; font-size: 1.125rem; color: var(--steel); }
+.hello svg { width: 1.875rem; height: 1.875rem; transform-origin: 70% 85%; animation: wave 5s .6s ease-in-out infinite; }
 @keyframes wave { 0%, 22%, 100% { rotate: -14deg; } 5% { rotate: 6deg; } 10% { rotate: -22deg; } 15% { rotate: 4deg; } }
-.hero h1 { margin-top: 1.25rem; font-size: var(--t-hero); font-weight: 400; letter-spacing: -.04em; line-height: 1.02; }
-.hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; }
-.hero h1 .w span { display: inline-block; animation: rise 1s var(--ease) both; }
-.hero h1 .w:nth-of-type(2) span { animation-delay: .08s; }
-.hero h1 .w:nth-of-type(3) span { animation-delay: .16s; color: var(--muted); }
-@keyframes rise { from { transform: translateY(105%); } }
-.hero .lead { margin-top: 1.5rem; max-width: 30rem; font-size: var(--t-lead); line-height: 1.45; color: var(--muted); }
-.hero .actions { display: flex; flex-wrap: wrap; gap: .625rem; margin-top: 2rem; }
-.hero .tags { display: flex; flex-wrap: wrap; gap: .375rem 1.25rem; margin-top: auto; padding-top: 2.5rem; }
-.hero .tags li::before { content: "● "; color: var(--blue); }
-/* Panneau photo : « KIKI » entièrement lisible au-dessus de la tête */
-.panel { position: relative; overflow: hidden; border-radius: var(--r) var(--r) 0 0; background: linear-gradient(180deg, #dbe6ed 0%, #c9d9e3 100%); min-height: 0; }
-.panel .word { position: absolute; left: 0; right: 0; top: 4%; text-align: center; font-size: clamp(6rem, 14vw, 15rem); font-weight: 500; letter-spacing: -.06em; line-height: .8; color: #fff; user-select: none; }
-.panel img { position: absolute; left: 50%; bottom: 0; height: 78%; width: auto; max-width: none; transform: translateX(-50%); filter: drop-shadow(0 30px 40px rgba(16, 24, 32, .2)); }
-.panel .badge { position: absolute; right: 1rem; top: 1rem; display: inline-flex; align-items: center; gap: .5rem; padding: .375rem .5rem .375rem .875rem; border-radius: 999px; background: #fff; font-size: .8125rem; font-weight: 500; rotate: -6deg; box-shadow: 0 10px 24px -12px rgba(16, 24, 32, .4); animation: float 6s ease-in-out infinite; }
-.panel .badge i { width: 2.25rem; height: 1.25rem; border-radius: 999px; background: var(--ink); position: relative; }
-.panel .badge i::after { content: ""; position: absolute; right: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--mist); }
-@keyframes float { 50% { translate: 0 -6px; } }
+.hero h1 { margin-top: 1.25rem; font-size: clamp(2.5rem, 1.2rem + 3.8vw, 4.5rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.1; }
+.hero h1 span { display: block; margin-top: .12em; color: var(--steel); }
+
+.hero-split { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+.hero-info { display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; padding: clamp(2.5rem, 4.5vw, 4rem) var(--g) clamp(2rem, 3.5vw, 2.75rem); background: var(--ink); color: #fff; }
+.eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: .375rem .625rem; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--mist); }
+.eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--mist); }
+.eyebrow span { white-space: nowrap; }
+.eyebrow span:not(:last-child)::after { content: "·"; margin-left: .625rem; }
+.hero-info .lead { margin-top: 1.25rem; max-width: 34rem; font-size: clamp(1.25rem, 1.05rem + .6vw, 1.625rem); line-height: 1.35; letter-spacing: -.015em; }
+.hero-info .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
+.btn.mist { background: var(--mist); color: var(--ink); }
+.btn.mist .ic { background: var(--ink); color: #fff; }
+.btn.mist:hover { background: #fff; }
+.btn.ghost { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22); color: #fff; }
+.btn.ghost .ic { background: rgba(255, 255, 255, .12); }
+.btn.ghost:hover { box-shadow: inset 0 0 0 1px #fff; }
+.figs { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .14); }
+.figs > div { padding-right: 1.25rem; }
+.figs > div + div { padding-left: 1.25rem; border-left: 1px solid rgba(255, 255, 255, .14); }
+.figs dt { font-size: clamp(2rem, 1.5rem + 1.2vw, 2.75rem); font-weight: 300; letter-spacing: -.035em; line-height: 1; }
+.figs dd { margin-top: .5rem; font-size: .8125rem; line-height: 1.35; color: rgba(255, 255, 255, .55); }
+.hero-photo { position: relative; overflow: hidden; min-height: 30rem; background: linear-gradient(180deg, #dbe6ed, #c4d6e1); }
+.hero-photo img { position: absolute; left: 50%; bottom: 0; height: 92%; width: auto; max-width: none; translate: -50% 0; filter: drop-shadow(0 30px 40px rgba(16, 24, 32, .22)); }
+/* Badge rond qui tourne, à la jonction ; il mène aux réalisations */
+.seal { position: absolute; left: 50%; top: 50%; z-index: 2; width: 132px; height: 132px; translate: -50% -50%; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 16px 30px -14px rgba(16, 24, 32, .45); transition: scale .4s var(--ease); }
+.seal:hover { scale: 1.06; }
+.seal .ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
+.seal text { font-family: var(--mono); font-size: 10.4px; letter-spacing: 2.2px; fill: var(--ink); }
+.seal .arrow { width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 1.25rem; transition: background-color .3s; }
+.seal:hover .arrow { background: var(--steel); }
+@keyframes spin { to { rotate: 360deg; } }
 
 /* ---------- 2. À propos ---------- */
 .about .grid { display: grid; grid-template-columns: 4fr 8fr; gap: 2rem var(--g); }
@@ -277,18 +302,18 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .nf .btn { align-self: flex-start; margin-top: 1rem; }
 
 /* ---------- Tablette et mobile ---------- */
-@media (max-width: 960px) {
+/* Tablette : burger, photo au-dessus du panneau, badge à cheval sur la jonction */
+@media (max-width: 1024px) {
   .top { grid-template-columns: 1fr auto; }
   .top .main-nav, .top .end > .lang, .top .end > .btn { display: none; }
   .burger { display: block; }
-  .top .who .logo { height: 24px; }
-  .hero, .about .grid, .foot .cta, .head, .cs-head, .part { grid-template-columns: 1fr; }
-  .hero { min-height: 0; height: auto; }
-  .hero .text { padding-block: 1rem 0; }
-  .hero .tags { margin-top: 2rem; padding-top: 0; }
-  .panel { min-height: 26rem; }
-  .panel .word { font-size: 30vw; }
-  .panel .badge { top: auto; bottom: 1rem; right: .75rem; }
+  .hero-split { grid-template-columns: 1fr; }
+  .hero-photo { order: -1; min-height: clamp(26rem, 62vw, 35rem); }
+  .seal { left: auto; right: var(--g); top: 0; translate: 0 -50%; width: 112px; height: 112px; }
+  .seal .arrow { width: 44px; height: 44px; }
+}
+@media (max-width: 960px) {
+  .about .grid, .foot .cta, .head, .cs-head, .part { grid-template-columns: 1fr; }
   .svc-grid { grid-template-columns: 1fr 1fr; }
   .svc-intro { grid-column: 1 / -1; padding-right: 0; }
   .part .lab { position: static; }
@@ -301,6 +326,10 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 }
 @media (max-width: 640px) {
   .work .grid, .gal, .gal.c3, .part .txt, .about .txt, .metrics { grid-template-columns: 1fr; }
+  .hero-mark svg { height: 90%; right: -30%; }
+  .seal { width: 104px; height: 104px; }
+  .hero-info .actions { flex-direction: column; gap: .75rem; }
+  .hero-info .actions .btn { justify-content: space-between; height: 3rem; }
   .gal.c4, .gal.c6 { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: 1fr; }
   .stat + .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 1rem; }

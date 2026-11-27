@@ -7,7 +7,8 @@ const fr = {
       "Designer web et graphique à Cotonou. Sites web et applications, identités visuelles et rapports bilingues FR/EN pour entreprises, ONG et institutions.",
   },
   nav: {
-    role: "Designer · Cotonou",
+    // Accroche à gauche de la barre du haut (en mono, capitales).
+    tagline: "Ici on parle web & design",
     realisations: "Réalisations",
     services: "Services",
     about: "À propos",
@@ -20,14 +21,22 @@ const fr = {
   },
   hero: {
     hello: "Salut ! Je suis",
-    name: ["Emmanuel", "KIKI"],
+    name: "Emmanuel KIKI",
     role: "Designer web & graphique",
+    // Petite ligne de repère, en haut du panneau bleu nuit.
+    eyebrow: ["Cotonou, Bénin", "Missions à distance", "FR / EN"],
     lead: "Je conçois des sites et applications, des identités visuelles et des rapports qui aident les entreprises, les ONG et les institutions à mieux présenter leur travail.",
     ctaWork: "Voir mes réalisations",
     ctaContact: "Discutons de votre projet",
-    tags: ["Cotonou, Bénin", "Missions à distance", "Français / English"],
+    figures: [
+      { value: "7+", label: "ans d'expérience" },
+      { value: "15+", label: "organisations accompagnées" },
+      { value: "60+", label: "projets livrés" },
+    ],
+    // Texte qui tourne autour du badge rond (≈ 37 caractères maximum).
+    seal: "Designer web & graphique · Défilez · ",
+    sealLabel: "Défiler vers les réalisations",
     portraitAlt: "Portrait d'Emmanuel KIKI, designer web et graphique à Cotonou",
-    creativeMode: "mode créatif",
   },
   realisations: {
     label: "Réalisations",
@@ -81,11 +90,10 @@ const fr = {
       "Je travaille surtout avec des ONG, des institutions et des entreprises en croissance, qui ont besoin de supports sérieux dans les deux langues.",
     ],
     // value : chiffre animé. text : texte affiché à la place (ex. une valeur à compléter).
-    // À COMPLÉTER : remplacez "[À COMPLÉTER]" par le chiffre réel, ex. { value: 60, suffix: "+", text: "" }.
     stats: [
       { value: 7, suffix: "+", text: "", label: "ans d'expérience" },
-      { value: 0, suffix: "", text: "[À COMPLÉTER]", label: "projets livrés" },
-      { value: 0, suffix: "", text: "[À COMPLÉTER]", label: "organisations accompagnées" },
+      { value: 60, suffix: "+", text: "", label: "projets livrés" },
+      { value: 15, suffix: "+", text: "", label: "organisations accompagnées" },
     ],
     trainings: "Formations",
     certificate: "Certificat ↗",

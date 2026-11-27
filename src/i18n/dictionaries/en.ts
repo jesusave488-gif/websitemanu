@@ -8,7 +8,7 @@ const en: Dictionary = {
       "Web and graphic designer based in Cotonou. Websites and apps, visual identities and bilingual FR/EN reports for companies, NGOs and institutions.",
   },
   nav: {
-    role: "Designer · Cotonou",
+    tagline: "Web & design spoken here",
     realisations: "Work",
     services: "Services",
     about: "About",
@@ -21,14 +21,20 @@ const en: Dictionary = {
   },
   hero: {
     hello: "Hi! I'm",
-    name: ["Emmanuel", "KIKI"],
+    name: "Emmanuel KIKI",
     role: "Web & graphic designer",
+    eyebrow: ["Cotonou, Benin", "Remote projects", "EN / FR"],
     lead: "I design websites and apps, visual identities and reports that help companies, NGOs and institutions present their work better.",
     ctaWork: "See my work",
     ctaContact: "Let's talk about your project",
-    tags: ["Cotonou, Benin", "Remote projects", "English / Français"],
+    figures: [
+      { value: "7+", label: "years of experience" },
+      { value: "15+", label: "organisations supported" },
+      { value: "60+", label: "projects delivered" },
+    ],
+    seal: "Web & graphic designer · Scroll · ",
+    sealLabel: "Scroll to the work",
     portraitAlt: "Portrait of Emmanuel KIKI, web and graphic designer in Cotonou",
-    creativeMode: "creative mode",
   },
   realisations: {
     label: "Work",
@@ -83,8 +89,8 @@ const en: Dictionary = {
     ],
     stats: [
       { value: 7, suffix: "+", text: "", label: "years of experience" },
-      { value: 0, suffix: "", text: "[TO COMPLETE]", label: "projects delivered" },
-      { value: 0, suffix: "", text: "[TO COMPLETE]", label: "organisations supported" },
+      { value: 60, suffix: "+", text: "", label: "projects delivered" },
+      { value: 15, suffix: "+", text: "", label: "organisations supported" },
     ],
     trainings: "Training",
     certificate: "Certificate ↗",
