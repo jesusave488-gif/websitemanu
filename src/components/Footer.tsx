@@ -1,6 +1,7 @@
 import type { Dictionary } from "@/i18n";
 import { site, whatsappLink } from "@/content/site";
 import Logo from "./Logo";
+import SocialIcon from "./SocialIcon";
 
 /** (05) Contact — un seul bloc — puis un pied de page minimal. */
 export default function Footer({ dict }: { dict: Dictionary }) {
@@ -35,7 +36,8 @@ export default function Footer({ dict }: { dict: Dictionary }) {
                 <span key={link.label} className="social">
                   <span aria-hidden="true"> · </span>
                   <a href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.label} ↗
+                    <SocialIcon name={link.label} />
+                    {link.label}
                   </a>
                 </span>
               ))}
