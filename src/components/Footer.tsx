@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/i18n";
 import { site, whatsappLink } from "@/content/site";
+import Logo from "./Logo";
 
 /** (05) Contact — un seul bloc — puis un pied de page minimal. */
 export default function Footer({ dict }: { dict: Dictionary }) {
@@ -32,9 +33,12 @@ export default function Footer({ dict }: { dict: Dictionary }) {
         </div>
       </div>
 
-      <p className="copy wrap">
-        © {site.year} {site.name} · <a href="#top">{dict.footer.backToTop}</a>
-      </p>
+      <div className="copy wrap">
+        <Logo size={48} className="logo" />
+        <p>
+          © {site.year} {site.name} · <a href="#top">{dict.footer.backToTop}</a>
+        </p>
+      </div>
     </footer>
   );
 }

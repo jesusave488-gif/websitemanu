@@ -33,6 +33,14 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
+/** Image de partage (réseaux sociaux) : public/og-image.png, 1200 × 630. */
+const shareImage = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "Logo manuscrit KIKI — Emmanuel KIKI, designer web & graphique à Cotonou",
+};
+
 export async function generateMetadata({ params }: Omit<LayoutProps, "children">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
@@ -52,6 +60,13 @@ export async function generateMetadata({ params }: Omit<LayoutProps, "children">
       title: dict.meta.title,
       description: dict.meta.description,
       locale: lang === "fr" ? "fr_FR" : "en_US",
+      images: [shareImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: [shareImage],
     },
   };
 }

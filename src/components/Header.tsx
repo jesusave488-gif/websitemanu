@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import Clock from "./Clock";
+import Logo from "./Logo";
 
 type HeaderProps = {
   locale: Locale;
@@ -79,8 +80,10 @@ export default function Header({ locale, dict }: HeaderProps) {
   return (
     <header className={`top${open ? " menu-open" : ""}`} ref={ref}>
       <Link className="who" href={home} onClick={close}>
-        <b>Emmanuel KIKI</b>
-        <span>{dict.role}</span> <Clock prefix="· " />
+        <Logo size={28} className="logo" />
+        <span className="role">
+          {dict.role} <Clock prefix="· " />
+        </span>
       </Link>
 
       <nav className="main-nav" aria-label="Navigation">
