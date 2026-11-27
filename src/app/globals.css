@@ -36,7 +36,7 @@ html { overflow-x: clip; background: #fff; scroll-behavior: smooth; scroll-paddi
 body { font-family: var(--sans); color: var(--fg); background: #fff; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 img, video { display: block; max-width: 100%; }
-ul { list-style: none; }
+ul, ol { list-style: none; }
 button { font: inherit; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
@@ -161,14 +161,10 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .about .grid { display: grid; grid-template-columns: 4fr 8fr; gap: 2rem var(--g); }
 .about h2.title { max-width: 26ch; }
 .about .txt { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); margin-top: 1.75rem; color: var(--muted); }
-.stat strong.todo { font-size: clamp(1.125rem, 1rem + .6vw, 1.5rem); font-weight: 400; letter-spacing: 0; line-height: 1.35; color: var(--steel); }
-.trainings { margin-top: clamp(2.5rem, 5vw, 4rem); }
-.trainings .table { margin-top: .875rem; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line); }
-.stat { padding: 1.25rem 1.25rem 0 0; }
-.stat + .stat { padding-left: 1.25rem; border-left: 1px solid var(--line); }
-.stat strong { display: block; font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4rem); font-weight: 300; letter-spacing: -.045em; line-height: 1; }
-.stat > span { display: block; margin-top: .5rem; font-size: .875rem; color: var(--muted); }
+.about .extra { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem var(--g); margin-top: clamp(2.5rem, 5vw, 4rem); }
+.trainings .table, .tools ul { margin-top: .875rem; }
+.tools ul { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.tools li { padding: .375rem .875rem; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font-size: .9375rem; }
 
 /* ---------- 3. Travaux : 2 colonnes, légendes alignées ---------- */
 .work .grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 4vw, 3.5rem) var(--g); }
@@ -182,7 +178,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .work .cap { display: block; }
 .work .cap .cat { margin-top: .125rem; }
 .cap .res { margin-top: .625rem; padding-top: .625rem; border-top: 1px solid var(--line); font-size: .9375rem; color: var(--steel); }
-.work .head .sub { margin-top: .75rem; max-width: 36rem; color: var(--muted); }
+.head .sub { margin-top: .75rem; max-width: 36rem; color: var(--muted); }
 .work .clients { margin-top: clamp(3.5rem, 6vw, 5rem); }
 .cap .name { font-size: 1.0625rem; font-weight: 500; }
 .cap .go { grid-row: span 2; align-self: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1px var(--line); transition: background-color .3s, color .3s, transform .4s var(--ease); }
@@ -219,8 +215,16 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
 .step + .step { padding-left: 1.5rem; border-left: 1px solid var(--line); }
 .step .num { font-family: var(--mono); font-size: .75rem; color: var(--blue); }
 .step h3 { margin-top: 2.5rem; font-size: 1.5rem; font-weight: 400; letter-spacing: -.02em; }
-.step h3, .step p { overflow-wrap: break-word; hyphens: auto; }
-.step p { margin-top: .5rem; font-size: .9375rem; color: var(--muted); }
+.step h3, .step p, .exchange dd { overflow-wrap: break-word; }
+.step > p { margin-top: .5rem; font-size: .9375rem; color: var(--muted); }
+/* Chaque étape partage les mêmes lignes que ses voisines : titres, textes et blocs « apportez / recevez » sont alignés. */
+.step { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+.exchange { display: contents; }
+.exchange > div { padding-block: .75rem; border-top: 1px solid var(--line); }
+.exchange > div:first-child { margin-top: 1.5rem; }
+.exchange > div:last-child { padding-bottom: 0; }
+.exchange dt { font-family: var(--mono); font-size: .6875rem; letter-spacing: .05em; text-transform: uppercase; color: var(--steel); }
+.exchange dd { margin-top: .25rem; font-size: .8125rem; line-height: 1.5; color: var(--muted); }
 
 /* ---------- Formations (dans À propos) et clients (sous les Réalisations) ---------- */
 .table .row { position: relative; display: grid; grid-template-columns: 6fr 4fr auto; gap: 1rem; align-items: center; padding-block: 1.125rem; border-top: 1px solid var(--line); }
@@ -321,6 +325,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .part .lab { position: static; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .step:nth-child(3) { border-left: 0; padding-left: 0; }
+  .step:nth-child(n+3) { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
   .step h3 { margin-top: 1rem; }
   .facts { grid-template-columns: 1fr 1fr; }
   .facts > div:nth-child(3) { border-left: 0; padding-left: 0; }
@@ -339,9 +344,10 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .figs dd { margin-top: 0; font-size: .9375rem; }
   .hero-info .actions .btn { justify-content: space-between; height: 3rem; }
   .gal.c4, .gal.c6 { grid-template-columns: 1fr 1fr; }
-  .stats { grid-template-columns: 1fr; }
-  .stat + .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 1rem; }
-  .stat { padding-bottom: 1rem; }
+  .steps { grid-template-columns: 1fr; }
+  .step, .step + .step, .step:nth-child(3), .step:nth-child(n+3) { margin-top: 0; padding: 1.5rem 0; border-left: 0; }
+  .step + .step { border-top: 1px solid var(--line); }
+  .about .extra { grid-template-columns: 1fr; }
   .svc-grid { grid-template-columns: 1fr; }
   .svc-card { min-height: 0; padding: 1.5rem; }
   .svc-title { padding-top: 2rem; }

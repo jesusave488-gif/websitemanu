@@ -2,7 +2,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import { recognitions } from "@/content/recognitions";
 
-/** (04) À propos : parcours, chiffres et formations. */
+/** (04) À propos : parcours, puis formations et outils côte à côte. */
 export default function About({ dict, locale }: { dict: Dictionary["about"]; locale: Locale }) {
   return (
     <section className="about sec wrap" id="apropos">
@@ -18,45 +18,39 @@ export default function About({ dict, locale }: { dict: Dictionary["about"]; loc
             ))}
           </div>
 
-          <div className="stats rv d2">
-            {dict.stats.map((stat) => (
-              <div className="stat" key={stat.label}>
-                {stat.text ? (
-                  // Valeur à compléter : affichée en plus petit pour rester lisible.
-                  <strong className="todo">{stat.text}</strong>
-                ) : (
-                  <strong>
-                    <span className="count" data-to={stat.value}>{stat.value}</span>
-                    {stat.suffix}
-                  </strong>
-                )}
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
+          <div className="extra">
+            <div className="trainings rv">
+              <p className="k">{dict.trainings}</p>
+              <ul className="table">
+                {recognitions.map((r) => (
+                  <li className="row" key={r.id}>
+                    <span>{r.category[locale]}</span>
+                    <span className="org">{r.issuer}</span>
+                    {/* Lien vers le certificat seulement s'il a été ajouté (voir content/recognitions.ts). */}
+                    {r.certificate.src ? (
+                      <a className="see" href={r.certificate.src} target="_blank" rel="noopener noreferrer">
+                        {dict.certificate}
+                        <span className="cert has-img" aria-hidden="true">
+                          {/* eslint-disable-next-line @next/next/no-img-element -- aperçu au survol */}
+                          <img src={r.certificate.src} alt="" loading="lazy" />
+                        </span>
+                      </a>
+                    ) : (
+                      <span />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="trainings rv">
-            <p className="k">{dict.trainings}</p>
-            <ul className="table">
-              {recognitions.map((r) => (
-                <li className="row" key={r.id}>
-                  <span>{r.category[locale]}</span>
-                  <span className="org">{r.issuer}</span>
-                  {/* Lien vers le certificat seulement s'il a été ajouté (voir content/recognitions.ts). */}
-                  {r.certificate.src ? (
-                    <a className="see" href={r.certificate.src} target="_blank" rel="noopener noreferrer">
-                      {dict.certificate}
-                      <span className="cert has-img" aria-hidden="true">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- aperçu au survol */}
-                        <img src={r.certificate.src} alt="" loading="lazy" />
-                      </span>
-                    </a>
-                  ) : (
-                    <span />
-                  )}
-                </li>
-              ))}
-            </ul>
+            <div className="tools rv d1">
+              <p className="k">{dict.toolsLabel}</p>
+              <ul>
+                {dict.tools.map((tool) => (
+                  <li key={tool}>{tool}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
