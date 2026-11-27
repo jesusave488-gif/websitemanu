@@ -29,6 +29,16 @@ export default function Footer({ dict }: { dict: Dictionary }) {
             <a href={wa} target="_blank" rel="noopener noreferrer">{site.whatsapp.display}</a>
             <span aria-hidden="true"> · </span>
             <span>{dict.contact.location}</span>
+            {site.social
+              .filter((link) => link.url)
+              .map((link) => (
+                <span key={link.label} className="social">
+                  <span aria-hidden="true"> · </span>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    {link.label} ↗
+                  </a>
+                </span>
+              ))}
           </p>
         </div>
       </div>

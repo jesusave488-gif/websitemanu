@@ -13,8 +13,8 @@ export const site = {
 
   // À compléter : collez l'URL complète de chaque profil.
   social: [
-    { label: "LinkedIn", url: "" },
-    { label: "Instagram", url: "" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/jesugnonkiki" },
+    { label: "Behance", url: "https://www.behance.net/emmanuelkiki3" },
   ],
 
   // Déposez votre photo dans public/images/ puis indiquez son chemin ici,

@@ -358,6 +358,7 @@ h2.title { font-size: var(--t-h2); font-weight: 400; letter-spacing: -.025em; li
   .cert { display: none; }
   .foot .cta .info { display: flex; flex-direction: column; gap: .25rem; }
   .foot .cta .info > span[aria-hidden] { display: none; }
+  .foot .cta .info .social > span[aria-hidden] { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
