@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 import { site, siteUrl } from "@/content/site";
-import { projects } from "@/content/projects";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Effects, { EffectsInit } from "@/components/Effects";
@@ -65,7 +64,6 @@ export default async function LangLayout({ children, params }: LayoutProps) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const hasWork = projects.length > 0;
 
   return (
     // suppressHydrationWarning : la classe "js" est posée par EffectsInit avant React.
@@ -75,9 +73,9 @@ export default async function LangLayout({ children, params }: LayoutProps) {
         <a href="#main" className="skip-link">
           {dict.nav.skip}
         </a>
-        <Header locale={lang} dict={dict.nav} hasWork={hasWork} />
+        <Header locale={lang} dict={dict.nav} />
         <main id="main">{children}</main>
-        <Footer locale={lang} dict={dict} hasWork={hasWork} n={hasWork ? "06" : "05"} />
+        <Footer dict={dict} />
         <Effects />
       </body>
     </html>

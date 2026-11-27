@@ -3,8 +3,6 @@ import type { Dictionary } from "@/i18n";
 type HeroProps = {
   dict: Dictionary["hero"];
   portrait: string;
-  /** Affiche le bouton « Voir les travaux » s'il y a des projets. */
-  hasWork: boolean;
 };
 
 /** Main qui salue (animée en CSS). */
@@ -19,7 +17,7 @@ function Wave() {
   );
 }
 
-export default function Hero({ dict, portrait, hasWork }: HeroProps) {
+export default function Hero({ dict, portrait }: HeroProps) {
   return (
     <section className="hero">
       <div className="text">
@@ -27,6 +25,7 @@ export default function Hero({ dict, portrait, hasWork }: HeroProps) {
           <Wave />
           <span>{dict.hello}</span>
         </p>
+        {/* H1 : le nom et la spécialité. */}
         <h1>
           <span className="w"><span>{dict.name[0]}</span></span>{" "}
           <span className="w"><span>{dict.name[1]}</span></span>
@@ -35,16 +34,14 @@ export default function Hero({ dict, portrait, hasWork }: HeroProps) {
         </h1>
         <p className="lead">{dict.lead}</p>
         <div className="actions">
-          <a className="btn fill" href="#contact">
-            <span>{dict.cta}</span>
+          <a className="btn fill" href="#realisations">
+            <span>{dict.ctaWork}</span>
+            <span className="ic" aria-hidden="true">↓</span>
+          </a>
+          <a className="btn line" href="#contact">
+            <span>{dict.ctaContact}</span>
             <span className="ic" aria-hidden="true">↗</span>
           </a>
-          {hasWork ? (
-            <a className="btn line" href="#travaux">
-              <span>{dict.seeWork}</span>
-              <span className="ic" aria-hidden="true">↓</span>
-            </a>
-          ) : null}
         </div>
         <ul className="tags k">
           {dict.tags.map((tag) => (

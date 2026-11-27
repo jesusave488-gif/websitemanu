@@ -1,20 +1,12 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Dictionary } from "@/i18n";
 import type { ServiceId } from "@/content/services";
 
 type ServicesProps = {
   dict: Dictionary["services"];
-  n: string;
-  /** Lien WhatsApp du bouton « Parlons de votre projet ». */
-  contactHref: string;
-  items: {
-    id: ServiceId;
-    number: string;
-    /** Lien vers un projet de ce service, sinon lien WhatsApp avec message pré-rempli. */
-    href: string;
-    isProject: boolean;
-  }[];
+  /** Lien WhatsApp du bouton « Demander un devis ». */
+  quoteHref: string;
+  items: { id: ServiceId; number: string }[];
 };
 
 const stroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
@@ -62,43 +54,36 @@ function WhatsAppIcon() {
   );
 }
 
-/** Services : intro + cinq cartes sur fond bleu nuit. Au survol, la carte se soulève et pivote légèrement. */
-export default function Services({ dict, n, contactHref, items }: ServicesProps) {
+/** (02) Services : cinq cartes sur fond bleu nuit, puis un seul bouton « Demander un devis ». */
+export default function Services({ dict, quoteHref, items }: ServicesProps) {
   return (
     <section className="services dark sec wrap" id="services">
-      <div className="svc-grid">
-        <div className="svc-intro rv">
-          <p className="k"><b>({n})</b><span>{dict.label}</span></p>
+      <ul className="svc-grid">
+        <li className="svc-intro rv">
+          <p className="k"><b>(02)</b><span>{dict.label}</span></p>
           <h2 className="title">{dict.title}</h2>
-          <p>{dict.intro}</p>
-          <a className="btn fill" href={contactHref} target="_blank" rel="noopener noreferrer">
-            <span className="ic wa" aria-hidden="true"><WhatsAppIcon /></span>
-            <span>{dict.cta}</span>
-          </a>
-        </div>
+        </li>
 
         {items.map((item, i) => {
           const text = dict.items[item.id];
-          const body = (
-            <>
+          return (
+            <li key={item.id} className={`svc-card rv${["", " d1", " d2"][(i + 1) % 3]}`}>
               <span className="svc-top">
                 <span className="svc-icon" aria-hidden="true">{icons[item.id]}</span>
                 <span className="svc-n">{item.number}</span>
               </span>
-              <span className="svc-title">{text.title}</span>
-              <span className="svc-text">{text.description}</span>
-              <span className="svc-link">
-                {item.isProject ? dict.seeProject : dict.talk} <span aria-hidden="true">↗</span>
-              </span>
-            </>
-          );
-          const cls = `svc-card rv${["", " d1", " d2"][(i + 1) % 3]}`;
-          return item.isProject ? (
-            <Link key={item.id} className={cls} href={item.href}>{body}</Link>
-          ) : (
-            <a key={item.id} className={cls} href={item.href} target="_blank" rel="noopener noreferrer">{body}</a>
+              <h3 className="svc-title">{text.title}</h3>
+              <p className="svc-text">{text.description}</p>
+            </li>
           );
         })}
+      </ul>
+
+      <div className="svc-cta rv">
+        <a className="btn fill" href={quoteHref} target="_blank" rel="noopener noreferrer">
+          <span className="ic wa" aria-hidden="true"><WhatsAppIcon /></span>
+          <span>{dict.cta}</span>
+        </a>
       </div>
     </section>
   );

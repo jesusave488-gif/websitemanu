@@ -2,11 +2,11 @@ import type { Dictionary } from "@/i18n";
 
 const delays = ["", " d1", " d2", " d3"];
 
-export default function Method({ dict, n }: { dict: Dictionary["method"]; n: string }) {
+export default function Method({ dict }: { dict: Dictionary["method"] }) {
   return (
-    <section className="ice sec wrap">
+    <section className="ice sec wrap" id="methode">
       <div className="head rv">
-        <p className="k"><b>({n})</b><span>{dict.label}</span></p>
+        <p className="k"><b>(03)</b><span>{dict.label}</span></p>
         <h2 className="title">{dict.title}</h2>
       </div>
       <div className="steps">

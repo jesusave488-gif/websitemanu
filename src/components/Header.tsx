@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 import Clock from "./Clock";
@@ -10,18 +10,28 @@ import Clock from "./Clock";
 type HeaderProps = {
   locale: Locale;
   dict: Dictionary["nav"];
-  /** Affiche le lien « Travaux » seulement s'il y a des projets. */
-  hasWork: boolean;
 };
 
-/** Barre du haut, opaque, qui passe en sombre au-dessus des sections .dark. */
-export default function Header({ locale, dict, hasWork }: HeaderProps) {
+/**
+ * Barre du haut, opaque, qui passe en sombre au-dessus des sections .dark.
+ * Sous 960 px, la navigation passe dans un menu burger (Échap ou clic sur un lien pour fermer).
+ */
+export default function Header({ locale, dict }: HeaderProps) {
   const ref = useRef<HTMLElement>(null);
+  const burger = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? `/${locale}`;
   const target: Locale = locale === "fr" ? "en" : "fr";
   const switchHref = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), `/${target}`);
   const home = `/${locale}`;
 
+  const links = [
+    { href: `${home}#realisations`, label: dict.realisations },
+    { href: `${home}#services`, label: dict.services },
+    { href: `${home}#apropos`, label: dict.about },
+  ];
+
+  // Passe la barre en sombre au-dessus des sections sombres.
   useEffect(() => {
     const bar = ref.current;
     if (!bar) return;
@@ -42,17 +52,43 @@ export default function Header({ locale, dict, hasWork }: HeaderProps) {
     };
   }, [pathname]);
 
+  // Menu : fermeture avec Échap (le focus revient sur le bouton) et au changement de page.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        burger.current?.focus();
+      }
+    };
+    const onResize = () => {
+      if (innerWidth > 960) setOpen(false);
+    };
+    addEventListener("keydown", onKey);
+    addEventListener("resize", onResize);
+    return () => {
+      removeEventListener("keydown", onKey);
+      removeEventListener("resize", onResize);
+    };
+  }, [open]);
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  const close = () => setOpen(false);
+
   return (
-    <header className="top" ref={ref}>
-      <Link className="who" href={home}>
+    <header className={`top${open ? " menu-open" : ""}`} ref={ref}>
+      <Link className="who" href={home} onClick={close}>
         <b>Emmanuel KIKI</b>
         <span>{dict.role}</span> <Clock prefix="· " />
       </Link>
-      <nav aria-label="Navigation">
-        {hasWork ? <Link href={`${home}#travaux`}>{dict.work}</Link> : null}
-        <Link href={`${home}#services`}>{dict.services}</Link>
-        <Link href={`${home}#apropos`}>{dict.about}</Link>
+
+      <nav className="main-nav" aria-label="Navigation">
+        {links.map((l) => (
+          <Link key={l.href} href={l.href}>{l.label}</Link>
+        ))}
       </nav>
+
       <div className="end">
         <Link className="lang" href={switchHref} hrefLang={target} lang={target} aria-label={dict.switchLabel}>
           {dict.switchTo}
@@ -61,7 +97,35 @@ export default function Header({ locale, dict, hasWork }: HeaderProps) {
           <span>{dict.contact}</span>
           <span className="ic" aria-hidden="true">↗</span>
         </a>
+        <button
+          ref={burger}
+          type="button"
+          className="burger"
+          aria-expanded={open}
+          aria-controls="menu"
+          aria-label={open ? dict.closeMenu : dict.menu}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
       </div>
+
+      <nav id="menu" className="menu" aria-label="Menu" hidden={!open}>
+        <ul>
+          {links.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} onClick={close}>{l.label}</Link>
+            </li>
+          ))}
+          <li>
+            <a href="#contact" onClick={close}>{dict.contact}</a>
+          </li>
+        </ul>
+        <Link className="lang" href={switchHref} hrefLang={target} lang={target} aria-label={dict.switchLabel} onClick={close}>
+          {dict.switchTo === "EN" ? "English" : "Français"} ↗
+        </Link>
+      </nav>
     </header>
   );
 }

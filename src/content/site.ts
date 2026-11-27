@@ -21,7 +21,8 @@ export const site = {
   // par exemple "/images/portrait.png" (PNG détouré conseillé). Laissez vide pour afficher l'emplacement.
   portrait: "/images/portrait.png",
 
-  clients: ["Zeyhii", "VIP Tribe", "Ayo Agency", "Camp Régional", "International Relief"],
+  // Ligne « Ils m'ont fait confiance », sous les réalisations.
+  clients: ["Zeyhii", "VIP Tribe", "Ayo Agency", "WoPAs", "IDRI", "AMD", "Camp Régional", "International Relief"],
 };
 
 /**
