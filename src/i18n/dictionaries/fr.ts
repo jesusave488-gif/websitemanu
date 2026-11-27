@@ -19,7 +19,7 @@ const fr = {
     closeMenu: "Fermer le menu",
   },
   hero: {
-    hello: "Salut, hey !",
+    hello: "Salut ! Je suis",
     name: ["Emmanuel", "KIKI"],
     role: "Designer web & graphique",
     lead: "Je conçois des sites et applications, des identités visuelles et des rapports qui aident les entreprises, les ONG et les institutions à mieux présenter leur travail.",

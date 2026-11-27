@@ -20,7 +20,7 @@ const en: Dictionary = {
     closeMenu: "Close menu",
   },
   hero: {
-    hello: "Hello, hey!",
+    hello: "Hi! I'm",
     name: ["Emmanuel", "KIKI"],
     role: "Web & graphic designer",
     lead: "I design websites and apps, visual identities and reports that help companies, NGOs and institutions present their work better.",
